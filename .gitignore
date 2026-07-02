@@ -1,0 +1,29 @@
+# Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+
+# Android
+android/build/
+android/.gradle/
+.gradle/
+.cxx/
+local.properties
+android/local.properties
+
+# iOS
+ios/Pods/
+
+# IDE
+.idea/
+.vscode/
+
+# Firebase Secret
+credentials.json
+
+# Keystore
+key.properties
+*.jks
+*.keystore

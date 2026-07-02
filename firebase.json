@@ -1,0 +1,39 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "app-kebudyaan-lobar",
+          "appId": "1:770464636292:android:6bb60676c26c76156551d1",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "app-kebudyaan-lobar",
+          "configurations": {
+            "android": "1:770464636292:android:6bb60676c26c76156551d1",
+            "ios": "1:770464636292:ios:d4be2180ebfaecc66551d1",
+            "macos": "1:770464636292:ios:d4be2180ebfaecc66551d1",
+            "web": "1:770464636292:web:c6e0870d74ef0ca66551d1",
+            "windows": "1:770464636292:web:6330c57499e6deff6551d1"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
