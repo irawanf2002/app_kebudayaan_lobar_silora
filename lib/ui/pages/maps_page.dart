@@ -200,8 +200,8 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
     }
 
     // ✅ GANTI URL KE API LOKAL LAPTOP ANDA (Jika di Emulator Android gunakan 10.0.2.2. Jika HP Fisik, ganti dengan IP 192.168.1.2)
-    const String apiUrlBatch = "http://192.168.1.2:5000/predict_batch";
-    const String apiUrlSingle = "http://192.168.1.2:5000/predict";
+    const String apiUrlBatch = "https://silora-backend-api.up.railway.app/predict_batch";
+    const String apiUrlSingle = "https://silora-backend-api.up.railway.app/predict";
 
     try {
       final batchData = allData.map((item) {
