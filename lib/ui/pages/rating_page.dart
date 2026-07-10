@@ -1,4 +1,4 @@
-import 'package:app_kebudyaan_lobar/data/providers/comment_provider.dart.dart';
+import 'package:app_kebudyaan_lobar/data/providers/comment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

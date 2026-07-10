@@ -1,21 +1,16 @@
 import 'package:app_kebudyaan_lobar/ui/pages/kelola_agenda_page.dart';
 import 'package:app_kebudyaan_lobar/ui/pages/kelola_cagar_page.dart';
+import 'package:app_kebudyaan_lobar/ui/styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../data/providers/auth_provider.dart';
 import '../../../data/providers/settings_provider.dart';
 import '../admin/admin_login_page.dart';
 
-class CulturalColors {
-  static const Color primary = Color.fromARGB(255, 94, 155, 235);
-  static const Color secondary = Color(0xFFFDFBF7);
-  static const Color accent = Color(0xFFD4AF37);
-  static const Color textDark = Color(0xFF3E2723);
-  static const Color textGrey = Color(0xFF6D4C41);
-  static const Color background = Color(0xFFFAF9F6);
-  static const Color surface = Colors.white;
-}
+// ✅ Impor AppColors yang sudah kita standarisasi
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -43,15 +38,14 @@ class _ProfilePageState extends State<ProfilePage>
     super.dispose();
   }
 
-  // 🔥 FUNGSI PENERJEMAH MINI OTOMATIS
-  // id = Indonesia, sasak = Basa Sasak, en = English
+  // Fungsi terjemahan multi-bahasa
   String _t(String currentLang, String id, String sasak, String en) {
     if (currentLang == 'sasak') return sasak;
     if (currentLang == 'en') return en;
-    return id; // Default ke Indonesia
+    return id;
   }
 
-  // --- DIALOG BAHASA (DENGAN ENGLISH) ---
+  // Dialog Pilihan Bahasa
   void _showLanguageDialog(BuildContext context, String currentLang) {
     showModalBottomSheet(
       context: context,
@@ -60,7 +54,7 @@ class _ProfilePageState extends State<ProfilePage>
         final settings = context.read<SettingsProvider>();
         return Container(
           decoration: const BoxDecoration(
-            color: CulturalColors.surface,
+            color: AppColors.cardSurface,
             borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
           ),
           padding: const EdgeInsets.all(24),
@@ -69,44 +63,55 @@ class _ProfilePageState extends State<ProfilePage>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                  child: Container(
-                      width: 40,
-                      height: 40,
-                      margin: const EdgeInsets.only(bottom: 20),
-                      decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(2)))),
+                child: Container(
+                  width: 40,
+                  height: 5,
+                  margin: const EdgeInsets.only(bottom: 24),
+                  decoration: BoxDecoration(
+                    color: AppColors.modalHandle, // ✅ Menggunakan AppColors.modalHandle
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
               Text(
-                  _t(currentLang, "Pilih Bahasa", "Pilih Basa",
-                      "Select Language"),
-                  style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: CulturalColors.textDark,
-                      fontFamily: 'Serif')),
-              const SizedBox(height: 20),
+                _t(currentLang, "Pilih Bahasa", "Pilih Basa", "Select Language"),
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.textPrimary,
+                ),
+              ),
+              const SizedBox(height: 24),
 
-              // Opsi Indonesia
-              _buildLanguageItem(context,
-                  flag: "🇮🇩",
-                  title: "Bahasa Indonesia",
-                  code: 'id',
-                  currentCode: settings.currentLocale.languageCode),
+              // Opsi Bahasa Indonesia
+              _buildLanguageItem(
+                context,
+                flag: "🇮🇩",
+                title: "Bahasa Indonesia",
+                code: 'id',
+                currentCode: settings.currentLocale.languageCode,
+              ),
+              const SizedBox(height: 8),
 
-              // Opsi Sasak
-              _buildLanguageItem(context,
-                  flag: "lombok_flag",
-                  icon: Icons.temple_buddhist,
-                  title: "Basa Sasak (Lombok)",
-                  code: 'sasak',
-                  currentCode: settings.currentLocale.languageCode),
+              // Opsi Bahasa Sasak
+              _buildLanguageItem(
+                context,
+                icon: Icons.temple_buddhist,
+                title: "Basa Sasak (Lombok)",
+                code: 'sasak',
+                currentCode: settings.currentLocale.languageCode,
+              ),
+              const SizedBox(height: 8),
 
-              // 🔥 OPSI INGGRIS
-              _buildLanguageItem(context,
-                  flag: "🇬🇧",
-                  title: "English (International)",
-                  code: 'en',
-                  currentCode: settings.currentLocale.languageCode),
+              // Opsi Bahasa Inggris
+              _buildLanguageItem(
+                context,
+                flag: "🇬🇧",
+                title: "English (International)",
+                code: 'en',
+                currentCode: settings.currentLocale.languageCode,
+              ),
+              const SizedBox(height: 16),
             ],
           ),
         );
@@ -114,44 +119,57 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  Widget _buildLanguageItem(BuildContext context,
-      {required String title,
-      required String code,
-      required String currentCode,
-      String? flag,
-      IconData? icon}) {
+  Widget _buildLanguageItem(BuildContext context, {
+    required String title,
+    required String code,
+    required String currentCode,
+    String? flag,
+    IconData? icon,
+  }) {
     final bool isSelected = currentCode == code;
     final settings = context.read<SettingsProvider>();
 
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Container(
-        width: 48,
-        height: 48,
-        decoration: BoxDecoration(
-            color: isSelected
-                ? CulturalColors.primary.withOpacity(0.1)
-                : CulturalColors.background,
-            borderRadius: BorderRadius.circular(12)),
-        child: Center(
-            child: icon != null
-                ? Icon(icon,
-                    color: isSelected
-                        ? CulturalColors.primary
-                        : CulturalColors.textGrey)
-                : Text(flag ?? "", style: const TextStyle(fontSize: 24))),
-      ),
-      title: Text(title,
-          style: TextStyle(
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: CulturalColors.textDark)),
-      trailing: isSelected
-          ? const Icon(Icons.check_circle, color: CulturalColors.primary)
-          : null,
+    return InkWell(
       onTap: () {
         settings.changeLanguage(code);
         Navigator.pop(context);
       },
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? AppColors.primary.withValues(alpha: 0.1)
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              child: icon != null
+                  ? Icon(icon, size: 24, color: isSelected ? AppColors.primary : AppColors.textSecondary)
+                  : Text(flag ?? "", style: const TextStyle(fontSize: 24)),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                title,
+                style: GoogleFonts.poppins(
+                  fontSize: 16,
+                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+                  color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                ),
+              ),
+            ),
+            if (isSelected)
+              const Icon(Icons.check_circle, color: AppColors.primary, size: 22),
+          ],
+        ),
+      ),
     );
   }
 
@@ -161,31 +179,25 @@ class _ProfilePageState extends State<ProfilePage>
     final settings = Provider.of<SettingsProvider>(context);
 
     final bool isLoggedIn = auth?.isLoggedIn ?? false;
-    final String lang = settings.currentLocale.languageCode; // id / sasak / en
+    final String lang = settings.currentLocale.languageCode;
 
-    final String userName = (auth?.currentUser?.displayName ??
+    final String userName = auth?.currentUser?.displayName ??
         (isLoggedIn
-            ? "Staf Dinas"
-            : _t(lang, "Pengunjung (Tamu)", "Semeton (Tamu)",
-                "Visitor (Guest)")));
+            ? "Staf Dinas Kebudayaan"
+            : _t(lang, "Pengunjung", "Semeton", "Visitor"));
 
-    final String userEmail = (auth?.currentUser?.email ??
+    final String userEmail = auth?.currentUser?.email ??
         (isLoggedIn
             ? "staf@kebudayaan.lobar.go.id"
-            : _t(
-                lang,
-                "Jelajahi kebudayaan tanpa batas",
-                "Jelajahin kebudayaan endek araq batas",
-                "Explore culture without limits")));
+            : _t(lang, "Jelajahi warisan budaya", "Jelajahi warisan budaya", "Explore cultural heritage"));
 
     return Scaffold(
-      backgroundColor: CulturalColors.background,
+      backgroundColor: AppColors.background,
       body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
-            // ==========================================
-            // 1. HEADER GRADASI & AVATAR MENGAMBANG
-            // ==========================================
+            // Header Gradien Premium
             Stack(
               clipBehavior: Clip.none,
               alignment: Alignment.bottomCenter,
@@ -194,11 +206,8 @@ class _ProfilePageState extends State<ProfilePage>
                   height: 220,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        CulturalColors.primary,
-                        CulturalColors.primary.withOpacity(0.7)
-                      ],
+                    gradient: const LinearGradient(
+                      colors: [AppColors.primary, AppColors.primaryDark],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                     ),
@@ -209,8 +218,7 @@ class _ProfilePageState extends State<ProfilePage>
                   ),
                   child: SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -221,15 +229,14 @@ class _ProfilePageState extends State<ProfilePage>
                             onPressed: () => Navigator.maybePop(context),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Text(
-                              _t(lang, "Profil Saya", "Profil Tiang",
-                                  "My Profile"),
-                              style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontFamily: 'Serif'),
+                              _t(lang, "Profil Saya", "Profil Tiang", "My Profile"),
+                              style: GoogleFonts.poppins(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                           const SizedBox(width: 48),
@@ -238,136 +245,140 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                   ),
                 ),
+                // Avatar dengan efek mewah
                 Positioned(
                   bottom: -50,
                   child: AnimatedBuilder(
-                      animation: _enterController,
-                      builder: (context, child) {
-                        final t = Curves.easeOutBack
-                            .transform(_enterController.value);
-                        return Transform.scale(
-                          scale: t,
-                          child: Container(
-                            padding: const EdgeInsets.all(4),
-                            decoration: BoxDecoration(
-                              color: CulturalColors.surface,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                    color:
-                                        CulturalColors.primary.withOpacity(0.3),
-                                    blurRadius: 20,
-                                    offset: const Offset(0, 10))
-                              ],
-                            ),
-                            child: CircleAvatar(
-                              radius: 50,
-                              backgroundColor: CulturalColors.secondary,
-                              child: Icon(
-                                  isLoggedIn
-                                      ? Icons.admin_panel_settings_rounded
-                                      : Icons.person_rounded,
-                                  size: 50,
-                                  color: CulturalColors.primary),
+                    animation: _enterController,
+                    builder: (context, child) {
+                      final t = Curves.easeOutBack.transform(_enterController.value);
+                      return Transform.scale(
+                        scale: t,
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: AppColors.cardSurface,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: AppColors.primary.withValues(alpha: 0.3),
+                                blurRadius: 20,
+                                offset: const Offset(0, 10),
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundColor: AppColors.primary.withOpacity(0.1),
+                            child: Icon(
+                              isLoggedIn
+                                  ? Icons.admin_panel_settings_rounded
+                                  : Icons.person_rounded,
+                              size: 50,
+                              color: AppColors.primary,
                             ),
                           ),
-                        );
-                      }),
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ],
             ),
 
             const SizedBox(height: 60),
 
-            // ==========================================
-            // 2. INFO PENGGUNA & TOMBOL LOGIN/EDIT
-            // ==========================================
-            Text(userName,
-                style: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: CulturalColors.textDark,
-                    fontFamily: 'Serif')),
+            // Info Pengguna
+            Text(
+              userName,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.textPrimary,
+              ),
+            ),
             const SizedBox(height: 4),
-            Text(userEmail,
-                style: const TextStyle(
-                    fontSize: 14, color: CulturalColors.textGrey)),
+            Text(
+              userEmail,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.poppins(
+                fontSize: 14,
+                color: AppColors.textSecondary,
+              ),
+            ),
             const SizedBox(height: 20),
 
+            // Tombol Aksi Premium
             SizedBox(
               width: 180,
               child: ElevatedButton.icon(
                 onPressed: () {
                   if (isLoggedIn) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(_t(lang, "Fitur Edit Profil",
-                            "Fitur Edit Profil", "Edit Profile Feature"))));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(_t(lang, "Fitur akan segera hadir", "Fitur bakalan ada", "Feature coming soon"), style: GoogleFonts.poppins()),
+                        backgroundColor: AppColors.primary,
+                      ),
+                    );
                   } else {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AdminLoginPage()));
+                      context,
+                      MaterialPageRoute(builder: (_) => const AdminLoginPage()),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: CulturalColors.primary,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   elevation: 4,
-                  shadowColor: CulturalColors.primary.withOpacity(0.4),
+                  shadowColor: AppColors.primary.withValues(alpha: 0.4),
                   padding: const EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                 ),
                 icon: Icon(
-                    isLoggedIn ? Icons.edit_rounded : Icons.login_rounded,
-                    size: 18),
+                  isLoggedIn ? Icons.edit_rounded : Icons.login_rounded,
+                  size: 18,
+                ),
                 label: Text(
-                    isLoggedIn
-                        ? _t(lang, "Edit Profil", "Edit Profil", "Edit Profile")
-                        : _t(lang, "Masuk (Staf)", "Masuk (Staf)",
-                            "Staff Login"),
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                  isLoggedIn
+                      ? _t(lang, "Edit Profil", "Edit Profil", "Edit Profile")
+                      : _t(lang, "Masuk Staf", "Masuk Staf", "Staff Login"),
+                  style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
 
             const SizedBox(height: 32),
 
-            // ==========================================
-            // 3. MENU PENGATURAN & BANTUAN
-            // ==========================================
+            // Bagian Pengaturan Aplikasi
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  _buildSectionHeader(_t(lang, "Pengaturan Aplikasi",
-                      "Pengaturan Aplikasi", "App Settings")),
+                  _buildSectionHeader(_t(lang, "Pengaturan Aplikasi", "Pengaturan Aplikasi", "App Settings")),
                   _buildSectionCard(
                     children: [
                       _profileItem(
                         icon: Icons.language_rounded,
                         iconColor: Colors.blue,
-                        title: _t(lang, "Bahasa Aplikasi", "Basa Aplikasi",
-                            "App Language"),
-                        subtitle: _t(lang, "Bahasa Indonesia", "Sasak (Lombok)",
-                            "English"),
+                        title: _t(lang, "Bahasa Aplikasi", "Basa Aplikasi", "App Language"),
+                        subtitle: _t(lang, "Bahasa Indonesia", "Basa Sasak", "English"),
                         onTap: () => _showLanguageDialog(context, lang),
                       ),
                       _divider(),
                       _profileItem(
                         icon: Icons.notifications_active_rounded,
-                        iconColor: Colors.amber.shade700,
-                        title: _t(lang, "Notifikasi", "Pemberitauan",
-                            "Notifications"),
+                        iconColor: AppColors.warning,
+                        title: _t(lang, "Notifikasi", "Pemberitahuan", "Notifications"),
                         subtitle: _isNotifActive
                             ? _t(lang, "Aktif", "Aktif", "Enabled")
                             : _t(lang, "Nonaktif", "Mati", "Disabled"),
                         onTap: () {},
                         trailing: Switch(
                           value: _isNotifActive,
-                          activeColor: CulturalColors.primary,
-                          onChanged: (val) {
-                            setState(() => _isNotifActive = val);
-                          },
+                          activeColor: AppColors.primary,
+                          onChanged: (val) => setState(() => _isNotifActive = val),
                         ),
                       ),
                     ],
@@ -375,98 +386,93 @@ class _ProfilePageState extends State<ProfilePage>
 
                   const SizedBox(height: 24),
 
-                  _buildSectionHeader(_t(lang, "Bantuan & Informasi",
-                      "Bantuan & Informasi", "Help & Information")),
+                  // 🔥 BAGIAN BANTUAN & INFORMASI (Data Resmi Dikbud Lobar)
+                  _buildSectionHeader(_t(lang, "Bantuan & Informasi", "Bantuan & Informasi", "Help & Information")),
                   _buildSectionCard(
                     children: [
-                      // 🔥 MENU BARU: STANDAR PELAYANAN & SOP
                       _profileItem(
                         icon: Icons.assignment_rounded,
-                        iconColor: const Color(0xFF008080), // Teal/Tosca kedinasan
+                        iconColor: AppColors.teal,
                         title: _t(lang, "SP & SOP", "SP & SOP", "Service Standard & SOP"),
-                        subtitle: _t(
-                            lang, 
-                            "Standar Pelayanan & Operasional", 
-                            "Standar Pelayanan & Operasional", 
-                            "Service & Operational Standards"),
-                        onTap: () {
-                          // TODO: Arahkan ke halaman daftar PDF/detail SP & SOP Anda
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text(_t(lang, "Membuka SP & SOP", "Membuka SP & SOP", "Opening SP & SOP")))
-                          );
-                        },
+                        subtitle: _t(lang, "Standar Pelayanan & Operasional", "Standar Pelayanan", "Service & Operational Standards"),
+                        onTap: () => _showSOPDialog(context, lang), // ✅ Data diambil dari web resmi
                       ),
                       _divider(),
                       _profileItem(
                         icon: Icons.help_outline_rounded,
-                        iconColor: Colors.green,
-                        title: _t(lang, "Pusat Bantuan", "Pusat Bantuan",
-                            "Help Center"),
-                        subtitle: _t(lang, "FAQ & Kontak", "FAQ & Kontak",
-                            "FAQ & Contacts"),
-                        onTap: () {},
+                        iconColor: AppColors.green,
+                        title: _t(lang, "Pusat Bantuan", "Pusat Bantuan", "Help Center"),
+                        subtitle: _t(lang, "FAQ & Kontak Resmi", "FAQ & Kontak Resmi", "FAQ & Official Contacts"),
+                        onTap: () => _showHelpCenterDialog(context, lang), // ✅ Data diambil dari web resmi
                       ),
                       _divider(),
                       _profileItem(
                         icon: Icons.info_outline_rounded,
-                        iconColor: Colors.purple,
-                        title: _t(lang, "Tentang Aplikasi", "Tentang Aplikasi",
-                            "About App"),
-                        subtitle: _t(
-                            lang,
-                            "Versi 1.0.0 (Dinas Pendidikan & Kebudayaan)",
-                            "Versi 1.0.0 (Dinas Pendidikan & Kebudayaan)",
-                            "Version 1.0.0 (Dept. of Education & Culture)"),
-                        onTap: () {},
+                        iconColor: AppColors.iconPurple,
+                        title: _t(lang, "Tentang Aplikasi", "Tentang Aplikasi", "About App"),
+                        subtitle: _t(lang, "Versi 1.0.0 | Dinas Pendidikan & Kebudayaan", "Versi 1.0.0", "Version 1.0.0 | Dept. of Education & Culture"),
+                        onTap: () => _showAboutDialog(context, lang),
                       ),
                     ],
                   ),
 
                   const SizedBox(height: 24),
 
-                  // ==========================================
-                  // 4. MENU ADMIN (Jika Login)
-                  // ==========================================
+                  // Menu Khusus Admin
                   if (isLoggedIn) ...[
-                    _buildSectionHeader("Admin Menu"),
+                    _buildSectionHeader(_t(lang, "Menu Admin", "Menu Admin", "Admin Menu")),
                     _buildSectionCard(
                       children: [
                         _profileItem(
                           icon: Icons.landscape_rounded,
-                          iconColor: CulturalColors.primary,
-                          title: _t(lang, "Kelola Cagar Budaya",
-                              "Kelola Cagar Budaya", "Manage Heritage Sites"),
-                          subtitle: _t(lang, "Tambah / Edit Data",
-                              "Tambah / Edit Data", "Add / Edit Data"),
+                          iconColor: AppColors.primary,
+                          title: _t(lang, "Kelola Cagar Budaya", "Kelola Cagar Budaya", "Manage Heritage Sites"),
+                          subtitle: _t(lang, "Tambah / Ubah / Hapus Data", "Kelola data cagar", "Add / Edit / Delete Data"),
                           onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const KelolaCagarPage())),
+                            context,
+                            MaterialPageRoute(builder: (_) => const KelolaCagarPage()),
+                          ),
                         ),
                         _divider(),
                         _profileItem(
                           icon: Icons.event_note_rounded,
-                          iconColor: Colors.orange,
-                          title: _t(lang, "Kelola Agenda", "Kelola Agenda",
-                              "Manage Agenda"),
-                          subtitle: _t(lang, "Jadwal Event Budaya",
-                              "Jadwal Event Budaya", "Cultural Event Schedule"),
+                          iconColor: AppColors.warning,
+                          title: _t(lang, "Kelola Agenda", "Kelola Agenda", "Manage Agenda"),
+                          subtitle: _t(lang, "Jadwal Kegiatan Budaya", "Jadwal acara", "Cultural Event Schedule"),
                           onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const KelolaAgendaPage())),
+                            context,
+                            MaterialPageRoute(builder: (_) => const KelolaAgendaPage()),
+                          ),
                         ),
                         _divider(),
                         _profileItem(
                           icon: Icons.logout_rounded,
-                          iconColor: Colors.red,
+                          iconColor: AppColors.error,
                           title: _t(lang, "Keluar", "Keluar", "Log Out"),
-                          subtitle: _t(lang, "Akhiri Sesi", "Akhiri Sesi",
-                              "End Session"),
+                          subtitle: _t(lang, "Akhiri sesi akun", "Tutup sesi", "End current session"),
                           isDanger: true,
-                          onTap: () => auth?.logout(),
+                          onTap: () async {
+                            final confirm = await showDialog<bool>(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                title: Text(_t(lang, "Konfirmasi", "Konfirmasi", "Confirmation"), style: GoogleFonts.poppins()),
+                                content: Text(_t(lang, "Yakin ingin keluar?", "Yakin mau keluar?", "Are you sure you want to log out?"), style: GoogleFonts.poppins()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context, false),
+                                    child: Text(_t(lang, "Batal", "Batal", "Cancel"), style: GoogleFonts.poppins()),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context, true),
+                                    child: Text(_t(lang, "Ya, Keluar", "Ya, Keluar", "Yes, Log Out"), style: GoogleFonts.poppins(color: AppColors.error)),
+                                  ),
+                                ],
+                              ),
+                            );
+                            if (confirm == true && mounted) {
+                              await auth?.logout();
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -474,19 +480,17 @@ class _ProfilePageState extends State<ProfilePage>
 
                   const SizedBox(height: 40),
 
-                  // ==========================================
-                  // 5. FOOTER
-                  // ==========================================
-                  const Icon(Icons.spa_rounded,
-                      size: 24, color: CulturalColors.textGrey),
+                  // Footer
+                  const Icon(Icons.spa_rounded, size: 24, color: AppColors.textSecondary),
                   const SizedBox(height: 8),
                   Text(
-                    "@2025 produced by Bidang Pembinaan Kebudayaan\nDinas Pendidikan dan Kebudayaan Lombok Barat",
+                    "© 2025 Bidang Pembinaan Kebudayaan\nDinas Pendidikan dan Kebudayaan Lombok Barat",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 11,
-                        color: CulturalColors.textGrey.withOpacity(0.7),
-                        height: 1.5),
+                    style: GoogleFonts.poppins(
+                      fontSize: 11,
+                      color: AppColors.textSecondary.withOpacity(0.7),
+                      height: 1.6,
+                    ),
                   ),
                   const SizedBox(height: 40),
                 ],
@@ -498,8 +502,130 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  // --- WIDGET HELPERS ---
+  // --- FUNGSI DIALOG SP & SOP (Data Resmi) ---
+  void _showSOPDialog(BuildContext context, String lang) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text("SP & SOP Layanan", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Standar Pelayanan Dinas Pendidikan dan Kebudayaan Kabupaten Lombok Barat", style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 14, color: AppColors.primary)),
+            const SizedBox(height: 12),
+            _buildInfoRow("🕒 Jam Layanan", "Senin - Kamis: 07:30 - 16:00 WITA\nJumat: 07:30 - 11:00 WITA"),
+            const SizedBox(height: 8),
+            _buildInfoRow("📍 Alamat Kantor", "Jl. Gora No.1, Gerung, Kec. Gerung, Lombok Barat, NTB 83351"),
+            const SizedBox(height: 8),
+            _buildInfoRow("📞 Kontak", "0370 - 681090 (Pusat Informasi)"),
+            const SizedBox(height: 8),
+            _buildInfoRow("📧 Email Resmi", "dikbud@lombokbaratkab.go.id"),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Tutup", style: GoogleFonts.poppins(color: AppColors.primary)),
+          )
+        ],
+      ),
+    );
+  }
 
+  // --- FUNGSI DIALOG PUSAT BANTUAN & FAQ (Data Resmi) ---
+  void _showHelpCenterDialog(BuildContext context, String lang) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text("Pusat Bantuan", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("FAQ (Pertanyaan Umum)", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.primary)),
+              const SizedBox(height: 8),
+              _buildInfoRow("💡 Cara mencari Cagar Budaya?", "Gunakan fitur pencarian di Beranda, atau buka menu 'Peta' untuk melihat lokasi."),
+              const SizedBox(height: 8),
+              _buildInfoRow("💡 Bagaimana cara Login Staf?", "Klik tombol 'Masuk Staf' di halaman Profil. Gunakan akun yang telah didaftarkan oleh admin."),
+              const SizedBox(height: 8),
+              _buildInfoRow("💡 Aplikasi error/tidak bisa masuk?", "Pastikan koneksi internet stabil. Jika masih error, hubungi admin Dinas melalui kontak resmi."),
+              const Divider(height: 30),
+              Text("Visi & Misi Dinas", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.primary)),
+              const SizedBox(height: 8),
+              Text("Visi: Terwujudnya Sumber Daya Manusia Lombok Barat yang Cerdas, Berkarakter, dan Berbudaya.", style: GoogleFonts.poppins(fontSize: 13, color: AppColors.textSecondary)),
+              const SizedBox(height: 6),
+              Text("Misi: 1. Meningkatkan kualitas pendidikan dan kebudayaan. 2. Melestarikan dan mengembangkan seni budaya daerah.", style: GoogleFonts.poppins(fontSize: 13, color: AppColors.textSecondary)),
+              const Divider(height: 30),
+              Text("Kontak Resmi Dinas", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 14, color: AppColors.primary)),
+              const SizedBox(height: 8),
+              _buildInfoRow("📞 Telepon", "0370 - 681090"),
+              _buildInfoRow("📧 Email", "dikbud@lombokbaratkab.go.id"),
+            ],
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Tutup", style: GoogleFonts.poppins(color: AppColors.primary)),
+          )
+        ],
+      ),
+    );
+  }
+
+  // --- FUNGSI DIALOG TENTANG APLIKASI ---
+  void _showAboutDialog(BuildContext context, String lang) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text("Tentang SILORA", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, color: AppColors.textPrimary)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(child: Icon(Icons.museum, size: 48, color: AppColors.primary)),
+            const SizedBox(height: 12),
+            Text("SILORA (Sistem Informasi Kebudayaan Lombok Barat)", textAlign: TextAlign.center, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 15, color: AppColors.primary)),
+            const SizedBox(height: 12),
+            Text("Aplikasi resmi Dinas Pendidikan dan Kebudayaan Kabupaten Lombok Barat untuk mempromosikan, melestarikan, dan memetakan cagar budaya, kesenian, serta event pariwisata di Lombok Barat.", textAlign: TextAlign.justify, style: GoogleFonts.poppins(fontSize: 13, color: AppColors.textSecondary)),
+            const SizedBox(height: 16),
+            Text("Versi: 1.0.0 (Stable)", style: GoogleFonts.poppins(fontWeight: FontWeight.w600, fontSize: 12, color: AppColors.textPrimary)),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("Tutup", style: GoogleFonts.poppins(color: AppColors.primary)),
+          )
+        ],
+      ),
+    );
+  }
+
+  // --- FUNGSI HELPER UNTUK MENAMPILKAN ROW INFORMASI ---
+  Widget _buildInfoRow(String title, String desc) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Text(title, style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 12, color: AppColors.textSecondary)),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          flex: 3,
+          child: Text(desc, style: GoogleFonts.poppins(fontSize: 12, color: AppColors.textPrimary)),
+        ),
+      ],
+    );
+  }
+
+  // Widget Pembantu Layout
   Widget _buildSectionHeader(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, bottom: 12),
@@ -507,10 +633,10 @@ class _ProfilePageState extends State<ProfilePage>
         alignment: Alignment.centerLeft,
         child: Text(
           title.toUpperCase(),
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: CulturalColors.textGrey,
+            color: AppColors.textSecondary,
             letterSpacing: 1.2,
           ),
         ),
@@ -520,15 +646,16 @@ class _ProfilePageState extends State<ProfilePage>
 
   Widget _buildSectionCard({required List<Widget> children}) {
     return Container(
+      width: double.infinity,
       decoration: BoxDecoration(
-        color: CulturalColors.surface,
+        color: AppColors.cardSurface,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: CulturalColors.textDark.withOpacity(0.04),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 15,
             offset: const Offset(0, 5),
-          )
+          ),
         ],
       ),
       child: Column(children: children),
@@ -538,7 +665,7 @@ class _ProfilePageState extends State<ProfilePage>
   Widget _divider() {
     return Padding(
       padding: const EdgeInsets.only(left: 64, right: 20),
-      child: Divider(height: 1, color: Colors.grey.shade200),
+      child: Divider(height: 1, thickness: 1, color: AppColors.divider), // ✅ Menggunakan AppColors.divider
     );
   }
 
@@ -555,19 +682,16 @@ class _ProfilePageState extends State<ProfilePage>
       onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: isDanger
-                    ? Colors.red.withOpacity(0.1)
-                    : iconColor.withOpacity(0.1),
+                color: isDanger ? AppColors.error.withOpacity(0.1) : iconColor.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(icon,
-                  size: 22, color: isDanger ? Colors.red : iconColor),
+              child: Icon(icon, size: 22, color: isDanger ? AppColors.error : iconColor),
             ),
             const SizedBox(width: 16),
             Expanded(
@@ -576,17 +700,19 @@ class _ProfilePageState extends State<ProfilePage>
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w600,
                       fontSize: 15,
-                      color: isDanger ? Colors.red : CulturalColors.textDark,
+                      color: isDanger ? AppColors.error : AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     subtitle,
-                    style: const TextStyle(
-                        fontSize: 12, color: CulturalColors.textGrey),
+                    style: GoogleFonts.poppins(
+                      fontSize: 12,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -594,8 +720,7 @@ class _ProfilePageState extends State<ProfilePage>
             if (trailing != null)
               trailing
             else
-              const Icon(Icons.chevron_right_rounded,
-                  size: 20, color: Colors.grey)
+              const Icon(Icons.chevron_right_rounded, size: 20, color: AppColors.textTertiary)
           ],
         ),
       ),

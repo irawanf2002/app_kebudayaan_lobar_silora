@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-// 🔥 PENTING: Pastikan kedua import ini mengarah ke file yang benar
+// 🔥 Pastikan import ini benar sesuai struktur folder kamu
 import 'cagar_form_page.dart';
 import '../../../data/models/cagar_model.dart';
 
@@ -13,8 +13,7 @@ class CagarAdminListPage extends StatefulWidget {
 }
 
 class _CagarAdminListPageState extends State<CagarAdminListPage> {
-  final Color _headerBlue =
-      const Color(0xFF2A3470); // Indigo Gelap (Sesuai Dashboard)
+  final Color _headerBlue = const Color(0xFF2A3470);
   String _searchQuery = "";
 
   @override
@@ -25,8 +24,8 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFFE0E7FF), // Soft Indigo (Biru kalem) di atas
-              Color(0xFFF1F5F9), // Slate (Abu-abu sejuk) di bawah
+              Color(0xFFE0E7FF),
+              Color(0xFFF1F5F9),
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -37,18 +36,13 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // 1. HEADER
               _buildHeaderControls(context),
-
               const SizedBox(height: 24),
-              // 🔥 GARIS PEMBATAS ELEGAN DITAMBAHKAN DI SINI
               Divider(
                 color: Colors.blueGrey.withOpacity(0.2),
                 thickness: 1.5,
               ),
               const SizedBox(height: 24),
-
-              // 2. AREA KONTEN (Daftar Kartu atau Status Kosong)
               Expanded(
                 child: _buildDataList(),
               ),
@@ -59,7 +53,6 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
     );
   }
 
-  // WIDGET: Bagian Atas (Judul, Cari, Tambah)
   Widget _buildHeaderControls(BuildContext context) {
     return TweenAnimationBuilder<double>(
       tween: Tween(begin: 0.0, end: 1.0),
@@ -75,7 +68,6 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          // Sisi Kiri: Judul
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -92,11 +84,8 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
                   style: TextStyle(color: Color(0xFF475569), fontSize: 14)),
             ],
           ),
-
-          // Sisi Kanan: Kolom Cari & Tombol
           Row(
             children: [
-              // Search Bar Putih Melayang
               Container(
                 width: 320,
                 height: 48,
@@ -124,7 +113,6 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
                 ),
               ),
               const SizedBox(width: 16),
-              // Tombol Tambah
               ElevatedButton.icon(
                 onPressed: () => Navigator.push(context,
                     MaterialPageRoute(builder: (_) => const CagarFormPage())),
@@ -150,38 +138,51 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
     );
   }
 
-  // WIDGET: Aliran Data dari Firestore
   Widget _buildDataList() {
     return StreamBuilder<QuerySnapshot>(
+      // ✅ PERBAIKAN: Hapus orderBy jika kolom belum ada, atau ganti nama kolomnya
       stream: FirebaseFirestore.instance
           .collection('cagar_budaya')
-          .orderBy('createdAt', descending: true)
+          // .orderBy('createdAt', descending: true) // ⬅️ KOMEN DULU jika belum ada kolom ini
           .snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator(color: _headerBlue));
         }
 
+        // ✅ PERBAIKAN: Tampilkan pesan error jelas
         if (snapshot.hasError) {
+          debugPrint("Error Firestore: ${snapshot.error}");
           return Center(
-              child: Text("Terjadi kesalahan sistem",
-                  style: TextStyle(color: Colors.red.shade300)));
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, color: Colors.redAccent, size: 48),
+                const SizedBox(height: 16),
+                Text("Terjadi kesalahan: ${snapshot.error}",
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.redAccent)),
+              ],
+            ),
+          );
         }
 
         final docs = snapshot.data?.docs ?? [];
 
         final filteredDocs = docs.where((doc) {
-          final data = doc.data() as Map<String, dynamic>;
-          final nama = (data['nama'] ?? '').toString().toLowerCase();
-          return nama.contains(_searchQuery);
+          try {
+            final data = doc.data() as Map<String, dynamic>;
+            final nama = (data['nama'] ?? '').toString().toLowerCase();
+            return nama.contains(_searchQuery);
+          } catch (e) {
+            return false;
+          }
         }).toList();
 
-        // JIKA DATA KOSONG
         if (filteredDocs.isEmpty) {
-          return AnimatedDenseEmptyState(headerBlue: _headerBlue);
+          return const AnimatedDenseEmptyState();
         }
 
-        // JIKA ADA DATA
         return ListView.builder(
           itemCount: filteredDocs.length,
           padding: const EdgeInsets.only(bottom: 40),
@@ -206,22 +207,28 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
                 docId: doc.id,
                 data: data,
                 onEdit: () {
-                  final modelCagar = CagarModel(
-                    id: doc.id,
-                    nama: data['nama'] ?? '',
-                    lokasi: data['lokasi'] ?? '',
-                    deskripsi: data['deskripsi'] ?? '',
-                    gambarUrl: data['gambar_url'] ?? '',
-                    kategori: data['kategori'] ?? 'Benda Cagar Budaya',
-                    jamBuka: data['jamBuka'] ?? '',
-                    hargaTiket: data['hargaTiket'] ?? '',
-                  );
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => CagarFormPage(cagar: modelCagar)));
+                  try {
+                    final modelCagar = CagarModel(
+                      id: doc.id,
+                      nama: data['nama']?.toString() ?? '',
+                      lokasi: data['lokasi']?.toString() ?? '',
+                      deskripsi: data['deskripsi']?.toString() ?? '',
+                      gambarUrl: data['gambar_url']?.toString() ?? '',
+                      kategori: data['kategori']?.toString() ?? 'Benda Cagar Budaya',
+                      jamBuka: data['jamBuka']?.toString() ?? '-',
+                      hargaTiket: data['hargaTiket']?.toString() ?? '-',
+                    );
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => CagarFormPage(cagar: modelCagar)));
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("❌ Gagal memuat data: $e"), backgroundColor: Colors.red),
+                    );
+                  }
                 },
-                onDelete: () => _showDeleteDialog(doc.id, data['nama']),
+                onDelete: () => _showDeleteDialog(doc.id, data['nama']?.toString() ?? ''),
               ),
             );
           },
@@ -230,7 +237,7 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
     );
   }
 
-  void _showDeleteDialog(String id, String? nama) {
+  void _showDeleteDialog(String id, String nama) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -251,14 +258,23 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
           ElevatedButton(
             onPressed: () async {
               Navigator.pop(ctx);
-              await FirebaseFirestore.instance
-                  .collection('cagar_budaya')
-                  .doc(id)
-                  .delete();
-              if (mounted)
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Arsip berhasil dihapus'),
-                    backgroundColor: Colors.redAccent));
+              try {
+                await FirebaseFirestore.instance
+                    .collection('cagar_budaya')
+                    .doc(id)
+                    .delete();
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Arsip berhasil dihapus'),
+                      backgroundColor: Colors.green));
+                }
+              } catch (e) {
+                if (mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Gagal hapus: $e'),
+                      backgroundColor: Colors.red));
+                }
+              }
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
             child:
@@ -271,11 +287,8 @@ class _CagarAdminListPageState extends State<CagarAdminListPage> {
 }
 
 // =====================================================================
-// 🔥 WIDGET: EMPTY STATE (Status Kosong)
-// =====================================================================
 class AnimatedDenseEmptyState extends StatefulWidget {
-  final Color headerBlue;
-  const AnimatedDenseEmptyState({super.key, required this.headerBlue});
+  const AnimatedDenseEmptyState({super.key});
 
   @override
   State<AnimatedDenseEmptyState> createState() =>
@@ -430,7 +443,7 @@ class _AnimatedDenseEmptyStateState extends State<AnimatedDenseEmptyState>
                       width: 40, height: 2, color: Colors.grey.shade200)),
             Column(
               children: [
-                Icon(icon, color: widget.headerBlue.withOpacity(0.6), size: 32),
+                Icon(icon, color: const Color(0xFF2A3470).withOpacity(0.6), size: 32),
                 const SizedBox(height: 12),
                 Text(title,
                     style: const TextStyle(
@@ -453,8 +466,6 @@ class _AnimatedDenseEmptyStateState extends State<AnimatedDenseEmptyState>
   }
 }
 
-// =====================================================================
-// 🔥 WIDGET KHUSUS KARTU DATA (Dengan Efek Melayang Saat Di-Hover)
 // =====================================================================
 class AnimatedHoverCard extends StatefulWidget {
   final String docId;
@@ -514,10 +525,15 @@ class _AnimatedHoverCardState extends State<AnimatedHoverCard> {
                     border: Border.all(color: Colors.grey.shade200)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.network(widget.data['gambar_url'] ?? '',
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => Icon(Icons.museum_outlined,
-                          color: Colors.blueGrey.shade300, size: 40)),
+                  child: Image.network(
+                    widget.data['gambar_url']?.toString() ?? '',
+                    fit: BoxFit.cover,
+                    errorBuilder: (_, __, ___) => Icon(
+                      Icons.museum_outlined,
+                      color: Colors.blueGrey.shade300,
+                      size: 40,
+                    ),
+                  ),
                 ),
               ),
               const SizedBox(width: 24),
@@ -525,26 +541,29 @@ class _AnimatedHoverCardState extends State<AnimatedHoverCard> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.data['nama'] ?? 'Tanpa Nama',
-                        style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black87)),
+                    Text(
+                      widget.data['nama']?.toString() ?? 'Tanpa Nama',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87),
+                    ),
                     const SizedBox(height: 12),
                     Row(
                       children: [
-                        _buildCategoryBadge(widget.data['kategori'] ?? '-'),
+                        _buildCategoryBadge(widget.data['kategori']?.toString() ?? '-'),
                         const SizedBox(width: 16),
                         Icon(Icons.location_on_rounded,
                             size: 16, color: Colors.blueGrey.shade400),
                         const SizedBox(width: 4),
                         Expanded(
-                            child: Text(widget.data['lokasi'] ?? '-',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    color: Colors.blueGrey.shade600,
-                                    fontSize: 14))),
+                            child: Text(
+                          widget.data['lokasi']?.toString() ?? '-',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: Colors.blueGrey.shade600, fontSize: 14),
+                        )),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -560,20 +579,24 @@ class _AnimatedHoverCardState extends State<AnimatedHoverCard> {
                           Icon(Icons.access_time_rounded,
                               size: 16, color: Colors.blueGrey.shade400),
                           const SizedBox(width: 6),
-                          Text(widget.data['jamBuka'] ?? '-',
-                              style: TextStyle(
-                                  color: Colors.blueGrey.shade700,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            widget.data['jamBuka']?.toString() ?? '-',
+                            style: TextStyle(
+                                color: Colors.blueGrey.shade700,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500),
+                          ),
                           const SizedBox(width: 20),
                           Icon(Icons.confirmation_number_rounded,
                               size: 16, color: Colors.blueGrey.shade400),
                           const SizedBox(width: 6),
-                          Text(widget.data['hargaTiket'] ?? '-',
-                              style: TextStyle(
-                                  color: Colors.blueGrey.shade700,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500)),
+                          Text(
+                            widget.data['hargaTiket']?.toString() ?? '-',
+                            style: TextStyle(
+                                color: Colors.blueGrey.shade700,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ],
                       ),
                     )
@@ -611,9 +634,10 @@ class _AnimatedHoverCardState extends State<AnimatedHoverCard> {
 
   Widget _buildCategoryBadge(String kategori) {
     Color color = Colors.blue;
-    if (kategori.toLowerCase().contains("benda")) color = Colors.blueGrey;
-    if (kategori.toLowerCase().contains("situs")) color = Colors.orange;
-    if (kategori.toLowerCase().contains("struktur")) color = Colors.purple;
+    final kategoriLower = kategori.toLowerCase();
+    if (kategoriLower.contains("benda")) color = Colors.blueGrey;
+    if (kategoriLower.contains("situs")) color = Colors.orange;
+    if (kategoriLower.contains("struktur")) color = Colors.purple;
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

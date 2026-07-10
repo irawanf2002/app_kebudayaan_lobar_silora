@@ -21,6 +21,13 @@ class CommentModel {
 
   factory CommentModel.fromFirestore(DocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>? ?? {};
+    
+    DateTime parseDate(dynamic value) {
+      if (value is Timestamp) return value.toDate();
+      if (value is DateTime) return value;
+      return DateTime.now();
+    }
+
     return CommentModel(
       id: doc.id,
       cagarId: data['cagarId']?.toString() ?? '',
@@ -32,9 +39,7 @@ class CommentModel {
       rating: (data['rating'] is int)
           ? data['rating']
           : int.tryParse(data['rating']?.toString() ?? '5') ?? 5,
-      createdAt: data['createdAt'] is Timestamp
-          ? (data['createdAt'] as Timestamp).toDate()
-          : DateTime.now(),
+      createdAt: parseDate(data['createdAt']),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -20,6 +21,13 @@ class DashboardAdminPage extends StatefulWidget {
 
 class _DashboardAdminPageState extends State<DashboardAdminPage> {
   int _selectedIndex = 0;
+  bool _isSidebarOpen = true;
+
+  // Variabel untuk data dari Firestore
+  int _totalCagar = 0;
+  int _totalUlasan = 0;
+  int _totalAgenda = 0;
+  int _totalPengunjung = 0;
 
   // Tema Warna Premium
   final Color _primaryNavy = const Color(0xFF1E3A8A);
@@ -28,27 +36,62 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
   final Color _bgLightGray = const Color(0xFFF8FAFC);
 
   @override
+  void initState() {
+    super.initState();
+    _ambilDataDariFirestore(); // Ambil data saat halaman dibuka
+  }
+
+  // Fungsi untuk membaca data dari Firestore
+  Future<void> _ambilDataDariFirestore() async {
+    try {
+      // Baca jumlah dokumen dari setiap koleksi
+      final cagarSnapshot = await FirebaseFirestore.instance.collection('cagar_budaya').get();
+      final ulasanSnapshot = await FirebaseFirestore.instance.collection('comments').get();
+      final agendaSnapshot = await FirebaseFirestore.instance.collection('agenda_events').get();
+      final pengunjungSnapshot = await FirebaseFirestore.instance.collection('pengunjung').get();
+
+      if (mounted) {
+        setState(() {
+          _totalCagar = cagarSnapshot.docs.length;
+          _totalUlasan = ulasanSnapshot.docs.length;
+          _totalAgenda = agendaSnapshot.docs.length;
+          _totalPengunjung = pengunjungSnapshot.docs.length;
+        });
+      }
+    } catch (e) {
+      debugPrint("Gagal mengambil data dari Firestore: $e");
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("❌ Gagal memuat data: $e"), backgroundColor: Colors.redAccent),
+        );
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+
     return Scaffold(
       backgroundColor: _bgLightGray,
+      drawer: isMobile ? _buildSidebar() : null,
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Sidebar
-          _buildSidebar(),
-          // Konten Utama
+          if (!isMobile && _isSidebarOpen) _buildSidebar(),
           Expanded(
-            child: _getSelectedPage(),
+            child: _getSelectedPage(isMobile: isMobile),
           ),
         ],
       ),
     );
   }
 
-  Widget _getSelectedPage() {
+  Widget _getSelectedPage({required bool isMobile}) {
     switch (_selectedIndex) {
       case 0:
-        return _buildDashboardContent();
+        return _buildDashboardContent(isMobile: isMobile);
       case 1:
         return const CagarAdminListPage();
       case 2:
@@ -56,22 +99,23 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
       case 3:
         return const CfnAdminListPage();
       default:
-        return _buildDashboardContent();
+        return _buildDashboardContent(isMobile: isMobile);
     }
   }
 
-  Widget _buildDashboardContent() {
+  Widget _buildDashboardContent({required bool isMobile}) {
     return Column(
       children: [
-        _buildTopBar(),
+        _buildTopBar(isMobile: isMobile),
         Expanded(
           child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildHeaderSection(),
-                _buildSummaryCards(),
-                _buildDataSection(),
+                _buildHeaderSection(isMobile: isMobile),
+                _buildSummaryCards(isMobile: isMobile),
+                _buildDataSection(isMobile: isMobile),
               ],
             ),
           ),
@@ -90,25 +134,25 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
         ),
       );
 
-      // GANTI DENGAN URL ANDA (Cloud Function atau Flask Server)
       final response = await http.post(
-        Uri.parse('http://localhost:5000/predict'), // Ubah nanti ke production URL
+        Uri.parse('https://alamat-server-anda.com/predict'),
         headers: {'Content-Type': 'application/json'},
       );
 
       if (response.statusCode == 200) {
         await Provider.of<CagarProvider>(context, listen: false).refreshData();
-        
+        await _ambilDataDariFirestore(); // Refresh data setelah proses selesai
+
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text("✅ Prediksi XGBoost Berhasil! Marker di peta sudah terupdate."),
+              content: Text("✅ Prediksi XGBoost Berhasil! Data diperbarui."),
               backgroundColor: Colors.green,
             ),
           );
         }
       } else {
-        throw Exception("Server error");
+        throw Exception("Server merespons kode: ${response.statusCode}");
       }
     } catch (e) {
       if (mounted) {
@@ -126,9 +170,10 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
   Widget _buildSidebar() {
     return Container(
       width: 280,
+      constraints: const BoxConstraints(maxWidth: 280),
       decoration: BoxDecoration(
         color: _sidebarDark,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 15, offset: const Offset(5, 0))],
+        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 15, offset: Offset(5, 0))],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +239,7 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 3))],
+        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 3))],
       ),
       child: Image.asset(path, fit: BoxFit.contain, errorBuilder: (_, __, ___) => Icon(fallbackIcon, color: _primaryNavy, size: 24)),
     );
@@ -224,6 +269,7 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
           ),
         ),
         onTap: () {
+          if (Navigator.canPop(context)) Navigator.pop(context);
           if (isLogout) {
             _handleLogout();
           } else {
@@ -242,22 +288,33 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
   }
 
   // ================== TOP BAR ==================
-  Widget _buildTopBar() {
+  Widget _buildTopBar({required bool isMobile}) {
     return Container(
-      height: 75,
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 10, offset: const Offset(0, 2))]),
-      padding: const EdgeInsets.symmetric(horizontal: 32),
+      height: isMobile ? 65 : 75,
+      decoration: const BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 2))]),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 32),
       child: Row(
         children: [
-          Icon(Icons.menu_open_rounded, color: _primaryNavy, size: 28),
-          const SizedBox(width: 32),
+          IconButton(
+            padding: EdgeInsets.zero,
+            constraints: const BoxConstraints(minWidth: 40),
+            icon: Icon(Icons.menu_open_rounded, color: _primaryNavy, size: isMobile ? 24 : 28),
+            onPressed: () {
+              if (isMobile) {
+                Scaffold.of(context).openDrawer();
+              } else {
+                setState(() => _isSidebarOpen = !_isSidebarOpen);
+              }
+            },
+          ),
+          const SizedBox(width: 16),
           Expanded(
             child: SizedBox(
               height: 45,
               child: TextField(
                 decoration: InputDecoration(
                   hintText: "Cari data cagar atau agenda...",
-                  hintStyle: const TextStyle(fontSize: 14, color: Colors.black45),
+                  hintStyle: TextStyle(fontSize: isMobile ? 13 : 14, color: Colors.black45),
                   prefixIcon: const Icon(Icons.search, size: 20, color: Colors.black45),
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(25), borderSide: BorderSide.none),
                   filled: true,
@@ -267,49 +324,52 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
               ),
             ),
           ),
-          const SizedBox(width: 32),
-          Stack(
-            children: [
-              const Icon(Icons.notifications_none_rounded, color: Colors.black54, size: 28),
-              Positioned(right: 2, top: 2, child: Container(width: 10, height: 10, decoration: const BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle))),
-            ],
-          ),
-          const SizedBox(width: 24),
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(2),
-                decoration: BoxDecoration(shape: BoxShape.circle, gradient: LinearGradient(colors: [_primaryNavy, Colors.blueAccent])),
-                child: const CircleAvatar(backgroundColor: Colors.white, radius: 18, child: Icon(Icons.person, color: Color(0xFF1E3A8A), size: 22)),
-              ),
-              const SizedBox(width: 12),
-              const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Admin Staf", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87)),
-                  Text("Dinas Dikbud", style: TextStyle(color: Colors.black54, fontSize: 12)),
-                ],
-              )
-            ],
-          )
+          if (!isMobile) ...[
+            const SizedBox(width: 32),
+            const Stack(
+              children: [
+                Icon(Icons.notifications_none_rounded, color: Colors.black54, size: 28),
+                Positioned(right: 2, top: 2, child: SizedBox(width: 10, height: 10, child: DecoratedBox(decoration: BoxDecoration(color: Colors.redAccent, shape: BoxShape.circle)))),
+              ],
+            ),
+            const SizedBox(width: 24),
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(2),
+                  decoration: BoxDecoration(shape: BoxShape.circle, gradient: LinearGradient(colors: [_primaryNavy, Colors.blueAccent])),
+                  child: const CircleAvatar(backgroundColor: Colors.white, radius: 18, child: Icon(Icons.person, color: Color(0xFF1E3A8A), size: 22)),
+                ),
+                const SizedBox(width: 12),
+                const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Admin Staf", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black87)),
+                    Text("Dinas Dikbud", style: TextStyle(color: Colors.black54, fontSize: 12)),
+                  ],
+                )
+              ],
+            )
+          ] else ...[
+            const SizedBox(width: 12),
+            const CircleAvatar(backgroundColor: Color(0xFF1E3A8A), radius: 16, child: Icon(Icons.person, color: Colors.white, size: 20)),
+          ]
         ],
       ),
     );
   }
 
   // ================== HEADER ==================
-  Widget _buildHeaderSection() {
+  Widget _buildHeaderSection({required bool isMobile}) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(40, 48, 40, 80),
+      padding: EdgeInsets.fromLTRB(isMobile ? 20 : 40, isMobile ? 30 : 48, isMobile ? 20 : 40, isMobile ? 50 : 80),
       decoration: BoxDecoration(
         gradient: LinearGradient(colors: [_primaryNavy, _secondaryIndigo], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
+      child: isMobile 
+        ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -318,85 +378,84 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
                 child: const Text("V.1.0 - Production", style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1)),
               ),
               const SizedBox(height: 16),
-              const Text("Ringkasan Sistem Informasi", style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
+              const Text("Ringkasan Sistem Informasi", style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
               const SizedBox(height: 8),
-              Text("Bidang Kebudayaan - Dinas Pendidikan dan Kebudayaan Lombok Barat", style: TextStyle(color: Colors.blue[100], fontSize: 15, letterSpacing: 0.2)),
+              Text("Bidang Kebudayaan - Dinas Pendidikan dan Kebudayaan Lombok Barat", style: TextStyle(color: Colors.blue[100], fontSize: 13, height: 1.4)),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () => setState(() => _selectedIndex = 1),
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: _primaryNavy, padding: const EdgeInsets.symmetric(vertical: 16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                  icon: const Icon(Icons.add_box_rounded),
+                  label: const Text("Kelola Data", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                ),
+              )
+            ],
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(color: Colors.white.withOpacity(0.15), borderRadius: BorderRadius.circular(20)),
+                    child: const Text("V.1.0 - Production", style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold, letterSpacing: 1)),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text("Ringkasan Sistem Informasi", style: TextStyle(color: Colors.white, fontSize: 32, fontWeight: FontWeight.w800, letterSpacing: -0.5)),
+                  const SizedBox(height: 8),
+                  Text("Bidang Kebudayaan - Dinas Pendidikan dan Kebudayaan Lombok Barat", style: TextStyle(color: Colors.blue[100], fontSize: 15, letterSpacing: 0.2)),
+                ],
+              ),
+              ElevatedButton.icon(
+                onPressed: () => setState(() => _selectedIndex = 1),
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: _primaryNavy, padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+                icon: const Icon(Icons.add_box_rounded),
+                label: const Text("Kelola Data", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+              )
             ],
           ),
-          ElevatedButton.icon(
-            onPressed: () => setState(() => _selectedIndex = 1),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.white, foregroundColor: _primaryNavy, padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 20), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
-            icon: const Icon(Icons.add_box_rounded),
-            label: const Text("Kelola Data", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
-          )
-        ],
-      ),
     );
   }
 
-  // ================== SUMMARY CARDS (DENGAN XGBOOST) ==================
-  Widget _buildSummaryCards() {
+  // ================== SUMMARY CARDS (DATA DARI FIREBASE) ==================
+  Widget _buildSummaryCards({required bool isMobile}) {
     return Transform.translate(
       offset: const Offset(0, -50),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Row(
-          children: [
-            Expanded(child: _statCard("Total Cagar", "100", Icons.account_balance, Colors.blueAccent)),
-            const SizedBox(width: 16),
-            Expanded(child: _statCard("Total Ulasan", "132", Icons.rate_review_rounded, Colors.orangeAccent)),
-            const SizedBox(width: 16),
-            Expanded(child: _statCard("Agenda Event", "50", Icons.event_available_rounded, Colors.teal)),
-            const SizedBox(width: 16),
-
-            // === KARTU XGBoost ===
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.deepOrange.shade300, width: 2),
-                  boxShadow: [BoxShadow(color: Colors.deepOrange.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 10))],
-                ),
-                child: InkWell(
-                  onTap: _jalankanPrediksiXGBoost,
-                  borderRadius: BorderRadius.circular(20),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              decoration: BoxDecoration(color: Colors.deepOrange.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
-                              child: const Icon(Icons.psychology_rounded, color: Colors.deepOrange, size: 28),
-                            ),
-                            const Icon(Icons.play_arrow_rounded, color: Colors.deepOrange, size: 32),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        const Text("Analisis XGBoost", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black87)),
-                        const SizedBox(height: 6),
-                        const Text("Jalankan Prediksi Kondisi", style: TextStyle(fontSize: 13, color: Colors.grey)),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(color: Colors.deepOrange.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
-                          child: const Text("Terbaru", style: TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold, fontSize: 12)),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+        padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 40),
+        child: isMobile
+          ? GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 1.1,
+              children: [
+                _statCard("Total Cagar", "$_totalCagar", Icons.account_balance, Colors.blueAccent),
+                _statCard("Total Ulasan", "$_totalUlasan", Icons.rate_review_rounded, Colors.orangeAccent),
+                _statCard("Agenda Event", "$_totalAgenda", Icons.event_available_rounded, Colors.teal),
+                _buildXGBoostCard(),
+                _statCard("Pengunjung", "$_totalPengunjung", Icons.people_alt_rounded, Colors.deepPurpleAccent),
+              ],
+            )
+          : Row(
+              children: [
+                Expanded(child: _statCard("Total Cagar", "$_totalCagar", Icons.account_balance, Colors.blueAccent)),
+                const SizedBox(width: 16),
+                Expanded(child: _statCard("Total Ulasan", "$_totalUlasan", Icons.rate_review_rounded, Colors.orangeAccent)),
+                const SizedBox(width: 16),
+                Expanded(child: _statCard("Agenda Event", "$_totalAgenda", Icons.event_available_rounded, Colors.teal)),
+                const SizedBox(width: 16),
+                Expanded(child: _buildXGBoostCard()),
+                const SizedBox(width: 16),
+                Expanded(child: _statCard("Pengunjung", "$_totalPengunjung", Icons.people_alt_rounded, Colors.deepPurpleAccent)),
+              ],
             ),
-            const SizedBox(width: 16),
-            Expanded(child: _statCard("Pengunjung", "1.4K", Icons.people_alt_rounded, Colors.deepPurpleAccent)),
-          ],
-        ),
       ),
     );
   }
@@ -428,18 +487,63 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
     );
   }
 
-  Widget _buildDataSection() {
+  Widget _buildXGBoostCard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.deepOrange.shade300, width: 2),
+        boxShadow: [BoxShadow(color: Colors.deepOrange.withOpacity(0.15), blurRadius: 20, offset: const Offset(0, 10))],
+      ),
+      child: InkWell(
+        onTap: _jalankanPrediksiXGBoost,
+        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(color: Colors.deepOrange.withOpacity(0.1), borderRadius: BorderRadius.circular(12)),
+                    child: const Icon(Icons.psychology_rounded, color: Colors.deepOrange, size: 28),
+                  ),
+                  const Icon(Icons.play_arrow_rounded, color: Colors.deepOrange, size: 32),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const Text("Analisis XGBoost", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black87)),
+              const SizedBox(height: 6),
+              const Text("Jalankan Prediksi Kondisi", style: TextStyle(fontSize: 13, color: Colors.grey)),
+              const SizedBox(height: 12),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                decoration: BoxDecoration(color: Colors.deepOrange.withOpacity(0.1), borderRadius: BorderRadius.circular(20)),
+                child: const Text("Terbaru", style: TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold, fontSize: 12)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ================== BAGIAN INFORMASI ==================
+  Widget _buildDataSection({required bool isMobile}) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(40, 0, 40, 40),
+      padding: EdgeInsets.fromLTRB(isMobile ? 16 : 40, 0, isMobile ? 16 : 40, 40),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 24, offset: const Offset(0, 8))],
+          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 24, offset: Offset(0, 8))],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(40.0),
+          padding: EdgeInsets.all(isMobile ? 24 : 40.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -464,7 +568,7 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
                         children: [
                           const Text("Sistem Berjalan Normal", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: Colors.black87)),
                           const SizedBox(height: 4),
-                          Text("Sistem Informasi Kebudayaan (SILORA) terpantau stabil.", style: TextStyle(color: Colors.blueGrey.shade700, height: 1.5, fontSize: 14)),
+                          Text("Sistem Informasi Kebudayaan (SILORA) terhubung dengan Firebase Firestore. Data diperbarui secara otomatis.", style: TextStyle(color: Colors.blueGrey.shade700, height: 1.5, fontSize: 14)),
                         ],
                       ),
                     ),

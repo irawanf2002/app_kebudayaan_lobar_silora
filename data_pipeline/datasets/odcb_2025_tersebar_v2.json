@@ -1,0 +1,5897 @@
+[
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Puspa Karma",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.698327163642102,
+        "longitude": 116.05609256231533,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 30
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Medang Sekar",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.708738692696949,
+        "longitude": 116.11277517280526,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Ajar Wali",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.692530982201893,
+        "longitude": 116.0614431851706,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Bangbari",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.657224359313242,
+        "longitude": 116.08776334866168,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Jati Swara",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.669191714166445,
+        "longitude": 116.07497985809233,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Purwadaksina",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.629961422519228,
+        "longitude": 116.0974889925555,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Markum",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.682228286767142,
+        "longitude": 116.13545159234857,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Indar Jaya",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.707104503744036,
+        "longitude": 116.0948263052397,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Ana Kidung",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.620147777336193,
+        "longitude": 116.08425311972171,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Rengganis",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.615574051647714,
+        "longitude": 116.12868671393007,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Tapal Adam",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.624867096673954,
+        "longitude": 116.106472986037,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Indar Bangsawan",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.666637766924993,
+        "longitude": 116.13820707018986,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 25
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Kawitan Selandir",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.701541494494313,
+        "longitude": 116.11258550594818,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Jong Lengge",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.609398034701561,
+        "longitude": 116.11283960261409,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Kabar Sundari",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.702200211449341,
+        "longitude": 116.06637740145631,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Doyan Neda",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.642929068981923,
+        "longitude": 116.06379432885385,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Usul Tahkik",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.631964427023666,
+        "longitude": 116.13316112574485,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Cilinaya",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.717125075755925,
+        "longitude": 116.10753692615624,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Kayat Cukur/Kayat Nur",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.70796838633365,
+        "longitude": 116.14583609648805,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Jowarsah",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.63638208724662,
+        "longitude": 116.14671890840978,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Puser Bumi",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.675186456052423,
+        "longitude": 116.14216232610123,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Kemodong Aur",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.626350343629738,
+        "longitude": 116.15219250779346,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Monyeh",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.718624262220072,
+        "longitude": 116.14428535078515,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Balik Bangke",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.68689757580612,
+        "longitude": 116.05788676452178,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 25,
+        "nama_objek": "Langit Gita",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.638324968792649,
+        "longitude": 116.05814370480225,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 26,
+        "nama_objek": "Brambang Ulung",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.698888054471071,
+        "longitude": 116.09113060349095,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 27,
+        "nama_objek": "Ajar Pati",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.706246611269151,
+        "longitude": 116.14001169646936,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 28,
+        "nama_objek": "Tanjung Bangsa",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.672323101516053,
+        "longitude": 116.11013344217548,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 29,
+        "nama_objek": "Jabal Kap",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.69832665213825,
+        "longitude": 116.17354500782557,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 30,
+        "nama_objek": "Yusuf",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.70804384980609,
+        "longitude": 116.1372987949534,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 31,
+        "nama_objek": "Guritan Kencure",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.708557664891845,
+        "longitude": 116.15240322891779,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 32,
+        "nama_objek": "Betal Jemur",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.66764998091185,
+        "longitude": 116.07768384338581,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 33,
+        "nama_objek": "Babad Lombok",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.639759851872157,
+        "longitude": 116.13031020160379,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 34,
+        "nama_objek": "Babad Praya",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.672735704215373,
+        "longitude": 116.06007234551268,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 35,
+        "nama_objek": "Babad Selaparang",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.704231231832255,
+        "longitude": 116.14132457614738,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 36,
+        "nama_objek": "Bunga Harum",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.63648409354043,
+        "longitude": 116.09018837172253,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 37,
+        "nama_objek": "Laduni",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.706038326001742,
+        "longitude": 116.12037965189302,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 38,
+        "nama_objek": "Serat Menak",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.660545356150779,
+        "longitude": 116.1312444864959,
+        "metadata": {
+            "jenis_manuskrip": "Lontar",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 39,
+        "nama_objek": "Daqo'iqul Akhbar",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.630996958822678,
+        "longitude": 116.07687238989472,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 40,
+        "nama_objek": "Tambihul Gofilin",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.656988423721755,
+        "longitude": 116.09386171914251,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 41,
+        "nama_objek": "Qashasul Anbiya",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.612288022284956,
+        "longitude": 116.15011486709192,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 42,
+        "nama_objek": "Qurthubi",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.615901020904605,
+        "longitude": 116.1605313794809,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 43,
+        "nama_objek": "Nur Muhammad",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.631835402562167,
+        "longitude": 116.10731255608732,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 44,
+        "nama_objek": "Kamaruzzaman",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.700652014089158,
+        "longitude": 116.1209111109008,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 45,
+        "nama_objek": "KasfulGoibiah",
+        "kategori_odcb": "Manuskrip",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.663352060314814,
+        "longitude": 116.13584839904209,
+        "metadata": {
+            "jenis_manuskrip": "Kertas",
+            "jumlah_pembaca": 25,
+            "jumlah_pengakses": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Anak Iwoq",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.658471777574833,
+        "longitude": 116.07268471839424,
+        "metadata": {
+            "jenis_tradisi": "Cerita Rakyat",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Arya Banjar Getas",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.684590638994404,
+        "longitude": 116.09241842085288,
+        "metadata": {
+            "jenis_tradisi": "Sejarah",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Dewi Anjani",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65095434577288,
+        "longitude": 116.15736869436637,
+        "metadata": {
+            "jenis_tradisi": "Mitos",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Rarudan",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.645183221752772,
+        "longitude": 116.09475483946393,
+        "metadata": {
+            "jenis_tradisi": "Cerita Rakyat",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Temelak Mangan",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.675417370107338,
+        "longitude": 116.08526217754313,
+        "metadata": {
+            "jenis_tradisi": "Cerita Rakyat",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Timun Belo/Timun Jogog",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.618485896653937,
+        "longitude": 116.06973733530386,
+        "metadata": {
+            "jenis_tradisi": "Cerita Rakyat",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Tegodek godek tetuntel tuntel",
+        "kategori_odcb": "Tradisi Lisan",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.605930027630352,
+        "longitude": 116.12258055529686,
+        "metadata": {
+            "jenis_tradisi": "Cerita Rakyat",
+            "penuturan": "Bewaran"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Merariq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.715559930714809,
+        "longitude": 116.06318174558525,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Sejati Selabar",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.705985867463506,
+        "longitude": 116.09708374723604,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Selabar Wali",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.710717195853602,
+        "longitude": 116.08221329424737,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Nikahan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.604673603703983,
+        "longitude": 116.09141780671368,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Rebaq Pucuk",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.708873751987724,
+        "longitude": 116.17289899162509,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Bait Janji",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.67049461590899,
+        "longitude": 116.06322994692368,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Begawe",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.637033879400013,
+        "longitude": 116.08298957424424,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Sorong Serah Aji Krame",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.704851777099154,
+        "longitude": 116.08984045858702,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Nyongkolan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.720403354509452,
+        "longitude": 116.09930275628307,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Bejango",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.710063981085133,
+        "longitude": 116.14851402360247,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Puputan Aji Krama",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.723042486091805,
+        "longitude": 116.09857069445901,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Bisoq Tian/Bretes",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.689982645350796,
+        "longitude": 116.09508448233245,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Petoq Puset",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.616068537988024,
+        "longitude": 116.16865775073299,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Peraq api",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.627923773620404,
+        "longitude": 116.11370980024235,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Ngurisan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.654723927829629,
+        "longitude": 116.07978457377699,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Bekekah",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.630125576188618,
+        "longitude": 116.15301987841895,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Nyunatan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.656449993707902,
+        "longitude": 116.14310209247125,
+        "metadata": {
+            "jenis_ritus": "Gawe Urip"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Unjuran",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.693666241974036,
+        "longitude": 116.06852962615206,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Belangar",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.687904874574055,
+        "longitude": 116.11459848141709,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Tepong Gumi",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70301693650078,
+        "longitude": 116.16067977075255,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Slamet Gumi",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.614349581878077,
+        "longitude": 116.06465101409145,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Nelung",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.613141971055365,
+        "longitude": 116.14291170008919,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Mituq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.662887277307002,
+        "longitude": 116.16668457465978,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Nyiiwaq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.621541183030477,
+        "longitude": 116.09534897412227,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 25,
+        "nama_objek": "Melayaran",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70756009911677,
+        "longitude": 116.07155445010059,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 26,
+        "nama_objek": "Metang dase",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.614541063907613,
+        "longitude": 116.16559745812715,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 27,
+        "nama_objek": "Nyatus",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.638033784918017,
+        "longitude": 116.16756709184124,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 28,
+        "nama_objek": "Nyiu",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.608413597693263,
+        "longitude": 116.13569379298482,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 29,
+        "nama_objek": "Haul",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.605552291900379,
+        "longitude": 116.09857062171152,
+        "metadata": {
+            "jenis_ritus": "Gawe Pati"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 30,
+        "nama_objek": "Roah bubur puteq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.66503565488076,
+        "longitude": 116.05869700397766,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 31,
+        "nama_objek": "Roah bubur beaq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.71675299607363,
+        "longitude": 116.10685227485527,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 32,
+        "nama_objek": "Mandi Safar/Rebo Bontong",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.671431131390596,
+        "longitude": 116.15379589520509,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 33,
+        "nama_objek": "Mulud",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.62259926426839,
+        "longitude": 116.15465709664521,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 34,
+        "nama_objek": "Mi'raj",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.665603272249667,
+        "longitude": 116.066045803581,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 35,
+        "nama_objek": "Nispu Sya'ban",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65296271296797,
+        "longitude": 116.13883381574082,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 36,
+        "nama_objek": "Mersinan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.674285458889836,
+        "longitude": 116.12989805145038,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 37,
+        "nama_objek": "Namatan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.605698301074192,
+        "longitude": 116.09527173189015,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 38,
+        "nama_objek": "Maleman",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.715334449689601,
+        "longitude": 116.17322311565715,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 39,
+        "nama_objek": "Lebaran Beleq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.618277410782262,
+        "longitude": 116.12159991681362,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 40,
+        "nama_objek": "Lebaran Topat",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.701333666477849,
+        "longitude": 116.16241360246698,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 41,
+        "nama_objek": "Lebaran Kodeq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.662794169219424,
+        "longitude": 116.11705422779602,
+        "metadata": {
+            "jenis_ritus": "Perayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 42,
+        "nama_objek": "Perang Topat",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.622311953944614,
+        "longitude": 116.14829141255879,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 43,
+        "nama_objek": "Mandik Gerah Bulan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.652532371656973,
+        "longitude": 116.13808906419345,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 44,
+        "nama_objek": "Tradisi Aci-Aci",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.708907602273596,
+        "longitude": 116.11220044238952,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 45,
+        "nama_objek": "Bebangar",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.644746124849311,
+        "longitude": 116.06062604965508,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 46,
+        "nama_objek": "Malean Sampi",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.643449010877031,
+        "longitude": 116.06579393799579,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 47,
+        "nama_objek": "Betetulak/Besentulak",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.701644998365147,
+        "longitude": 116.11391043798677,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 48,
+        "nama_objek": "Pandiq Keris",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.632080549654942,
+        "longitude": 116.10527491021398,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 49,
+        "nama_objek": "Saweq Lowong",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.650215747039848,
+        "longitude": 116.07544796759348,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 50,
+        "nama_objek": "Embung Tengaq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.626454761765714,
+        "longitude": 116.15280539851777,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 51,
+        "nama_objek": "Sembeq Buraq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.693869320074441,
+        "longitude": 116.15786598585862,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 52,
+        "nama_objek": "Tradisi Ngejot",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.641816952044328,
+        "longitude": 116.06706960721314,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 53,
+        "nama_objek": "Begibung",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.682954929901276,
+        "longitude": 116.08844815431443,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 54,
+        "nama_objek": "Berayan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.702316499081034,
+        "longitude": 116.11801977463237,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 55,
+        "nama_objek": "Ulat Kuliq",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.649127164267322,
+        "longitude": 116.14212417516272,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 56,
+        "nama_objek": "Bepupuk",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.633175700651982,
+        "longitude": 116.1677550004839,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 57,
+        "nama_objek": "Berayan (Ulang)",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.720336343939746,
+        "longitude": 116.09978800680119,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 58,
+        "nama_objek": "Berebekan/plengkungan",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70139004783897,
+        "longitude": 116.16978063543527,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 59,
+        "nama_objek": "Saur Sangi",
+        "kategori_odcb": "Ritus / Upacara Adat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.696319913441037,
+        "longitude": 116.16067565739004,
+        "metadata": {
+            "jenis_ritus": "Ritual Kepercayaan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Sangkep",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.663377430817693,
+        "longitude": 116.07464863742055,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Gawe Rapah",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.634982252147351,
+        "longitude": 116.09264601587357,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Nebengin",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.693483023093922,
+        "longitude": 116.07899968897917,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Awig-awig",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.645588813970665,
+        "longitude": 116.07850500206925,
+        "metadata": {
+            "jenis_adat": "Aturan Kesepakatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Ngayah",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688262650141098,
+        "longitude": 116.07230604501731,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Ngujang",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65929874212289,
+        "longitude": 116.094158715492,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Besiru",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.612387876472964,
+        "longitude": 116.05713683648992,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Ngendeng",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.646822250011763,
+        "longitude": 116.13358701944159,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Saweq",
+        "kategori_odcb": "Adat Istiadat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.696531372050702,
+        "longitude": 116.08584397418514,
+        "metadata": {
+            "jenis_adat": "Penyelesaian Masalah"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Anggu (kayu)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.692386212835382,
+        "longitude": 116.0584247526069,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Tempan (bambu)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.605273619256296,
+        "longitude": 116.05794970585359,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Lisung",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.638537132738065,
+        "longitude": 116.09105714727514,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Bakak",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.60835053042408,
+        "longitude": 116.12625014147095,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Kleong",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.61165223087587,
+        "longitude": 116.14751013474786,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Tembolak",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70646836905192,
+        "longitude": 116.1546036430164,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Sampir",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688339191231561,
+        "longitude": 116.09913568601517,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Selao",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.68458414803463,
+        "longitude": 116.10936941802947,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Pendaiq",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.723893048220313,
+        "longitude": 116.1079032833277,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Sendor",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.661109206928886,
+        "longitude": 116.08709835393782,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Range",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.616305445989877,
+        "longitude": 116.08315129706473,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Pane",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.659492005482681,
+        "longitude": 116.06979181814019,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Tepaq (Kecil)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.649262429651877,
+        "longitude": 116.09874087246925,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Canting",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.686370145649052,
+        "longitude": 116.05884382220876,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Bong",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.622504218758788,
+        "longitude": 116.17256104673922,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Pemongkang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.690462081281703,
+        "longitude": 116.06453400229869,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Ceret",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.646873806232913,
+        "longitude": 116.10449055157096,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Kemerasan",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.635798869714373,
+        "longitude": 116.05527531800747,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Kulak/Jejai",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.61671248627368,
+        "longitude": 116.12803203265743,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Koboq",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.617659228591572,
+        "longitude": 116.11758486652502,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Catu",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.605257142354438,
+        "longitude": 116.11280157173422,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Jangkeh",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.714077527239068,
+        "longitude": 116.07388071468651,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Kekete",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.636252072932736,
+        "longitude": 116.12503852478235,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 25,
+        "nama_objek": "Tepaq",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.71117590704316,
+        "longitude": 116.09070756646508,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 26,
+        "nama_objek": "Kocor",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.68060941550307,
+        "longitude": 116.08202817385138,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 27,
+        "nama_objek": "Kelangsah",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.634785534736771,
+        "longitude": 116.16093037696405,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 28,
+        "nama_objek": "Kekise",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.60711253356911,
+        "longitude": 116.08211964893619,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 29,
+        "nama_objek": "Penginang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.650722484600808,
+        "longitude": 116.08359974149607,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 30,
+        "nama_objek": "Pelocok",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.64734208250817,
+        "longitude": 116.09131109052369,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 31,
+        "nama_objek": "Cale",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70794181554264,
+        "longitude": 116.1372359395472,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 32,
+        "nama_objek": "Bateq",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.680001165462489,
+        "longitude": 116.0657969304722,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 33,
+        "nama_objek": "Ladik",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.642647756486433,
+        "longitude": 116.16940655087937,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 34,
+        "nama_objek": "Awis",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.686007658391485,
+        "longitude": 116.08622961554093,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 35,
+        "nama_objek": "Bateq (Ulang)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.62142830763572,
+        "longitude": 116.16503901537871,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 36,
+        "nama_objek": "Ladik (Ulang)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611832688846354,
+        "longitude": 116.16791606370042,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 37,
+        "nama_objek": "Awis (Ulang)",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.718019320623206,
+        "longitude": 116.10441214159324,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 38,
+        "nama_objek": "Pemaje",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.617293526851116,
+        "longitude": 116.15278324764515,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Rumah Tangga"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 39,
+        "nama_objek": "Kandik",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.702111640163467,
+        "longitude": 116.13040663458577,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 40,
+        "nama_objek": "Rangkap",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.649147398355653,
+        "longitude": 116.13629380448009,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 41,
+        "nama_objek": "Bebosang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688041199392854,
+        "longitude": 116.10691431448905,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 42,
+        "nama_objek": "Botok",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.695964549623513,
+        "longitude": 116.06430911115667,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 43,
+        "nama_objek": "Kodong",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.613779833186571,
+        "longitude": 116.14935011181568,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 44,
+        "nama_objek": "Pencar",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611542455743782,
+        "longitude": 116.12141482217437,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 45,
+        "nama_objek": "Walesan",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.62834248168226,
+        "longitude": 116.13703779624328,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 46,
+        "nama_objek": "Sorok",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.682366484921499,
+        "longitude": 116.14543002945554,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 47,
+        "nama_objek": "Gau",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.715717128891763,
+        "longitude": 116.144586727055,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 48,
+        "nama_objek": "Gegandek",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.617115593622623,
+        "longitude": 116.0646123511174,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 49,
+        "nama_objek": "Pelembah",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.621914318912037,
+        "longitude": 116.11197602539212,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 50,
+        "nama_objek": "Plante",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.711930014461068,
+        "longitude": 116.14144759365877,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 51,
+        "nama_objek": "Regang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.609324020206017,
+        "longitude": 116.0824679022974,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 52,
+        "nama_objek": "Tambah",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.608390011238395,
+        "longitude": 116.06008658895247,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 53,
+        "nama_objek": "Gareng",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.70928147491068,
+        "longitude": 116.10121729849253,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 54,
+        "nama_objek": "Samt",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.610287832209023,
+        "longitude": 116.12128453158867,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 55,
+        "nama_objek": "Ayuga",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.691252520078866,
+        "longitude": 116.08684122556981,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 56,
+        "nama_objek": "Tatahan",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.657235761625618,
+        "longitude": 116.10126824618015,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 57,
+        "nama_objek": "Perampek",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.675221854597721,
+        "longitude": 116.12421450216507,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 58,
+        "nama_objek": "Rembagan",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.652497682759593,
+        "longitude": 116.06792969449629,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 59,
+        "nama_objek": "Kasut",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.693145135824558,
+        "longitude": 116.0721206350963,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 60,
+        "nama_objek": "Cepang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.625839505045976,
+        "longitude": 116.16317112008846,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 61,
+        "nama_objek": "Penjarah",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.622877898393638,
+        "longitude": 116.13253619393036,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 62,
+        "nama_objek": "Siku-siku",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.634248063045515,
+        "longitude": 116.11832177043028,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 63,
+        "nama_objek": "Meteran",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.678228958423766,
+        "longitude": 116.15139643891966,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 64,
+        "nama_objek": "Sleran",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.654028969944592,
+        "longitude": 116.05804484303744,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 65,
+        "nama_objek": "Pat",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.715399537501684,
+        "longitude": 116.14277855448478,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 66,
+        "nama_objek": "Serut",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.709326678122196,
+        "longitude": 116.1196034111435,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 67,
+        "nama_objek": "Kiskis",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.694607628995918,
+        "longitude": 116.14242797215356,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 68,
+        "nama_objek": "Tenggale",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.615152741123865,
+        "longitude": 116.06938577111892,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 69,
+        "nama_objek": "Pelasah",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.640874889944916,
+        "longitude": 116.06758156332509,
+        "metadata": {
+            "kelompok_teknologi": "Perkakas Pertanian/Nelayan/Pertukangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 70,
+        "nama_objek": "Cidomo",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.61678966552995,
+        "longitude": 116.0604233920783,
+        "metadata": {
+            "kelompok_teknologi": "Alat Transportasi"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 71,
+        "nama_objek": "Dokar",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.653058188553606,
+        "longitude": 116.0848788559034,
+        "metadata": {
+            "kelompok_teknologi": "Alat Transportasi"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 72,
+        "nama_objek": "Cikar",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.648298949703108,
+        "longitude": 116.09858211085329,
+        "metadata": {
+            "kelompok_teknologi": "Alat Transportasi"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 73,
+        "nama_objek": "Nyonyot",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.666799183400085,
+        "longitude": 116.0993918345213,
+        "metadata": {
+            "kelompok_teknologi": "Alat Transportasi"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 74,
+        "nama_objek": "Jukung",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.622831799423617,
+        "longitude": 116.05895372157877,
+        "metadata": {
+            "kelompok_teknologi": "Alat Transportasi"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 75,
+        "nama_objek": "Lumbung",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang / Kurang",
+        "latitude": -8.613741624633462,
+        "longitude": 116.10993319688896,
+        "metadata": {
+            "kelompok_teknologi": "Arsitektur"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 76,
+        "nama_objek": "Berugak",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.69890276977184,
+        "longitude": 116.09491605924211,
+        "metadata": {
+            "kelompok_teknologi": "Arsitektur"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 77,
+        "nama_objek": "Sambi",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.673294358541101,
+        "longitude": 116.16628073747894,
+        "metadata": {
+            "kelompok_teknologi": "Arsitektur"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 78,
+        "nama_objek": "Bale Adat",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65076755475271,
+        "longitude": 116.15303595716587,
+        "metadata": {
+            "kelompok_teknologi": "Arsitektur"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 79,
+        "nama_objek": "Tumbak",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.645824425914675,
+        "longitude": 116.07367519335506,
+        "metadata": {
+            "kelompok_teknologi": "Senjata Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 80,
+        "nama_objek": "Berang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.68972974467168,
+        "longitude": 116.09729367329682,
+        "metadata": {
+            "kelompok_teknologi": "Senjata Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 81,
+        "nama_objek": "Keris",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.643357885780514,
+        "longitude": 116.13673456684936,
+        "metadata": {
+            "kelompok_teknologi": "Senjata Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 82,
+        "nama_objek": "Klewang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.70709949375583,
+        "longitude": 116.1195339859917,
+        "metadata": {
+            "kelompok_teknologi": "Senjata Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 83,
+        "nama_objek": "Diwal / Cabang",
+        "kategori_odcb": "Teknologi Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.624451581882651,
+        "longitude": 116.07185006882445,
+        "metadata": {
+            "kelompok_teknologi": "Senjata Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Ebatan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.689897636677467,
+        "longitude": 116.15461867292233,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Pelecing",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.64057668187797,
+        "longitude": 116.0953664869202,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Beberok",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.651279055000218,
+        "longitude": 116.15177892298706,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Bebetok",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.710660162461394,
+        "longitude": 116.07685510071349,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Jejeruk",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.671590810173152,
+        "longitude": 116.11101117305682,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Antap Repes",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.63470753323423,
+        "longitude": 116.07077506715333,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Rusu",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611768887304775,
+        "longitude": 116.10906681281112,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Sate Bulayak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.723542238975707,
+        "longitude": 116.08642627217856,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Sate Pusut",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.683969783911067,
+        "longitude": 116.17082858606469,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Ares",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.606099009780188,
+        "longitude": 116.12624408551734,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Pedia Panas",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.628844934714495,
+        "longitude": 116.06946442383006,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Rujak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.712776842582024,
+        "longitude": 116.16544710325383,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Gule Lemak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.705814235687892,
+        "longitude": 116.16214546969933,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Reraon",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.671977537905107,
+        "longitude": 116.12335247415031,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Bebalung",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.635265233065807,
+        "longitude": 116.15792242863932,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Pes",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.682588573395403,
+        "longitude": 116.06912824066612,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Serabi",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.709253561878278,
+        "longitude": 116.09443002115682,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Keludan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.663190125174845,
+        "longitude": 116.07499787649691,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Lupis",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688836204615797,
+        "longitude": 116.11356435724565,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Cerorot",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.695497645714095,
+        "longitude": 116.09293738884993,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Jongkong",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.69393980035204,
+        "longitude": 116.11633446653094,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Kedebak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.707050191289397,
+        "longitude": 116.06870897168918,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Lempok",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.634979989735479,
+        "longitude": 116.1160333540734,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Sumping",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.658090799648614,
+        "longitude": 116.12150027866228,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 25,
+        "nama_objek": "Plemeng",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.631179339654226,
+        "longitude": 116.1453512966297,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 26,
+        "nama_objek": "Tikel",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.691407316888544,
+        "longitude": 116.10717110964858,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 27,
+        "nama_objek": "Bantal",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.641651999060414,
+        "longitude": 116.0960968364078,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 28,
+        "nama_objek": "Topat",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.625615460328588,
+        "longitude": 116.05604498911582,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 29,
+        "nama_objek": "Sengkor",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.665908758555778,
+        "longitude": 116.09856802383565,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 30,
+        "nama_objek": "Banget",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.66529974669735,
+        "longitude": 116.15933649458101,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 31,
+        "nama_objek": "Iwel",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.62889296415712,
+        "longitude": 116.1708930788527,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 32,
+        "nama_objek": "Pangan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.629718547460588,
+        "longitude": 116.11787979382885,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 33,
+        "nama_objek": "Jaje Tujak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.66048480115035,
+        "longitude": 116.07935018374884,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 34,
+        "nama_objek": "Poteng",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.660873497077834,
+        "longitude": 116.05658500259811,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 35,
+        "nama_objek": "Renggi",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.720537230758518,
+        "longitude": 116.1709691217361,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 36,
+        "nama_objek": "Opak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.667455740900023,
+        "longitude": 116.09352521873197,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 37,
+        "nama_objek": "Kaliadem",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.64191622942078,
+        "longitude": 116.07392149518479,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 38,
+        "nama_objek": "Tarik",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.702337963913862,
+        "longitude": 116.15197033672102,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 39,
+        "nama_objek": "Tempeyek",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.687278653564066,
+        "longitude": 116.08204895605786,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 40,
+        "nama_objek": "Kembang Goyang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611897634421956,
+        "longitude": 116.16071237398958,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 41,
+        "nama_objek": "Celliong",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.658773535995332,
+        "longitude": 116.05770854283182,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 42,
+        "nama_objek": "Dipang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.618857642195415,
+        "longitude": 116.1606901668779,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 43,
+        "nama_objek": "Ciput",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65519620797377,
+        "longitude": 116.14432606944624,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 44,
+        "nama_objek": "Dokok-dokok",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65460170668034,
+        "longitude": 116.09947395819952,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 45,
+        "nama_objek": "Putri Nyelem",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.664514696508181,
+        "longitude": 116.11983225147011,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 46,
+        "nama_objek": "Bubur Putik",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.68712138605392,
+        "longitude": 116.15539087606601,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 47,
+        "nama_objek": "Bubur Beak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611705918830852,
+        "longitude": 116.09974564517445,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 48,
+        "nama_objek": "Beor",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611270674539346,
+        "longitude": 116.08676233019136,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 49,
+        "nama_objek": "Tempani",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.690535749224983,
+        "longitude": 116.08216604958723,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 50,
+        "nama_objek": "Jaje Teduk",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.65557097617493,
+        "longitude": 116.11204725674604,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 51,
+        "nama_objek": "Senggite",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688304340952186,
+        "longitude": 116.09011108186372,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 52,
+        "nama_objek": "Gagak Ngarem",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.658144887302514,
+        "longitude": 116.15694046660855,
+        "metadata": {
+            "jenis_pengetahuan": "Makanan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 53,
+        "nama_objek": "Serbat",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.639825056103835,
+        "longitude": 116.08540345647518,
+        "metadata": {
+            "jenis_pengetahuan": "Minuman"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 54,
+        "nama_objek": "Tuak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.68652572626225,
+        "longitude": 116.0709019664451,
+        "metadata": {
+            "jenis_pengetahuan": "Minuman"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 55,
+        "nama_objek": "Brem",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.65353952307546,
+        "longitude": 116.13616820194781,
+        "metadata": {
+            "jenis_pengetahuan": "Minuman"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 56,
+        "nama_objek": "Aik Kalas",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.629249751746876,
+        "longitude": 116.09537606778036,
+        "metadata": {
+            "jenis_pengetahuan": "Minuman"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 57,
+        "nama_objek": "Nyitak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.72012085651318,
+        "longitude": 116.16028158359168,
+        "metadata": {
+            "jenis_pengetahuan": "Kerajinan Tangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 58,
+        "nama_objek": "Cukli",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.605607543546869,
+        "longitude": 116.16475122086145,
+        "metadata": {
+            "jenis_pengetahuan": "Kerajinan Tangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 59,
+        "nama_objek": "Kurungan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.641321320241078,
+        "longitude": 116.11978412664247,
+        "metadata": {
+            "jenis_pengetahuan": "Kerajinan Tangan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 60,
+        "nama_objek": "Pertuq",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.71357906498831,
+        "longitude": 116.13210831672228,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 61,
+        "nama_objek": "Nyembeq",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.692712257012253,
+        "longitude": 116.14696195842146,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 62,
+        "nama_objek": "Bebangar",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.667885924195726,
+        "longitude": 116.0590063426011,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 63,
+        "nama_objek": "Berorah",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.68982995617487,
+        "longitude": 116.17395618405648,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 64,
+        "nama_objek": "Nyembar",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.686249131268495,
+        "longitude": 116.1677306182947,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 65,
+        "nama_objek": "Bepopot",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.66334891162057,
+        "longitude": 116.06874929714736,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 66,
+        "nama_objek": "Bebubus",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.709308812825128,
+        "longitude": 116.09178474498188,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 67,
+        "nama_objek": "Bejampi",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.635862050261828,
+        "longitude": 116.16327786542978,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 68,
+        "nama_objek": "Pertuq (Ulang)",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.656834743670528,
+        "longitude": 116.07740645034853,
+        "metadata": {
+            "jenis_pengetahuan": "Metode Penyehatan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 69,
+        "nama_objek": "Sapuq/Capuk",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.701706870876734,
+        "longitude": 116.17445077632468,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 70,
+        "nama_objek": "Cipoq",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.666424218616003,
+        "longitude": 116.08807654174264,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 71,
+        "nama_objek": "Selebet",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.614843763257209,
+        "longitude": 116.16840679459254,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 72,
+        "nama_objek": "Lempot",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.657258406975604,
+        "longitude": 116.09940628219238,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 73,
+        "nama_objek": "Leang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.720086982146457,
+        "longitude": 116.08708982989816,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 74,
+        "nama_objek": "Subeng",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.662613642814451,
+        "longitude": 116.06986200907532,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 75,
+        "nama_objek": "Sengkang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.634277502761092,
+        "longitude": 116.05818842087973,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 76,
+        "nama_objek": "Gelang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.674334635541276,
+        "longitude": 116.07887131316403,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 77,
+        "nama_objek": "Tindiq",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.691250420348279,
+        "longitude": 116.11362338952381,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 78,
+        "nama_objek": "Jiwang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.695226672548744,
+        "longitude": 116.15809702522078,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 79,
+        "nama_objek": "Kalong",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.604517470869055,
+        "longitude": 116.09554284371393,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 80,
+        "nama_objek": "Lambung",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.624589199398256,
+        "longitude": 116.1422102098754,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 81,
+        "nama_objek": "Kereng",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.625411953626402,
+        "longitude": 116.09725215237451,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 82,
+        "nama_objek": "Pegon/tampet",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.688740398595883,
+        "longitude": 116.12524747299135,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 83,
+        "nama_objek": "Pangkak",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.643812933833601,
+        "longitude": 116.12128266107167,
+        "metadata": {
+            "jenis_pengetahuan": "Busana Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 84,
+        "nama_objek": "Nadep",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.690903944696958,
+        "longitude": 116.14522722211633,
+        "metadata": {
+            "jenis_pengetahuan": "Pengambilan Air Nira"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 85,
+        "nama_objek": "Nyakap",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.60523915020749,
+        "longitude": 116.10373131923606,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 86,
+        "nama_objek": "Nandu",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.6535224464734,
+        "longitude": 116.07609629140877,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 87,
+        "nama_objek": "Ngaperan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.618645222882634,
+        "longitude": 116.15377757473122,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Peternakan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 88,
+        "nama_objek": "Bedilan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.675052444005482,
+        "longitude": 116.1590894375958,
+        "metadata": {
+            "jenis_pengetahuan": "Sewa Lahan Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 89,
+        "nama_objek": "Bederep",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.650133995782559,
+        "longitude": 116.06239274998808,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Peternakan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 90,
+        "nama_objek": "Bediya",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.646482052282039,
+        "longitude": 116.1662356789052,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Barter"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 91,
+        "nama_objek": "Ngadas",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.640573826374991,
+        "longitude": 116.0675204675279,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Peternakan"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 92,
+        "nama_objek": "Pengempel",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.668821001053669,
+        "longitude": 116.16068085796057,
+        "metadata": {
+            "jenis_pengetahuan": "Pengairan Tani"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 93,
+        "nama_objek": "Belumbang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.655517135450175,
+        "longitude": 116.07457620677738,
+        "metadata": {
+            "jenis_pengetahuan": "Pengairan Tani"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 94,
+        "nama_objek": "Pundukan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.640394890416742,
+        "longitude": 116.14903865924754,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 95,
+        "nama_objek": "Embang-embang",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.707699105645453,
+        "longitude": 116.14987355513212,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 96,
+        "nama_objek": "Anjingan",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.661903895687583,
+        "longitude": 116.16246506906428,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 97,
+        "nama_objek": "Pelupuh",
+        "kategori_odcb": "Pengetahuan Tradisional",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.714855041613244,
+        "longitude": 116.08816939682747,
+        "metadata": {
+            "jenis_pengetahuan": "Sistem Pertanian"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Bale Ganjur",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.630438477469923,
+        "longitude": 116.16708331420418,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 35
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Gendang Beleq",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.649011535535049,
+        "longitude": 116.12092259801085,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Penginang Robek",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.655061907866278,
+        "longitude": 116.07921424133306,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Cepung",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.648247463336526,
+        "longitude": 116.1209707368297,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 26
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Cilokaq",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.622230828878372,
+        "longitude": 116.06844647336621,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 45
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Gamelan",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.620991446172539,
+        "longitude": 116.1322150978966,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Tawak-tawak",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.694097663316022,
+        "longitude": 116.11338658294541,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Genggong",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.637003046847271,
+        "longitude": 116.11018879758655,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Kelentang",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.718939506883238,
+        "longitude": 116.16781653386172,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 70
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Lesung Punikan",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.685329813829519,
+        "longitude": 116.15961600815325,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 50
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Suling Semprong",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.704328597818385,
+        "longitude": 116.06115914450861,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 26
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Gandrung",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.6736672966151,
+        "longitude": 116.10966843057429,
+        "metadata": {
+            "cabang_seni": "Tari",
+            "pelaku_pendukung": 65
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Batek Baris",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.67684724997189,
+        "longitude": 116.1346623179726,
+        "metadata": {
+            "cabang_seni": "Tari",
+            "pelaku_pendukung": 46
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Baris Arug",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.665791316826216,
+        "longitude": 116.12877430857527,
+        "metadata": {
+            "cabang_seni": "Tari",
+            "pelaku_pendukung": 50
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Drama Cupak Gerantang",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.700886819181216,
+        "longitude": 116.10954332389069,
+        "metadata": {
+            "cabang_seni": "Seni Pertunjukan",
+            "pelaku_pendukung": 45
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Kamput",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.687102750448325,
+        "longitude": 116.11770230901523,
+        "metadata": {
+            "cabang_seni": "Seni Pertunjukan",
+            "pelaku_pendukung": 65
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Kayaq Sandongan",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.631708828360033,
+        "longitude": 116.06707386934754,
+        "metadata": {
+            "cabang_seni": "Seni Pertunjukan",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Rudat",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.651057418100553,
+        "longitude": 116.13706266011555,
+        "metadata": {
+            "cabang_seni": "Seni Pertunjukan",
+            "pelaku_pendukung": 70
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Penting Treng Gunung Sasak",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.671127299686317,
+        "longitude": 116.16502121890566,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Rebana",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.651658458121647,
+        "longitude": 116.16987170065222,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Cungklik",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.677496598178957,
+        "longitude": 116.07883481291228,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Bumbung",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.621852547033342,
+        "longitude": 116.07148740256231,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Kelentang (Ulang)",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.624236382867359,
+        "longitude": 116.14290352414928,
+        "metadata": {
+            "cabang_seni": "Musik",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Wayang",
+        "kategori_odcb": "Seni",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.6117005525197,
+        "longitude": 116.10651052190045,
+        "metadata": {
+            "cabang_seni": "Seni Pertunjukan",
+            "pelaku_pendukung": 0
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Bahasa Indonesia",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Umum",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.695659234526707,
+        "longitude": 116.15882054987945,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Sasak",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.686519462898,
+        "longitude": 116.16670377655196,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Bali",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Bali",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.696400718579337,
+        "longitude": 116.11843417300398,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Bahasa Jawa",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Jawa",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.649357501293261,
+        "longitude": 116.08055252788591,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Bahasa Bima",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Bima",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.628996478270006,
+        "longitude": 116.09589758600958,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Bahasa Sumbawa",
+        "kategori_odcb": "Bahasa Daerah",
+        "etnis": "Sumbawa",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.68837098306564,
+        "longitude": 116.15699846168293,
+        "metadata": {}
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Begasingan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.616025398822911,
+        "longitude": 116.08784395438084,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Beledokan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.611285066788412,
+        "longitude": 116.09060560971461,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Bekeciwe",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.61120544168273,
+        "longitude": 116.15673359922793,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Saling Paleq",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.708831605743113,
+        "longitude": 116.07165167933233,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Gatik",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.694535153874467,
+        "longitude": 116.13312959745977,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Sungkit/keteq",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.651153567848985,
+        "longitude": 116.05846080427114,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Selodor",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.701226865385674,
+        "longitude": 116.09868885687199,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Seboq Pete/beboya'an",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.649220981169014,
+        "longitude": 116.13579064978015,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Manuk Kurung",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.691015095321122,
+        "longitude": 116.140774338448,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Belayangan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.688833197329423,
+        "longitude": 116.14812544645923,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Betemplekan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.671251109583412,
+        "longitude": 116.13112108065756,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Bekepung",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.706097124597301,
+        "longitude": 116.1091613782498,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Anggong",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.650395322992953,
+        "longitude": 116.07113397960188,
+        "metadata": {
+            "jenis_permainan": "Permainan Rakyat"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Besepokan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Punah",
+        "latitude": -8.647542642166705,
+        "longitude": 116.13136252378276,
+        "metadata": {
+            "jenis_permainan": "Olahraga Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Belanjakan",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Berkembang",
+        "latitude": -8.673834479965718,
+        "longitude": 116.08077979188515,
+        "metadata": {
+            "jenis_permainan": "Olahraga Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Peresean",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.614726881239788,
+        "longitude": 116.09909946103585,
+        "metadata": {
+            "jenis_permainan": "Olahraga Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Pencak Silat Sasak",
+        "kategori_odcb": "Permainan Rakyat",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Berkembang",
+        "latitude": -8.679012357855417,
+        "longitude": 116.05576137576743,
+        "metadata": {
+            "jenis_permainan": "Olahraga Tradisional"
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 1,
+        "nama_objek": "Batu Kelambu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.631954867185852,
+        "longitude": 116.17117834607198,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 2,
+        "nama_objek": "Batu Tulis",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.7126918776428,
+        "longitude": 116.0766445783965,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 3,
+        "nama_objek": "Kayangan/Betare",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.612793647884066,
+        "longitude": 116.07423115830694,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 4,
+        "nama_objek": "Batu Gendang",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.662103548024245,
+        "longitude": 116.07322401936163,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 5,
+        "nama_objek": "Batu Kemeras",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.685614957748005,
+        "longitude": 116.11375717899932,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 6,
+        "nama_objek": "Tombak",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.62267049265337,
+        "longitude": 116.12110769848094,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 7,
+        "nama_objek": "Gong Mambalan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.611682266933139,
+        "longitude": 116.17037553230031,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 8,
+        "nama_objek": "Keris",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.670192592937108,
+        "longitude": 116.10315828481993,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 9,
+        "nama_objek": "Wayang Kuno",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.628333868339368,
+        "longitude": 116.1386260058824,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 10,
+        "nama_objek": "Bedil",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.3565521,
+        "longitude": 116.182659,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 11,
+        "nama_objek": "Pedang",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.654528402319457,
+        "longitude": 116.11681734228533,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 12,
+        "nama_objek": "Pemukul Gong",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.67897648242771,
+        "longitude": 116.05505342312843,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 13,
+        "nama_objek": "Tambur",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.705859342255524,
+        "longitude": 116.10446340594103,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 14,
+        "nama_objek": "Gendang Kodeq",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.656556505500916,
+        "longitude": 116.15434597377417,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 15,
+        "nama_objek": "Gong (Boq-boq)",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.67238706396194,
+        "longitude": 116.07434607052905,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 16,
+        "nama_objek": "Rincik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.616241942698435,
+        "longitude": 116.17354427882398,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 17,
+        "nama_objek": "Kajar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.707721156994976,
+        "longitude": 116.0589853349456,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 18,
+        "nama_objek": "Kenot",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.630009283529473,
+        "longitude": 116.08367827824911,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 19,
+        "nama_objek": "Piring Keramik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.7154105006071,
+        "longitude": 116.14392098249645,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 20,
+        "nama_objek": "Mangkok Keramik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.694866010646614,
+        "longitude": 116.15639364942183,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 21,
+        "nama_objek": "Ceret",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.643821876026266,
+        "longitude": 116.07943721397734,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 22,
+        "nama_objek": "Tutup Ceret",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.715709952392462,
+        "longitude": 116.07240877184414,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 23,
+        "nama_objek": "Cawan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.62062890450854,
+        "longitude": 116.13523739409531,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 24,
+        "nama_objek": "Dulang",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.8848487,
+        "longitude": 116.2819347,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 25,
+        "nama_objek": "Alat Tenun (Kayu Blide)",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.65464000217643,
+        "longitude": 116.07055666198904,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 26,
+        "nama_objek": "Gembok Pintu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.638205046916537,
+        "longitude": 116.14414381881907,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 27,
+        "nama_objek": "Tongkat Kuningan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.652800028305482,
+        "longitude": 116.08516723052323,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 28,
+        "nama_objek": "Keris Kuno",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.676387453300375,
+        "longitude": 116.10725481134645,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 29,
+        "nama_objek": "Mangkuk Gerabah",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.632457409987133,
+        "longitude": 116.07422405796885,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 30,
+        "nama_objek": "Lempeng Perak (Uang Kuno)",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.716020899527273,
+        "longitude": 116.15720690984234,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 31,
+        "nama_objek": "Cincin Ganesha",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.65155696258744,
+        "longitude": 116.10577660650839,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 32,
+        "nama_objek": "Patung Megalitikum",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.67774257325831,
+        "longitude": 116.15862705960616,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 33,
+        "nama_objek": "Kendi Keramik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.704786219437716,
+        "longitude": 116.0985946849152,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 34,
+        "nama_objek": "Cawan Keramik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.673184913543949,
+        "longitude": 116.07071990484343,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 35,
+        "nama_objek": "Mangkok Keramik",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.71263258601034,
+        "longitude": 116.15726105027584,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 36,
+        "nama_objek": "Meriam Jepang Bangko-bangko",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.698782462929843,
+        "longitude": 116.05791794148713,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 37,
+        "nama_objek": "Timbangan Jepang",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.719046275125631,
+        "longitude": 116.07525825442467,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 38,
+        "nama_objek": "Makam Kedaro",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.711924197292944,
+        "longitude": 116.09527389915611,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 39,
+        "nama_objek": "Makam Mudung",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.61360522954728,
+        "longitude": 116.05800492477653,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 40,
+        "nama_objek": "Jembatan Gantung Lembar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.62978115344148,
+        "longitude": 116.11538728179224,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 41,
+        "nama_objek": "Makam Indergecek",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.67270757650474,
+        "longitude": 116.09236137164652,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 42,
+        "nama_objek": "Kubur Cina",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.653868209830877,
+        "longitude": 116.0907063286424,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 43,
+        "nama_objek": "Makam Datu Kuripan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.677276304000774,
+        "longitude": 116.14328096289422,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 44,
+        "nama_objek": "Jembatan Ceraken",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.656467465983475,
+        "longitude": 116.07850941152348,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 45,
+        "nama_objek": "Makam TGH. Saleh Hambali",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.647738858242848,
+        "longitude": 116.17401849498286,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 46,
+        "nama_objek": "Makam Demung",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.639023384141451,
+        "longitude": 116.16992634106752,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 47,
+        "nama_objek": "Makam Nilam (Padang Reak)",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.671181104021786,
+        "longitude": 116.11428926975385,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 48,
+        "nama_objek": "Makam TGH. Muhibudin",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.607134019197915,
+        "longitude": 116.1121371336791,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 49,
+        "nama_objek": "Kuburan Cerepak Telu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.724125134216324,
+        "longitude": 116.10337594346022,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 50,
+        "nama_objek": "Makam Baturiti",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5466714,
+        "longitude": 116.127298,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 51,
+        "nama_objek": "Makam Keramat Batulayar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5163451,
+        "longitude": 116.0605556,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 52,
+        "nama_objek": "Makam Tato",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.670750237031823,
+        "longitude": 116.11781348424485,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 53,
+        "nama_objek": "Goa Lawah Lembah Sempage",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.610534388563673,
+        "longitude": 116.17127185167962,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 54,
+        "nama_objek": "Pedewak Pelabu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.664540342473062,
+        "longitude": 116.05665691247819,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 55,
+        "nama_objek": "Taman Narmada",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5960237,
+        "longitude": 116.2053339,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 56,
+        "nama_objek": "Pure Meru Narmada",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.716616279465935,
+        "longitude": 116.11649358675605,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 57,
+        "nama_objek": "Pure Suranadi",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.699624174263876,
+        "longitude": 116.13673920736959,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 58,
+        "nama_objek": "Sangkareang Keru",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.70930297955433,
+        "longitude": 116.07093077518854,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 59,
+        "nama_objek": "Rumah Adat Karang Bayan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.671498904179911,
+        "longitude": 116.08468786680662,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 60,
+        "nama_objek": "Langgar Karang Bayan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.672617080611941,
+        "longitude": 116.09584054505922,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 61,
+        "nama_objek": "Pura Lingsar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5758092,
+        "longitude": 116.1801374,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 62,
+        "nama_objek": "Kemalik Lingsar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.673172591039835,
+        "longitude": 116.14091976308201,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 63,
+        "nama_objek": "Pura Ulon",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.62152393409897,
+        "longitude": 116.16373468923881,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 64,
+        "nama_objek": "Pura Sarasute",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.68406521946731,
+        "longitude": 116.09553015199926,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 65,
+        "nama_objek": "Pure Gunungbaliku",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.667187353045469,
+        "longitude": 116.17365366552752,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 66,
+        "nama_objek": "Pura Majapahit",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.543048,
+        "longitude": 116.1130723,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 67,
+        "nama_objek": "Pura Gunungsari",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5376517,
+        "longitude": 116.1036487,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 68,
+        "nama_objek": "Pura Batu Bolong",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5103707,
+        "longitude": 116.0564929,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 69,
+        "nama_objek": "Pura Gunung Pengsong",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.712811857213085,
+        "longitude": 116.10567717724489,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 70,
+        "nama_objek": "Pura Muter",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.646985740025643,
+        "longitude": 116.06594341965307,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 71,
+        "nama_objek": "Bale Jajar Kuranji Dalang",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.691034288205772,
+        "longitude": 116.06099527190203,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 72,
+        "nama_objek": "Takepan/lontar",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.635847326218368,
+        "longitude": 116.08796459222559,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 73,
+        "nama_objek": "Makam payung",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.622787647917987,
+        "longitude": 116.15328104009043,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 74,
+        "nama_objek": "Makam Patih Seketeng",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.697159456130677,
+        "longitude": 116.15633810752729,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 75,
+        "nama_objek": "Ceret (Besar)",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.640310907698236,
+        "longitude": 116.06295023910855,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 76,
+        "nama_objek": "Mahkota",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.5125326,
+        "longitude": 116.0609236,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 77,
+        "nama_objek": "Pura Ulun Danu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.660832242654731,
+        "longitude": 116.07668320254832,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 78,
+        "nama_objek": "Moncong Meriam",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Kurang Terawat",
+        "latitude": -8.680856978714377,
+        "longitude": 116.10816555813737,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 79,
+        "nama_objek": "Lembaran Khotbah Jum'at",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.692635377042405,
+        "longitude": 116.05874669260663,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 80,
+        "nama_objek": "Takepan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.696144517288406,
+        "longitude": 116.06634057985981,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 81,
+        "nama_objek": "Keris",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.606202768022351,
+        "longitude": 116.14664622209762,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 82,
+        "nama_objek": "Kain Umbaq",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.678995782973432,
+        "longitude": 116.16354685033689,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 83,
+        "nama_objek": "Hotel Suranadi",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.5696083,
+        "longitude": 116.2317603,
+        "metadata": {
+            "kategori_klasifikasi": "Bangunan",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 84,
+        "nama_objek": "Makam Segerining",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.63148401057498,
+        "longitude": 116.08325719590532,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 85,
+        "nama_objek": "Makam Munareng",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.673066572991472,
+        "longitude": 116.0554080175169,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 86,
+        "nama_objek": "Goa Raksase",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.634456028015252,
+        "longitude": 116.1441375057232,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 87,
+        "nama_objek": "Kamar Batu",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.611263015476409,
+        "longitude": 116.13407330281684,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 88,
+        "nama_objek": "Kemaliq Gunung Jae",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.697164492815148,
+        "longitude": 116.07313713785838,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 89,
+        "nama_objek": "Pancuran Lengkok Srung",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.635988197509944,
+        "longitude": 116.16510677744716,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 90,
+        "nama_objek": "Situs Ngeredeng",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Tidak Terawat",
+        "latitude": -8.69766518087857,
+        "longitude": 116.11511763249538,
+        "metadata": {
+            "kategori_klasifikasi": "Situs",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 91,
+        "nama_objek": "Makam Bayan",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.2665973,
+        "longitude": 116.4272323,
+        "metadata": {
+            "kategori_klasifikasi": "Struktur",
+            "jumlah_objek": 1
+        }
+    },
+    {
+        "tahun": 2025,
+        "no": 92,
+        "nama_objek": "Piring dan Mangkok Kuno",
+        "kategori_odcb": "Cagar Budaya",
+        "etnis": "Sasak",
+        "kondisi_aktual": "Terawat",
+        "latitude": -8.61352319104677,
+        "longitude": 116.124288721988,
+        "metadata": {
+            "kategori_klasifikasi": "Benda",
+            "jumlah_objek": 1
+        }
+    }
+]

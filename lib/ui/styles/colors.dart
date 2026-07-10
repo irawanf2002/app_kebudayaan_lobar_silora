@@ -51,6 +51,35 @@ class AppColors {
   static const Color shimmerBase = Color(0xFFE0E0E0);
   static const Color shimmerHighlight = Color(0xFFFFFFFF);
 
+  // ===========================================================================
+  // 6. 🆕 TAMBAHAN BARU: STATUS CAGAR BUDAYA & GRADASI
+  // ===========================================================================
+  
+  // Warna Status untuk Peta / Kartu (Misal: Terawat / Rusak Ringan / Rusak Berat)
+  static const Color success = Color(0xFF26A69A); // Hijau Teal (Untuk status 'Terawat')
+  static const Color warning = Color(0xFFFF9800); // Oranye (Untuk status 'Rusak Ringan')
+
+  // Warna Gradasi Dasar (Untuk Header, Banner Event, dan Shimmer Placeholder)
+  static const Color gradientStart = Color(0xFF00A2E8); // Sama dengan AppColors.primary
+  static const Color gradientEnd = Color(0xFF0077B6);   // Sama dengan AppColors.primaryDark
+
+  // ===========================================================================
+  // 7. 🆕 TAMBAHAN BARU: COMPONENT COLORS (UNTUK PROFILE PAGE & UI LAINNYA)
+  // ===========================================================================
+  static const Color divider = Color(0xFFEEEEEE); // Garis pemisah kartu yang lembut
+  static const Color modalHandle = Color(0xFFBDBDBD); // Gagang (Handle) Bottom Sheet
+
+  // Warna spesifik untuk Ikon Menu di Profile Page (Agar tidak perlu hardcode)
+  static const Color teal = Color(0xFF008080); // Warna untuk ikon SOP/SP
+  static const Color green = Color(0xFF4CAF50); // Warna untuk ikon Pusat Bantuan
+
+  // ===========================================================================
+  // 8. 🆕 TAMBAHAN BARU: MAP & NAVIGATION COLORS (UNTUK MAPS PAGE)
+  // ===========================================================================
+  static const Color mapBackground = Color(0xFF0F172A); // Latar belakang peta gelap agar kontras
+  static const Color routeLine = Color(0xFF29B6F6);     // Garis rute navigasi berwarna biru cerah
+  static const Color routeDestination = Color(0xFFE53935); // Bendera akhir rute / Titik tujuan
+
   // --- WARNA VIBRANT LAMA (Dinetralkan) ---
   static const Color brandTeal = Color(0xFF00897B);
   static const Color brandBlue = Color(0xFF29B6F6);

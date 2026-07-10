@@ -1,27 +1,27 @@
+import 'package:app_kebudyaan_lobar/data/models/kategori_model.dart';
+import 'package:app_kebudyaan_lobar/ui/pages/all_categories_page.dart'; // ✅ Tambahkan import halaman baru
+import 'package:app_kebudyaan_lobar/ui/pages/dikbud_info_page.dart';
 import 'package:app_kebudyaan_lobar/ui/pages/lang_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Untuk SystemNavigator
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-// Import untuk cek platform (Web/Android)
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:async'; // Untuk Timer Shimmer
+import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:ui' as ui;
 
 // PROVIDER
 import '../../../data/providers/cagar_provider.dart';
-// 🔥 SISIPAN: Import Provider Bahasa
 import '../../../data/providers/settings_provider.dart';
-
-// 🔥 SISIPAN: Import Kamus Bahasa
 
 // WIDGET PECAHAN
 import 'widgets/kategori_menu.dart';
-// import 'widgets/agenda_carousel.dart'; // DIHAPUS: Karena section agenda dihilangkan
 import 'widgets/situs_terbaru_list.dart';
 
 // HALAMAN LAIN
-import '../ceo_page.dart'; // Halaman Agenda (Tetap ada di Menu Bawah)
-import '../cfn_page.dart'; // Halaman CFN
+import '../ceo_page.dart';
+import '../cfn_page.dart';
 import '../maps_page.dart';
 import '../profile_page.dart';
 
@@ -38,54 +38,38 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   late final List<Widget> _pages;
-
-  // Variabel untuk logika Double Back to Exit
   DateTime? currentBackPressTime;
 
   @override
-@override
-void initState() {
-  super.initState();
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      context.read<CagarProvider>().fetchCagar();
+    });
+    _mintaIzinPenyimpanan();
 
-  Future.microtask(() {
-    context.read<CagarProvider>().fetchCagar();
-  });
-
-  _mintaIzinPenyimpanan();
-
-  _pages = [
-    const HomeContentPage(),
-    const MapsPage(),
-    CoePage(onNavTapped: _onTabSelected),
-    const CfnPage(),
-    const ProfilePage(),
-  ];
-}
+    _pages = [
+      const HomeContentPage(),
+      const MapsPage(),
+      CoePage(onNavTapped: _onTabSelected),
+      const CfnPage(),
+      const ProfilePage(),
+    ];
+  }
 
   Future<void> _mintaIzinPenyimpanan() async {
     if (kIsWeb) return;
-
     var statusStorage = await Permission.storage.status;
     var statusPhotos = await Permission.photos.status;
-
     if (!statusStorage.isGranted && !statusPhotos.isGranted) {
-      await [
-        Permission.storage,
-        Permission.photos,
-      ].request();
+      await [Permission.storage, Permission.photos].request();
     }
   }
 
-  void _onTabSelected(int index) {
-    setState(() => _selectedIndex = index);
-  }
+  void _onTabSelected(int index) => setState(() => _selectedIndex = index);
 
-  // --- DRAWER MENU SAMPING ---
   Widget _buildDrawer() {
-    // 🔥 SISIPAN: Baca bahasa yang sedang aktif untuk menu Drawer
-    final String lang =
-        context.watch<SettingsProvider>().currentLocale.languageCode;
-
+    final String lang = context.watch<SettingsProvider>().currentLocale.languageCode;
     return Drawer(
       backgroundColor: Colors.white,
       surfaceTintColor: Colors.white,
@@ -93,87 +77,64 @@ void initState() {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(color: AppColors.primary),
-            // 🔥 SISIPAN: Translasi
-            accountName: Text(
-                LangHelper.t(
-                    lang, "Pengguna Tamu", "Semeton (Tamu)", "Guest User"),
-                style: const TextStyle(fontWeight: FontWeight.bold)),
-            // 🔥 SISIPAN: Translasi
-            accountEmail: Text(LangHelper.t(
-                lang,
-                "Selamat datang di Budaya Lobar",
-                "Tunas napi leq Budaya Lobar",
-                "Welcome to Lobar Culture")),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.primary, AppColors.primaryDark],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            accountName: Text(LangHelper.t(lang, "Pengguna Tamu", "Semeton (Tamu)", "Guest User"), style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
+            accountEmail: Text(LangHelper.t(lang, "Selamat datang di Budaya Lobar", "Tunas napi leq Budaya Lobar", "Welcome to Lobar Culture"), style: GoogleFonts.poppins()),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
-              child: Image.asset('assets/images/logo_budaya.png',
-                  errorBuilder: (c, e, s) =>
-                      const Icon(Icons.person, color: AppColors.primary)),
+              child: Image.asset('assets/images/logo_budaya.png', errorBuilder: (c, e, s) => const Icon(Icons.person, color: AppColors.primary)),
             ),
           ),
           ListTile(
-            minLeadingWidth: 20, // Merapatkan jarak ikon ke teks
-            horizontalTitleGap: 12,
-            leading:
-                const Icon(Icons.dashboard_rounded, color: AppColors.primary),
-            // 🔥 SISIPAN: Translasi
-            title: Text(LangHelper.t(lang, 'Beranda', 'Beranda', 'Home')),
-            onTap: () {
-              Navigator.pop(context);
-              _onTabSelected(0);
-            },
+            minLeadingWidth: 20, horizontalTitleGap: 12,
+            leading: const Icon(Icons.dashboard_rounded, color: AppColors.primary),
+            title: Text(LangHelper.t(lang, 'Beranda', 'Beranda', 'Home'), style: GoogleFonts.poppins()),
+            onTap: () { Navigator.pop(context); _onTabSelected(0); },
           ),
           ListTile(
-            minLeadingWidth: 20, // Merapatkan jarak ikon ke teks
-            horizontalTitleGap: 12,
+            minLeadingWidth: 20, horizontalTitleGap: 12,
             leading: const Icon(Icons.map_rounded, color: AppColors.primary),
-            // 🔥 SISIPAN: Translasi
-            title: Text(LangHelper.t(
-                lang, 'Peta Wisata', 'Peta Wisata', 'Tourist Map')),
-            onTap: () {
-              Navigator.pop(context);
-              _onTabSelected(1);
-            },
+            title: Text(LangHelper.t(lang, 'Peta Wisata', 'Peta Wisata', 'Tourist Map'), style: GoogleFonts.poppins()),
+            onTap: () { Navigator.pop(context); _onTabSelected(1); },
           ),
           ListTile(
-            minLeadingWidth: 20, // Merapatkan jarak ikon ke teks
-            horizontalTitleGap: 12,
-            leading: const Icon(Icons.info_outline_rounded,
-                color: AppColors.primary),
-            // 🔥 SISIPAN: Translasi
-            title: Text(LangHelper.t(
-                lang, 'Tentang Aplikasi', 'Tentang Aplikasi', 'About App')),
+            minLeadingWidth: 20, horizontalTitleGap: 12,
+            leading: const Icon(Icons.info_outline_rounded, color: AppColors.primary),
+            title: Text(LangHelper.t(lang, 'Tentang Aplikasi', 'Tentang Aplikasi', 'About App'), style: GoogleFonts.poppins()),
             onTap: () {
               Navigator.pop(context);
               showAboutDialog(
                 context: context,
                 applicationName: "Budaya Lobar",
                 applicationVersion: "1.0.0",
-                applicationIcon: Image.asset('assets/images/logo_budaya.png',
-                    width: 50, height: 50),
-                children: [
-                  // 🔥 SISIPAN: Translasi
-                  Text(LangHelper.t(
-                      lang,
-                      "Aplikasi Jelajah Kebudayaan Lombok Barat membantu Anda menemukan destinasi wisata budaya, kuliner, dan kesenian terbaik.",
-                      "Aplikasi Jelajah Kebudayaan Lombok Barat yakne mbandu pelinggih mete destinasi wisata budaya, kuliner, dait kesenian sak solah.",
-                      "West Lombok Cultural Exploration App helps you discover the best cultural, culinary, and art tourist destinations.")),
-                ],
+                applicationIcon: Image.asset('assets/images/logo_budaya.png', width: 50, height: 50),
+                children: [Text(LangHelper.t(lang, "Aplikasi Jelajah Kebudayaan Lombok Barat...", "Aplikasi Jelajah Kebudayaan Lombok Barat...", "West Lombok Cultural Exploration App..."), style: GoogleFonts.poppins())],
               );
             },
           ),
+          
+          ListTile(
+            minLeadingWidth: 20, horizontalTitleGap: 12,
+            leading: const Icon(Icons.account_tree_rounded, color: AppColors.primary),
+            title: Text(LangHelper.t(lang, 'Struktur & Info Dinas', 'Struktur & Info Dinas', 'Org Structure & Info'), style: GoogleFonts.poppins()),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const DikbudInfoPage()));
+            },
+          ),
+
           const Divider(),
           ListTile(
-            minLeadingWidth: 20, // Merapatkan jarak ikon ke teks
-            horizontalTitleGap: 12,
+            minLeadingWidth: 20, horizontalTitleGap: 12,
             leading: const Icon(Icons.logout_rounded, color: Colors.red),
-            // 🔥 SISIPAN: Translasi
-            title: Text(LangHelper.t(lang, 'Keluar', 'Sugul', 'Exit'),
-                style: const TextStyle(color: Colors.red)),
-            onTap: () {
-              SystemNavigator.pop();
-            },
+            title: Text(LangHelper.t(lang, 'Keluar', 'Sugul', 'Exit'), style: GoogleFonts.poppins(color: Colors.red)),
+            onTap: () => SystemNavigator.pop(),
           ),
         ],
       ),
@@ -182,133 +143,70 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-    // 🔥 SISIPAN: Baca bahasa yang sedang aktif untuk struktur Scaffold
-    final String lang =
-        context.watch<SettingsProvider>().currentLocale.languageCode;
-
+    final String lang = context.watch<SettingsProvider>().currentLocale.languageCode;
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) async {
         if (didPop) return;
-
-        if (_selectedIndex != 0) {
-          setState(() => _selectedIndex = 0);
-          return;
-        }
-
+        if (_selectedIndex != 0) { setState(() => _selectedIndex = 0); return; }
         final now = DateTime.now();
-        if (currentBackPressTime == null ||
-            now.difference(currentBackPressTime!) >
-                const Duration(seconds: 2)) {
+        if (currentBackPressTime == null || now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
           currentBackPressTime = now;
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              // 🔥 SISIPAN: Translasi
-              content: Text(LangHelper.t(lang, 'Tekan sekali lagi untuk keluar',
-                  'Tekan sekale malik jari sugul', 'Press once again to exit')),
-              duration: const Duration(seconds: 2),
-            ),
+            SnackBar(content: Text(LangHelper.t(lang, 'Tekan sekali lagi untuk keluar', 'Tekan sekale malik jari sugul', 'Press once again to exit'), style: GoogleFonts.poppins()), duration: const Duration(seconds: 2)),
           );
           return;
         }
         SystemNavigator.pop();
       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFF5F5F5),
+        backgroundColor: AppColors.background,
         drawer: _buildDrawer(),
-        extendBody: true, // Agar lengkungan transparan tembus ke body
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: _pages,
-        ),
-
-        // --- BOTTOM APP BAR ---
+        extendBody: true,
+        body: IndexedStack(index: _selectedIndex, children: _pages),
         bottomNavigationBar: BottomAppBar(
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          height: 80,
-          color: Colors.white,
-          elevation: 10,
-          shadowColor: Colors.black,
-          child: Row(
-            mainAxisAlignment:
-                MainAxisAlignment.spaceBetween, // Distribusi rata
-            children: [
-              // 🔥 SISIPAN: Translasi
-              _buildNavItem(0, Icons.dashboard_outlined, Icons.dashboard,
-                  LangHelper.t(lang, 'Jelajah', 'Jelajahin', 'Explore')),
-              _buildNavItem(1, Icons.map_outlined, Icons.map,
-                  LangHelper.t(lang, 'Peta', 'Peta', 'Map')),
-              // UPDATE: Agenda masuk ke sini sejajar
-              _buildNavItem(
-                  2,
-                  Icons.calendar_today_outlined,
-                  Icons.calendar_month,
-                  LangHelper.t(lang, 'Agenda', 'Jadwal', 'Agenda')),
-              _buildNavItem(3, Icons.grid_view_outlined, Icons.grid_view,
-                  'CoE CFN'), // Biarkan aslinya
-              _buildNavItem(4, Icons.person_outline, Icons.person,
-                  LangHelper.t(lang, 'Profil', 'Profil', 'Profile')),
-            ],
-          ),
+          height: 80, color: Colors.white, elevation: 10,
+          child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            _buildNavItem(0, Icons.dashboard_outlined, Icons.dashboard, LangHelper.t(lang, 'Jelajah', 'Jelajahin', 'Explore')),
+            _buildNavItem(1, Icons.map_outlined, Icons.map, LangHelper.t(lang, 'Peta', 'Peta', 'Map')),
+            _buildNavItem(2, Icons.calendar_today_outlined, Icons.calendar_month, LangHelper.t(lang, 'Agenda', 'Jadwal', 'Agenda')),
+            _buildNavItem(3, Icons.grid_view_outlined, Icons.grid_view, 'CoE CFN'),
+            _buildNavItem(4, Icons.person_outline, Icons.person, LangHelper.t(lang, 'Profil', 'Profil', 'Profile')),
+          ]),
         ),
       ),
     );
   }
 
-  // --- WIDGET ITEM NAVIGASI (MODEL PILL / KAPSUL) ---
-  Widget _buildNavItem(
-      int index, IconData iconInactive, IconData iconActive, String label) {
+  Widget _buildNavItem(int index, IconData iconInactive, IconData iconActive, String label) {
     bool isSelected = _selectedIndex == index;
-
     return GestureDetector(
       onTap: () => _onTabSelected(index),
-      behavior: HitTestBehavior.opaque,
       child: SizedBox(
-        width: 65, // Lebar area sentuh
+        width: 65,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // KONTAINER IKON (BENTUK PILL/KAPSUL)
             AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               curve: Curves.easeOutBack,
-              height: 38, // Tinggi kapsul
-              width: isSelected ? 58 : 38, // Lebar kapsul (melebar saat aktif)
+              height: 38, width: isSelected ? 58 : 38,
               decoration: BoxDecoration(
-                // Warna background hanya muncul saat aktif (gaya Material 3)
-                color: isSelected
-                    ? AppColors.primary.withOpacity(0.12)
-                    : Colors.transparent,
-                borderRadius: BorderRadius.circular(20), // Sudut sangat bulat
+                color: isSelected ? AppColors.primary.withOpacity(0.12) : Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
-                // ANIMASI GANTI IKON
                 child: AnimatedSwitcher(
                   duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, anim) =>
-                      ScaleTransition(scale: anim, child: child),
-                  child: Icon(
-                    isSelected ? iconActive : iconInactive,
-                    key: ValueKey(isSelected),
-                    size: 28, // Ukuran ikon
-                    color:
-                        isSelected ? AppColors.primary : Colors.grey.shade600,
-                  ),
+                  transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
+                  child: Icon(isSelected ? iconActive : iconInactive, key: ValueKey(isSelected), size: 28, color: isSelected ? AppColors.primary : Colors.grey.shade600),
                 ),
               ),
             ),
             const SizedBox(height: 4),
-            // LABEL TEXT
-            Text(
-              label,
-              maxLines: 1,
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                color: isSelected ? AppColors.primary : Colors.grey.shade600,
-              ),
-            ),
+            Text(label, maxLines: 1, style: GoogleFonts.poppins(fontSize: 11, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500, color: isSelected ? AppColors.primary : Colors.grey.shade600)),
           ],
         ),
       ),
@@ -316,19 +214,49 @@ void initState() {
   }
 }
 
-// ================= CONTENT PAGE =================
+// ================= PREMIUM CONTENT PAGE =================
+Widget _buildGlassCard({required Widget child, Color? color, double opacity = 0.85}) {
+  return ClipRRect(
+    borderRadius: BorderRadius.circular(24),
+    child: BackdropFilter(
+      filter: ui.ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: (color ?? Colors.white).withValues(alpha: opacity),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.white.withValues(alpha: 0.25), width: 1),
+          boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.06), blurRadius: 20, offset: const Offset(0, 8))],
+        ),
+        child: child,
+      ),
+    ),
+  );
+}
+
 class HomeContentPage extends StatefulWidget {
   const HomeContentPage({super.key});
-
   @override
   State<HomeContentPage> createState() => _HomeContentPageState();
 }
 
-class _HomeContentPageState extends State<HomeContentPage> {
-  final TextEditingController _searchController =
-      TextEditingController(); // Tambahkan Controller
+class _HomeContentPageState extends State<HomeContentPage> with SingleTickerProviderStateMixin {
+  final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
   bool _showBackToTopButton = false;
+
+  // ✅ FITUR BARU: Variabel Banner Auto-Scroll & Pulse
+  final PageController _bannerController = PageController();
+  Timer? _bannerTimer;
+  int _currentBannerIndex = 0;
+  late AnimationController _pulseController;
+  late Animation<double> _pulseAnimation;
+
+  // ✅ Data Banner
+  final List<Map<String, String>> _bannerItems = [
+    {'title': 'Festival Pesona Senggigi', 'sub': 'November 2026'},
+    {'title': 'Perang Topat Lingsar', 'sub': 'November 2026'},
+    {'title': 'Jelajah Budaya Lobar', 'sub': 'Temukan Keindahan Nusantara'},
+  ];
 
   @override
   void initState() {
@@ -340,106 +268,202 @@ class _HomeContentPageState extends State<HomeContentPage> {
         setState(() => _showBackToTopButton = false);
       }
     });
+
+    // Auto-Scroll Banner
+    _bannerTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (_bannerController.hasClients) {
+        int nextPage = _currentBannerIndex + 1;
+        if (nextPage >= _bannerItems.length) nextPage = 0;
+        _bannerController.animateToPage(nextPage,
+            duration: const Duration(milliseconds: 800), curve: Curves.easeInOut);
+        setState(() => _currentBannerIndex = nextPage);
+      }
+    });
+
+    // Pulse Animation
+    _pulseController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    )..repeat(reverse: true);
+    _pulseAnimation = Tween<double>(begin: 0.9, end: 1.05).animate(
+      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
+    );
   }
 
   @override
   void dispose() {
-    _searchController.dispose(); // Dispose Controller
+    _searchController.dispose();
     _scrollController.dispose();
+    _bannerTimer?.cancel();
+    _pulseController.dispose();
+    _bannerController.dispose();
     super.dispose();
   }
 
-  void _scrollToTop() {
-    _scrollController.animateTo(0,
-        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  void _scrollToTop() => _scrollController.animateTo(0, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+
+  // ✅ WIDGET CAROUSEL OTOMATIS
+  Widget _buildAutoScrollCarousel() {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+      height: 150,
+      child: PageView.builder(
+        controller: _bannerController,
+        onPageChanged: (index) => setState(() => _currentBannerIndex = index),
+        itemCount: _bannerItems.length,
+        itemBuilder: (context, index) {
+          final item = _bannerItems[index];
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [AppColors.primary.withOpacity(0.8), AppColors.primaryDark.withOpacity(0.8)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 10, offset: const Offset(0, 4))],
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  right: -20, bottom: -20,
+                  child: Icon(Icons.museum_outlined, size: 120, color: Colors.white.withOpacity(0.1)),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(item['title']!, style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                      const SizedBox(height: 4),
+                      Text(item['sub']!, style: GoogleFonts.poppins(color: Colors.white70, fontSize: 13)),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  right: 16, bottom: 16,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(_bannerItems.length, (idx) {
+                      return Container(
+                        margin: const EdgeInsets.only(left: 4),
+                        width: _currentBannerIndex == idx ? 16 : 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          color: _currentBannerIndex == idx ? Colors.white : Colors.white.withOpacity(0.4),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  // ✅ KATEGORI DENGAN TOMBOL "LIHAT SEMUA" BERFUNGSI
+  Widget _buildStaggeredCategorySection() {
+    return Column(
+      children: [
+        // Header Kategori dengan Pulse Animation dan Fungsi Navigasi
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Kategori Utama", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18, color: AppColors.textPrimary)),
+              InkWell(
+                // ✅ Tombol 'Lihat Semua' sekarang bisa ditekan dan pindah halaman
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const AllCategoriesPage()),
+                  );
+                },
+                child: AnimatedBuilder(
+                  animation: _pulseAnimation,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _pulseAnimation.value,
+                      child: Text("Lihat Semua", style: GoogleFonts.poppins(color: AppColors.primary, fontSize: 13, fontWeight: FontWeight.w600)),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Tampilkan widget Kategori asli Anda
+        const CategorySection(),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // Ambil data provider untuk cek loading
     final provider = context.watch<CagarProvider>();
-    // 🔥 SISIPAN: Baca bahasa yang sedang aktif untuk Konten
-    final String lang =
-        context.watch<SettingsProvider>().currentLocale.languageCode;
+    final String lang = context.watch<SettingsProvider>().currentLocale.languageCode;
 
     return Stack(
       children: [
         RefreshIndicator(
-          onRefresh: () async {
-          },
+          onRefresh: () async {},
           color: AppColors.primary,
           backgroundColor: Colors.white,
           child: CustomScrollView(
             controller: _scrollController,
             physics: const BouncingScrollPhysics(),
             slivers: [
-              // ---------------- HEADER MODEREN (LOGO FULL) ----------------
+              // HEADER PREMIUM
               SliverAppBar(
-                // Diperbesar lagi agar muat untuk teks dan logo
-                expandedHeight: 220,
+                expandedHeight: 180,
                 pinned: true,
                 backgroundColor: Colors.white,
                 elevation: 0,
                 shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(50),
-                  ),
+                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
                 ),
-                leading: Padding(
-                  padding: const EdgeInsets.all(4.0), // Padding agar ukuran pas
-                  child: Image.asset(
-                    'assets/images/logo_kabupaten.png', // Ganti dengan logo kabupaten/instansi jika ada
-                    fit: BoxFit.contain,
-                    errorBuilder: (ctx, err, _) =>
-                        const SizedBox(), // Fallback kosong jika tidak ada
-                  ),
-                ),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Image.asset(
-                      'assets/images/logo_pesona_indonesia.png', // Contoh logo lain
-                      fit: BoxFit.contain,
-                      errorBuilder: (ctx, err, _) => const SizedBox(),
-                    ),
-                  ),
-                ],
                 flexibleSpace: FlexibleSpaceBar(
-                  // Mengurangi bottom padding agar logo lebih ke bawah
-                  titlePadding:
-                      const EdgeInsets.only(left: 24, right: 24, bottom: 10),
-                  // Background untuk menampung Teks Judul Sistem
+                  titlePadding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
                   background: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(30),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [AppColors.primary, AppColors.primaryDark],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
                     ),
                     child: SafeArea(
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 30, left: 24, right: 24),
+                        padding: const EdgeInsets.only(top: 30, left: 24, right: 24),
                         child: Column(
-                          crossAxisAlignment:
-                              CrossAxisAlignment.center, // UPDATE: Rata tengah
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // TEKS SISTEM INFORMASI (DI ATAS LOGO)
-                            // 🔥 SISIPAN: Translasi
                             Text(
-                              LangHelper.t(
-                                  lang,
-                                  "SISTEM INFORMASI KEBUDAYAAN LOMBOK BARAT\n(SILORA)",
-                                  "SISTEM INFORMASI KEBUDAYAAN LOMBOK BARAT\n(SILORA)",
-                                  "WEST LOMBOK CULTURAL INFORMATION SYSTEM\n(SILORA)"),
-                              textAlign:
-                                  TextAlign.center, // UPDATE: Rata tengah
-                              style: TextStyle(
-                                fontSize: 16, // UPDATE: Font lebih besar
+                              "Jelajah Budaya Lobar",
+                              style: GoogleFonts.poppins(
+                                fontSize: 22,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey[800],
-                                letterSpacing: 0.5,
-                                height: 1.4,
+                                color: Colors.white,
+                                letterSpacing: 1.2,
+                                shadows: [Shadow(color: Colors.black.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 4))],
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              "Tunas napi leq jero tamiu",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w300,
+                                color: Colors.white70,
                               ),
                             ),
                           ],
@@ -447,93 +471,90 @@ class _HomeContentPageState extends State<HomeContentPage> {
                       ),
                     ),
                   ),
-
-                  // Title berisi Logo SIKEBUD
                   title: SafeArea(
-                    child: SizedBox(
-                      height: 60,
-                      child: Align(
-                        alignment: Alignment.centerLeft, // Logo rata kiri
-                        child: Image.asset(
-                          'assets/images/logo_budaya.png',
-                          fit: BoxFit.contain, // Agar logo proporsional
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Text(
-                              "Budaya Lobar",
-                              style: TextStyle(
-                                color: AppColors.primary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 4))],
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(
+                        children: [
+                          Image.asset('assets/images/logo_budaya.png', height: 35, errorBuilder: (c, e, s) => const Icon(Icons.language, color: AppColors.primary)),
+                          const SizedBox(width: 10),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "SILORA",
+                                style: GoogleFonts.poppins(
+                                  color: AppColors.primary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w900,
+                                  letterSpacing: 1,
+                                  height: 1,
+                                ),
                               ),
-                            );
-                          },
-                        ),
+                              const SizedBox(height: 2),
+                              Text(
+                                "Lombok Barat",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.grey.shade500,
+                                  fontSize: 10, 
+                                  fontWeight: FontWeight.w600,
+                                  letterSpacing: 0.5,
+                                  height: 1, 
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
+                actions: [const SizedBox()],
               ),
 
-              // ---------------- BODY CONTENT ----------------
               SliverToBoxAdapter(
                 child: Container(
                   padding: const EdgeInsets.only(bottom: 100),
                   child: Column(
                     children: [
-                      // --- SEARCH BAR ---
-                      FadeInUp(
-                        delay: 0,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 15),
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.grey.shade200),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.04),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: TextField(
-                            controller: _searchController,
-                            onChanged: (value) {
-                            },
-                            textAlignVertical: TextAlignVertical.center,
-                            decoration: InputDecoration(
-                              // 🔥 SISIPAN: Translasi
-                              hintText: LangHelper.t(
-                                  lang,
-                                  "Cari situs budaya...",
-                                  "Beroq situs budaya...",
-                                  "Search cultural sites..."),
-                              hintStyle: TextStyle(
-                                color: Colors.grey.shade400,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(left: 15, right: 10),
-                                child: Icon(Icons.search_rounded,
-                                    color: AppColors.primary, size: 24),
-                              ),
-                              suffixIcon: Container(
-                                margin: const EdgeInsets.all(8),
-                                width: 34,
-                                height: 34,
-                                decoration: BoxDecoration(
-                                  color: AppColors.primary.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(8),
+                      // 1. SEARCH BAR GLASSMORPHISM
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+                        child: _buildGlassCard(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.search_rounded, color: Colors.grey),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: TextField(
+                                    controller: _searchController,
+                                    onChanged: (value) {},
+                                    style: GoogleFonts.poppins(fontSize: 15),
+                                    decoration: InputDecoration(
+                                      hintText: LangHelper.t(lang, "Cari situs budaya...", "Beroq situs budaya...", "Search cultural sites..."),
+                                      hintStyle: GoogleFonts.poppins(color: Colors.grey.shade400, fontSize: 15),
+                                      border: InputBorder.none,
+                                    ),
+                                  ),
                                 ),
-                                child: const Icon(Icons.tune_rounded,
-                                    color: AppColors.primary, size: 18),
-                              ),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.zero,
+                                Container(
+                                  width: 36, height: 36,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary.withValues(alpha: 0.1),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Icon(Icons.tune_rounded, color: AppColors.primary, size: 20),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -541,17 +562,18 @@ class _HomeContentPageState extends State<HomeContentPage> {
 
                       const SizedBox(height: 5),
 
-                      // A. KATEGORI
-                      const FadeInUp(delay: 50, child: CategorySection()),
+                      // ✅ 2. BANNER CAROUSEL OTOMATIS
+                      _buildAutoScrollCarousel(),
+
+                      // ✅ 3. KATEGORI UTAMA DENGAN STAGGERED & PULSE (Berfungsi)
+                      _buildStaggeredCategorySection(),
 
                       const SizedBox(height: 20),
 
-                      // D. LIST SITUS DENGAN SHIMMER LOADING
+                      // ✅ 4. DAFTAR SITUS
                       FadeInUp(
                         delay: 150,
-                        child: provider.isLoading
-                            ? _buildShimmerList()
-                            : const SitusSection(),
+                        child: provider.isLoading ? _buildShimmerList() : const SitusSection(),
                       ),
                     ],
                   ),
@@ -560,16 +582,16 @@ class _HomeContentPageState extends State<HomeContentPage> {
             ],
           ),
         ),
-
-        // FITUR: TOMBOL KEMBALI KE ATAS
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
-          bottom:
-              _showBackToTopButton ? 20 : -100, // Sembunyikan di bawah layar
+          bottom: _showBackToTopButton ? 20 : -100,
           right: 20,
-          child: FloatingActionButton.small(
+          child: FloatingActionButton(
+            heroTag: 'back_to_top_home',
             onPressed: _scrollToTop,
             backgroundColor: AppColors.primary,
+            shape: const CircleBorder(),
+            elevation: 6,
             child: const Icon(Icons.arrow_upward_rounded, color: Colors.white),
           ),
         ),
@@ -577,7 +599,6 @@ class _HomeContentPageState extends State<HomeContentPage> {
     );
   }
 
-  // --- EFEK SHIMMER (LOADING KEREN) ---
   Widget _buildShimmerList() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -585,38 +606,44 @@ class _HomeContentPageState extends State<HomeContentPage> {
         children: List.generate(3, (index) {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
-            height: 110,
+            height: 120, 
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(20), 
+              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 4))],
             ),
             child: Row(
               children: [
-                // Kotak Gambar Abu-abu
                 Container(
-                  width: 110,
-                  height: 110,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
-                    borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(16)),
+                    gradient: LinearGradient(
+                      colors: [AppColors.primary, AppColors.primaryDark],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: const BorderRadius.horizontal(left: Radius.circular(20)),
                   ),
+                  child: const Center(child: Icon(Icons.image_outlined, color: Colors.white, size: 32)),
                 ),
                 const SizedBox(width: 16),
-                // Garis-garis Teks Abu-abu
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                          width: 60, height: 10, color: Colors.grey.shade200),
+                      Container(width: 100, height: 14, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
                       const SizedBox(height: 10),
-                      Container(
-                          width: 150, height: 16, color: Colors.grey.shade200),
+                      Container(width: 180, height: 20, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
                       const SizedBox(height: 10),
-                      Container(
-                          width: 100, height: 12, color: Colors.grey.shade200),
+                      Row(
+                        children: [
+                          Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.grey.shade200, shape: BoxShape.circle)),
+                          const SizedBox(width: 6),
+                          Container(width: 80, height: 12, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
+                        ],
+                      ),
                     ],
                   ),
                 )
@@ -629,59 +656,29 @@ class _HomeContentPageState extends State<HomeContentPage> {
   }
 }
 
-// ANIMASI FADE IN UP
 class FadeInUp extends StatefulWidget {
   final Widget child;
   final int delay;
-
   const FadeInUp({super.key, required this.child, required this.delay});
-
   @override
   State<FadeInUp> createState() => _FadeInUpState();
 }
-
-class _FadeInUpState extends State<FadeInUp>
-    with SingleTickerProviderStateMixin {
+class _FadeInUpState extends State<FadeInUp> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacity;
   late Animation<Offset> _translate;
-
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-
-    _opacity = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutQuad),
-    );
-
-    _translate =
-        Tween<Offset>(begin: const Offset(0, 0.1), end: Offset.zero).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOutQuad),
-    );
-
-    Future.delayed(Duration(milliseconds: widget.delay), () {
-      if (mounted) _controller.forward();
-    });
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 500));
+    _opacity = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuad));
+    _translate = Tween<Offset>(begin: const Offset(0, 0.1), end: Offset.zero).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutQuad));
+    Future.delayed(Duration(milliseconds: widget.delay), () { if (mounted) _controller.forward(); });
   }
-
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
+  void dispose() { _controller.dispose(); super.dispose(); }
   @override
   Widget build(BuildContext context) {
-    return FadeTransition(
-      opacity: _opacity,
-      child: SlideTransition(
-        position: _translate,
-        child: widget.child,
-      ),
-    );
+    return FadeTransition(opacity: _opacity, child: SlideTransition(position: _translate, child: widget.child));
   }
 }

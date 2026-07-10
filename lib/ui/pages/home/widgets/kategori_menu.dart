@@ -42,18 +42,9 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Header Judul
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          child: Text(
-            "Kategori Utama",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ),
+        // ✅ BAGIAN HEADER TEXT "Kategori Utama" TELAH DIHAPUS
+        // (Karena sudah ditangani oleh HomePage dengan animasi pulse & navigasi Lihat Semua)
+        // Silakan buka home_page.dart untuk mengatur tulisan "Kategori Utama" dan tombol "Lihat Semua".
 
         // Menggunakan Padding Utama untuk Row yang Full Lebar Layar
         Padding(

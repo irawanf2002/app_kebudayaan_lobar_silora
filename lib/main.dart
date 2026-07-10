@@ -17,7 +17,7 @@ import 'data/providers/auth_provider.dart';
 import 'data/providers/cagar_provider.dart'; 
 import 'data/providers/agenda_provider.dart'; 
 import 'data/providers/rating_provider.dart';
-import 'data/providers/comment_provider.dart.dart'; // Sesuaikan jika ada typo nama file di proyekmu
+import 'data/providers/comment_provider.dart'; // Sesuaikan jika ada typo nama file di proyekmu
 import 'data/providers/settings_provider.dart';
 
 // --- PAGES ---

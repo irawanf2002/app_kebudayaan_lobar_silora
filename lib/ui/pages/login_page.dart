@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart'; // ✅ Konsistensi Font Premium
+
 import '../../data/providers/auth_provider.dart';
-import '../../ui/styles/colors.dart'; // Pastikan import ini sesuai struktur Anda
+import '../../ui/styles/colors.dart'; 
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -26,24 +28,24 @@ class _LoginPageState extends State<LoginPage> {
     if (_formKey.currentState!.validate()) {
       final auth = context.read<AuthProvider>();
 
-      // Panggil fungsi login dari Provider
       bool success = await auth.login(
         _emailController.text.trim(),
         _passwordController.text.trim(),
       );
 
       if (success && mounted) {
-        // Jika berhasil, kembali ke halaman sebelumnya (Profile Page)
         Navigator.pop(context);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text("Berhasil Login! Selamat Datang.")),
+          SnackBar(
+            content: Text("Berhasil Login! Selamat Datang.", style: GoogleFonts.poppins()),
+            backgroundColor: AppColors.success,
+          ),
         );
       } else if (mounted) {
-        // Jika gagal
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Gagal Login. Periksa email atau password."),
-            backgroundColor: Colors.red,
+          SnackBar(
+            content: Text("Gagal Login. Periksa email atau password.", style: GoogleFonts.poppins()),
+            backgroundColor: AppColors.error,
           ),
         );
       }
@@ -55,48 +57,79 @@ class _LoginPageState extends State<LoginPage> {
     final isLoading = context.watch<AuthProvider>().isLoading;
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background, // ✅ Menggunakan AppColors.background
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const BackButton(color: Colors.black),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.textPrimary, size: 20),
+          onPressed: () => Navigator.maybePop(context),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
           child: Form(
             key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
+                
                 // LOGO & JUDUL
                 Center(
-                  child: Image.asset(
-                    'assets/images/logo_budaya.png', // Pastikan logo ada
-                    height: 80,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(16),
+                        decoration: BoxDecoration(
+                          color: AppColors.cardSurface,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withOpacity(0.2),
+                              blurRadius: 15,
+                              offset: const Offset(0, 8),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          'assets/images/logo_budaya.png',
+                          height: 60,
+                          errorBuilder: (c, e, s) => const Icon(Icons.museum, size: 60, color: AppColors.primary),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Selamat Datang",
+                        style: GoogleFonts.poppins(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.textPrimary,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        "Silakan login untuk mengelola data budaya.",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          color: AppColors.textSecondary,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                const SizedBox(height: 40),
-                const Text(
-                  "Selamat Datang",
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                ),
-                const Text(
-                  "Silakan login untuk mengelola data.",
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
-                ),
+                
                 const SizedBox(height: 40),
 
                 // INPUT EMAIL
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
+                  style: GoogleFonts.poppins(color: AppColors.textPrimary, fontSize: 15),
                   decoration: _inputDecoration("Email", Icons.email_outlined),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Email wajib diisi';
-                    }
+                    if (value == null || value.isEmpty) return 'Email wajib diisi';
                     if (!value.contains('@')) return 'Format email salah';
                     return null;
                   },
@@ -107,17 +140,16 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: _passwordController,
                   obscureText: true,
+                  style: GoogleFonts.poppins(color: AppColors.textPrimary, fontSize: 15),
                   decoration: _inputDecoration("Password", Icons.lock_outline),
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Password wajib diisi';
-                    }
+                    if (value == null || value.isEmpty) return 'Password wajib diisi';
                     return null;
                   },
                 ),
                 const SizedBox(height: 40),
 
-                // TOMBOL LOGIN
+                // TOMBOL LOGIN PREMIUM
                 SizedBox(
                   width: double.infinity,
                   height: 55,
@@ -125,18 +157,25 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: isLoading ? null : _handleLogin,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,
+                      foregroundColor: Colors.white,
+                      elevation: 4,
+                      shadowColor: AppColors.primary.withOpacity(0.4),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     child: isLoading
-                        ? const CircularProgressIndicator(color: Colors.white)
-                        : const Text(
+                        ? const SizedBox(
+                            width: 24, height: 24,
+                            child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
+                          )
+                        : Text(
                             "Masuk (Login)",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                            style: GoogleFonts.poppins(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                           ),
                   ),
                 ),
@@ -147,17 +186,20 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("Belum punya akun staf? "),
+                    Text(
+                      "Belum punya akun staf? ",
+                      style: GoogleFonts.poppins(color: AppColors.textSecondary, fontSize: 14),
+                    ),
                     GestureDetector(
                       onTap: () {
-                        // Navigasi ke halaman Register
                         Navigator.pushNamed(context, '/register');
                       },
-                      child: const Text(
+                      child: Text(
                         "Daftar",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                           color: AppColors.primary,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -174,20 +216,27 @@ class _LoginPageState extends State<LoginPage> {
   InputDecoration _inputDecoration(String label, IconData icon) {
     return InputDecoration(
       labelText: label,
-      prefixIcon: Icon(icon),
+      labelStyle: GoogleFonts.poppins(color: AppColors.textSecondary, fontSize: 14),
+      hintStyle: GoogleFonts.poppins(color: AppColors.textTertiary, fontSize: 14),
+      prefixIcon: Padding(
+        padding: const EdgeInsets.only(left: 12, right: 4),
+        child: Icon(icon, color: AppColors.textSecondary, size: 22),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.divider),
       ),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.grey.shade300),
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.divider),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.primary, width: 2),
       ),
       filled: true,
-      fillColor: Colors.grey.shade50,
+      fillColor: AppColors.cardSurface.withOpacity(0.7),
     );
   }
 }

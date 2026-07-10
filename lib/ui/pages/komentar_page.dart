@@ -1,9 +1,9 @@
-import 'package:app_kebudyaan_lobar/data/providers/comment_provider.dart.dart';
+// lib/ui/pages/komentar_page.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-// Pastikan path import ini sesuai dengan struktur folder proyekmu
 import '../../data/models/comment_model.dart';
+import '../../data/providers/comment_provider.dart';
 
 class KomentarPage extends StatefulWidget {
   final String cagarId;
@@ -15,7 +15,6 @@ class KomentarPage extends StatefulWidget {
 }
 
 class _KomentarPageState extends State<KomentarPage> {
-  // 🔥 PERBAIKAN: Deklarasikan controller untuk nama dan komentar
   final TextEditingController _namaController = TextEditingController();
   final TextEditingController _komentarController = TextEditingController();
 
@@ -25,9 +24,13 @@ class _KomentarPageState extends State<KomentarPage> {
   @override
   void initState() {
     super.initState();
-    // Memastikan provider hanya mendengarkan komentar untuk ID cagar ini saja
-    Future.microtask(() {
-      context.read<CommentProvider>().listenToComments(widget.cagarId);
+    // ✅ Memastikan provider mendengarkan komentar untuk cagar ini
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        context.read<CommentProvider>().listenToComments(widget.cagarId);
+      } catch (e) {
+        debugPrint("Error loading comments: $e");
+      }
     });
   }
 
@@ -43,74 +46,101 @@ class _KomentarPageState extends State<KomentarPage> {
     if (_komentarController.text.trim().isEmpty ||
         _namaController.text.trim().isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Nama dan komentar wajib diisi!")),
+        const SnackBar(
+          content: Text("Nama dan komentar wajib diisi!"),
+          backgroundColor: Colors.orange,
+        ),
       );
       return;
     }
 
     setState(() => _isSending = true);
 
-    final provider = context.read<CommentProvider>();
+    try {
+      final provider = context.read<CommentProvider>();
 
-    // 🔥 PERBAIKAN: Gunakan variabel lokal ini untuk dikirim ke provider
-    String userId = "guest_${DateTime.now().millisecondsSinceEpoch}";
-    String userName = _namaController.text.trim();
+      String userId = "guest_${DateTime.now().millisecondsSinceEpoch}";
+      String userName = _namaController.text.trim();
 
-    bool success = await provider.addComment(
-      cagarId: widget.cagarId, // Mengunci ulasan pada ID cagar yang spesifik
-      content: _komentarController.text.trim(),
-      rating: _selectedRating,
-      userId: userId,
-      userName: userName,
-    );
-
-    if (mounted) setState(() => _isSending = false);
-
-    if (success && mounted) {
-      _komentarController.clear();
-      // _namaController.clear(); // Biarkan nama terisi jika user ingin komen lagi
-      FocusScope.of(context).unfocus();
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Matur Tampi Asih! Ulasan Anda telah terkirim."),
-          backgroundColor: Colors.green,
-        ),
+      bool success = await provider.addComment(
+        cagarId: widget.cagarId,
+        content: _komentarController.text.trim(),
+        rating: _selectedRating,
+        userId: userId,
+        userName: userName,
       );
-    } else if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Gagal mengirim ulasan")),
-      );
+
+      if (mounted) setState(() => _isSending = false);
+
+      if (success && mounted) {
+        _komentarController.clear();
+        FocusScope.of(context).unfocus();
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("✅ Matur Tampi Asih! Ulasan Anda telah terkirim."),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("❌ Gagal mengirim ulasan. Coba lagi."),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isSending = false);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Error: ${e.toString()}")),
+        );
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<CommentProvider>();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Ulasan & Apresiasi"),
+        backgroundColor: Colors.brown,
+        foregroundColor: Colors.white,
+        elevation: 0,
       ),
-      body: Column(
-        children: [
-          // Bagian List Komentar
-          Expanded(
-            child: provider.comments.isEmpty
-                ? const Center(child: Text("Belum ada ulasan di lokasi ini."))
-                : ListView.separated(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: provider.comments.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 16),
-                    itemBuilder: (context, index) {
-                      return _buildCommentItem(provider.comments[index]);
-                    },
-                  ),
-          ),
+      body: Consumer<CommentProvider>(
+        builder: (context, provider, child) {
+          return Column(
+            children: [
+              // Bagian List Komentar
+              Expanded(
+                child: provider.isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : provider.comments.isEmpty
+                        ? const Center(
+                            child: Text(
+                              "Belum ada ulasan di lokasi ini.",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          )
+                        : ListView.separated(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: provider.comments.length,
+                            separatorBuilder: (_, __) =>
+                                const SizedBox(height: 16),
+                            itemBuilder: (context, index) {
+                              return _buildCommentItem(
+                                  provider.comments[index]);
+                            },
+                          ),
+              ),
 
-          // Bagian Input
-          _buildInputSection(),
-        ],
+              // Bagian Input
+              _buildInputSection(),
+            ],
+          );
+        },
       ),
     );
   }
@@ -132,7 +162,7 @@ class _KomentarPageState extends State<KomentarPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Input Nama (Wajib agar tidak tercampur "Guest User" semua)
+          // Input Nama
           TextField(
             controller: _namaController,
             decoration: const InputDecoration(
@@ -143,6 +173,7 @@ class _KomentarPageState extends State<KomentarPage> {
             ),
           ),
           const Divider(),
+
           // Input Rating Bintang
           Row(
             children: [
@@ -154,18 +185,22 @@ class _KomentarPageState extends State<KomentarPage> {
                   child: Icon(
                     i < _selectedRating ? Icons.star : Icons.star_border,
                     color: Colors.orange,
+                    size: 28,
                   ),
                 ),
               )
             ],
           ),
           const SizedBox(height: 8),
+
           // Input Teks Komentar
           Row(
             children: [
               Expanded(
                 child: TextField(
                   controller: _komentarController,
+                  maxLines: 3,
+                  minLines: 1,
                   decoration: const InputDecoration(
                     hintText: "Tulis ulasan...",
                     border: OutlineInputBorder(),
@@ -176,7 +211,7 @@ class _KomentarPageState extends State<KomentarPage> {
               _isSending
                   ? const CircularProgressIndicator()
                   : IconButton(
-                      icon: const Icon(Icons.send, color: Colors.blue),
+                      icon: const Icon(Icons.send, color: Colors.blue, size: 30),
                       onPressed: _kirimKomentar,
                     )
             ],
@@ -194,14 +229,19 @@ class _KomentarPageState extends State<KomentarPage> {
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Colors.blue[100],
-          child:
-              Text(c.userName.isNotEmpty ? c.userName[0].toUpperCase() : "?"),
+          child: Text(
+            c.userName.isNotEmpty ? c.userName[0].toUpperCase() : "?",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
-        title: Text(c.userName,
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          c.userName,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Rating Bintang
             Row(
               children: List.generate(
                 5,
@@ -213,15 +253,26 @@ class _KomentarPageState extends State<KomentarPage> {
               ),
             ),
             const SizedBox(height: 4),
+            // Isi Komentar
             Text(c.content),
             const SizedBox(height: 4),
+            // ✅ PERBAIKAN: Format tanggal (createdAt sudah DateTime)
             Text(
-              DateFormat('dd MMM yyyy HH:mm').format(c.createdAt),
+              _formatDate(c.createdAt),
               style: const TextStyle(fontSize: 10, color: Colors.grey),
             ),
           ],
         ),
       ),
     );
+  }
+
+  // ✅ Method untuk format tanggal
+  String _formatDate(DateTime date) {
+    try {
+      return DateFormat('dd MMM yyyy HH:mm').format(date);
+    } catch (e) {
+      return "Baru saja";
+    }
   }
 }

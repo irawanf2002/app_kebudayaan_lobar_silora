@@ -7,23 +7,18 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'dart:ui';
 import 'dart:async';
 import 'dart:math' as math;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+// ✅ IMPORT YANG BENAR
 import '../../data/models/cagar_model.dart';
 import '../../data/models/agenda_model.dart';
+import '../../data/models/comment_model.dart';
 import 'maps_page.dart';
 import 'komentar_page.dart';
-import '../../data/providers/comment_provider.dart.dart';
+import '../../data/providers/comment_provider.dart';
 import '../../data/providers/agenda_provider.dart';
-
-// --- TEMA WARNA KEBUDAYAAN ---
-class CulturalColors {
-  static const Color primary = Color(0xFF8D5B4C); // Terracotta
-  static const Color secondary = Color(0xFFFDFBF7); // Cream Tua
-  static const Color accent = Color(0xFFD4AF37); // Emas
-  static const Color textDark = Color(0xFF3E2723); // Cokelat Tua
-  static const Color textGrey = Color(0xFF6D4C41); // Cokelat Abu
-  static const Color background = Color(0xFFFAF9F6); // Off-White
-  static const Color surface = Colors.white;
-}
+import '../../ui/styles/colors.dart';
 
 class DetailCagarPage extends StatefulWidget {
   final CagarModel cagar;
@@ -50,7 +45,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
 
   // --- TEXT TO SPEECH (TTS) ---
   late FlutterTts _flutterTts;
-  bool _isVoiceEnabled = false; // Default: Mati (Suara AI Chat)
+  bool _isVoiceEnabled = false;
   String _ttsState = "stopped";
 
   // --- SPEECH TO TEXT (STT) ---
@@ -85,10 +80,25 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     _initStt();
     _resetChat();
 
-    // 🔥 PERBAIKAN: Gunakan callback agar context siap sepenuhnya
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _refreshComments();
+      
+      // ✅ PERBAIKAN LOGIN: Otomatis login anonim saat halaman dibuka agar bisa kirim ulasan tanpa registrasi
+      _ensureAnonymousLogin();
     });
+  }
+
+  // --- PERBAIKAN: Login anonim otomatis untuk memastikan pengguna tamu bisa menulis ulasan ---
+  Future<void> _ensureAnonymousLogin() async {
+    try {
+      // Cek apakah sudah ada user login
+      if (FirebaseAuth.instance.currentUser == null) {
+        await FirebaseAuth.instance.signInAnonymously();
+        debugPrint("✅ Login anonim otomatis berhasil");
+      }
+    } catch (e) {
+      debugPrint("⚠️ Gagal login anonim: $e");
+    }
   }
 
   // --- METODE LOGIKA ---
@@ -97,12 +107,10 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     _flutterTts = FlutterTts();
     try {
       await _flutterTts.setLanguage("id-ID");
-      await _flutterTts
-          .setSpeechRate(0.85); // Sedikit lebih lambat untuk narasi
+      await _flutterTts.setSpeechRate(0.85);
       await _flutterTts.setVolume(1.0);
       await _flutterTts.setPitch(1.0);
 
-      // Handler ketika narasi selesai
       _flutterTts.setCompletionHandler(() {
         if (_isAiStoryPlaying) {
           _stopAiStoryteller();
@@ -123,7 +131,6 @@ class _DetailCagarPageState extends State<DetailCagarPage>
   }
 
   Future<void> _startAiStoryteller() async {
-    // Matikan suara chat jika ada
     if (_isVoiceEnabled) setState(() => _isVoiceEnabled = false);
     await _flutterTts.stop();
 
@@ -132,11 +139,8 @@ class _DetailCagarPageState extends State<DetailCagarPage>
       _currentSlideIndex = 0;
     });
 
-    // Mulai Narasi
-    // Membaca deskripsi sejarah
     await _flutterTts.speak(widget.cagar.deskripsi);
 
-    // Mulai Slideshow (Ganti gambar setiap 4 detik)
     _slideTimer = Timer.periodic(const Duration(seconds: 4), (timer) {
       if (!mounted) return;
       setState(() {
@@ -176,7 +180,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
   void _listen() async {
     if (!_isListening && _sttAvailable) {
       await _flutterTts.stop();
-      _stopAiStoryteller(); // Matikan story jika mic nyala
+      _stopAiStoryteller();
       setState(() => _isListening = true);
       _speech.listen(
         onResult: (val) {
@@ -206,7 +210,6 @@ class _DetailCagarPageState extends State<DetailCagarPage>
 
   Future<void> _speak(String text) async {
     if (!_isVoiceEnabled) return;
-    // Jangan bicara jika Storyteller sedang aktif
     if (_isAiStoryPlaying) return;
 
     await _flutterTts.stop();
@@ -229,16 +232,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     });
   }
 
-  // Pastikan kodenya seperti ini:
   void _refreshComments() {
-    // Pastikan widget.cagar.id memberikan ID yang benar-benar unik
     final String currentId = widget.cagar.id.toString();
     context.read<CommentProvider>().listenToComments(currentId);
   }
 
   Future<void> _openComments() async {
-    // 🔥 PERBAIKAN 2: Gunakan ID asli (String) untuk dikirim ke halaman Komentar
-    // Pastikan di file KomentarPage, variabel cagarId juga sudah diubah ke String jika perlu
     final String cagarId = widget.cagar.id.toString();
 
     await Navigator.push(
@@ -249,31 +248,29 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     _refreshComments();
   }
 
-  // Di dalam class _DetailCagarPageState
-
+  // --- PERBAIKAN: Fungsi Submit Rating dengan Login Anonim ---
   void _submitRating(int initialRating) {
-    final TextEditingController _nameController = TextEditingController();
-    final TextEditingController _commentController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController commentController = TextEditingController();
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Text("Beri Ulasan",
-            style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text("Beri Ulasan", style: GoogleFonts.poppins(fontWeight: FontWeight.bold)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text("⭐ $initialRating Bintang"),
+            Text("⭐ $initialRating Bintang", style: GoogleFonts.poppins()),
             const SizedBox(height: 15),
             TextField(
-              controller: _nameController,
+              controller: nameController,
               decoration: const InputDecoration(
                   labelText: "Nama Anda", border: OutlineInputBorder()),
             ),
             const SizedBox(height: 10),
             TextField(
-              controller: _commentController,
+              controller: commentController,
               maxLines: 2,
               decoration: const InputDecoration(
                   labelText: "Komentar", border: OutlineInputBorder()),
@@ -283,28 +280,63 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         actions: [
           TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Batal")),
+              child: Text("Batal", style: GoogleFonts.poppins())),
           ElevatedButton(
             onPressed: () async {
-              if (_nameController.text.trim().isEmpty) return;
+              if (nameController.text.trim().isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Mohon isi nama Anda")),
+                );
+                return;
+              }
 
-              // 🔥 Gunakan ID unik dari widget cagar
+              if (commentController.text.trim().isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Mohon isi komentar")),
+                );
+                return;
+              }
+
               final String currentId = widget.cagar.id.toString();
 
+              // ✅ AMANKAN: Pastikan login anonim sudah berjalan sebelum mengirim
+              User? currentUser = FirebaseAuth.instance.currentUser;
+              if (currentUser == null) {
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance.signInAnonymously();
+                  currentUser = userCredential.user;
+                } catch (e) {
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Koneksi terputus. Pastikan internet Anda aktif.")),
+                    );
+                  }
+                  return;
+                }
+              }
+
+              // ✅ Kirim userId asli dari Firebase agar aturan keamanan `request.auth != null` lulus
               bool success = await context.read<CommentProvider>().addComment(
                     cagarId: currentId,
-                    content: _commentController.text,
+                    content: commentController.text.trim(),
                     rating: initialRating,
-                    userId: "guest_${DateTime.now().millisecondsSinceEpoch}",
-                    userName: _nameController.text,
+                    userId: currentUser!.uid,
+                    userName: nameController.text.trim(),
                   );
 
               if (success && mounted) {
                 Navigator.pop(context);
-                _refreshComments(); // Refresh daftar agar ulasan baru muncul
+                _refreshComments();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("✅ Ulasan berhasil dikirim!")),
+                );
+              } else if (mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("❌ Gagal mengirim ulasan. Coba lagi.")),
+                );
               }
             },
-            child: const Text("Kirim"),
+            child: Text("Kirim", style: GoogleFonts.poppins()),
           ),
         ],
       ),
@@ -363,80 +395,97 @@ class _DetailCagarPageState extends State<DetailCagarPage>
       backgroundColor: Colors.transparent,
       builder: (context) => StatefulBuilder(builder: (context, setModalState) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           child: Container(
             padding: const EdgeInsets.fromLTRB(24, 16, 24, 30),
-            decoration: const BoxDecoration(
-                color: CulturalColors.surface,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+            decoration: BoxDecoration(
+              color: AppColors.cardSurface,
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(24))
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                    width: 40,
-                    height: 4,
-                    margin: const EdgeInsets.only(bottom: 20),
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(2))),
-                const Text("Tulis Apresiasi",
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: CulturalColors.textDark,
-                        fontFamily: 'Serif')),
+                  width: 40,
+                  height: 4,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  decoration: BoxDecoration(
+                    color: AppColors.divider,
+                    borderRadius: BorderRadius.circular(2)
+                  )
+                ),
+                Text(
+                  "Tulis Apresiasi",
+                  style: GoogleFonts.poppins(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textPrimary
+                  )
+                ),
                 const SizedBox(height: 24),
                 Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(
-                        5,
-                        (index) => GestureDetector(
-                            onTap: () => setModalState(
-                                () => currentInputRating = index + 1),
-                            child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 6),
-                                child: Icon(
-                                    index < currentInputRating
-                                        ? Icons.star_rounded
-                                        : Icons.star_outline_rounded,
-                                    color: CulturalColors.accent,
-                                    size: 42))))),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    5,
+                    (index) => GestureDetector(
+                      onTap: () => setModalState(() => currentInputRating = index + 1),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                        child: Icon(
+                          index < currentInputRating
+                              ? Icons.star_rounded
+                              : Icons.star_outline_rounded,
+                          color: AppColors.rating,
+                          size: 42
+                        )
+                      )
+                    )
+                  )
+                ),
                 const SizedBox(height: 30),
                 TextField(
-                    maxLines: 4,
-                    maxLength: 500,
-                    decoration: InputDecoration(
-                        hintText: "Berembe pendapat side?",
-                        filled: true,
-                        fillColor: CulturalColors.background,
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide.none))),
+                  maxLines: 4,
+                  maxLength: 500,
+                  decoration: InputDecoration(
+                    hintText: "Berembe pendapat side?",
+                    filled: true,
+                    fillColor: AppColors.background,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none
+                    )
+                  )
+                ),
                 const SizedBox(height: 20),
                 SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          _submitRating(currentInputRating);
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: CulturalColors.primary,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16))),
-                        child: const Text("Kirim Apresiasi",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 16)))),
-              ],
-            ),
-          ),
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      _submitRating(currentInputRating);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)
+                      )
+                    ),
+                    child: Text(
+                      "Kirim Apresiasi",
+                      style: GoogleFonts.poppins(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 16
+                      )
+                    )
+                  )
+                )
+              ]
+            )
+          )
         );
-      }),
+      })
     );
   }
 
@@ -446,9 +495,9 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         backgroundColor: Colors.transparent,
         builder: (context) => Container(
             height: 200,
-            decoration: const BoxDecoration(
-                color: CulturalColors.surface,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(24))),
+            decoration: BoxDecoration(
+                color: AppColors.cardSurface,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(24))),
             child: const Center(child: Text("Menu Share"))));
   }
 
@@ -471,8 +520,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         width: width,
         height: height,
         fit: BoxFit.cover,
-        errorBuilder: (c, e, s) =>
-            const Icon(Icons.broken_image, size: 50, color: Colors.grey),
+        errorBuilder: (c, e, s) => Container(
+          width: width,
+          height: height,
+          color: AppColors.divider,
+          child: const Center(child: Icon(Icons.image_outlined, size: 30, color: Colors.grey)),
+        ),
       );
     } else {
       return Image.asset(
@@ -490,12 +543,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     return SliverAppBar(
       expandedHeight: 340,
       pinned: true,
-      backgroundColor: CulturalColors.background,
+      backgroundColor: AppColors.background,
       elevation: 0,
       title: _isScrolled
           ? Text(widget.cagar.nama,
-              style: const TextStyle(
-                  color: CulturalColors.textDark,
+              style: GoogleFonts.poppins(
+                  color: AppColors.textPrimary,
                   fontWeight: FontWeight.bold,
                   fontSize: 18))
           : null,
@@ -527,22 +580,26 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                   gradient: LinearGradient(colors: [
             Colors.black.withOpacity(0.5),
             Colors.transparent,
-            CulturalColors.primary.withOpacity(0.2)
+            AppColors.primary.withOpacity(0.2)
           ], begin: Alignment.bottomCenter, end: Alignment.topCenter))),
         ]),
       ),
     );
   }
 
+  // ✅ PERUBAHAN BOTTOM BAR: Jam Operasional & Tombol Beri Ulasan
   Widget _buildBottomBar() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      decoration: BoxDecoration(color: CulturalColors.surface, boxShadow: [
-        BoxShadow(
-            color: CulturalColors.textDark.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, -5))
-      ]),
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        boxShadow: [
+          BoxShadow(
+              color: AppColors.textPrimary.withOpacity(0.08),
+              blurRadius: 20,
+              offset: const Offset(0, -5))
+        ]
+      ),
       child: SafeArea(
         child: Row(children: [
           Expanded(
@@ -551,26 +608,26 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text("Kontribusi Masuk",
-                        style: TextStyle(
-                            color: CulturalColors.textGrey,
+                    Text("Jam Operasional",
+                        style: GoogleFonts.poppins(
+                            color: AppColors.textSecondary,
                             fontSize: 12,
                             fontWeight: FontWeight.w500)),
                     const SizedBox(height: 2),
-                    Text(widget.cagar.hargaTiket,
-                        style: const TextStyle(
+                    Text(widget.cagar.jamBuka,
+                        style: GoogleFonts.poppins(
                             fontWeight: FontWeight.w800,
                             fontSize: 20,
-                            color: CulturalColors.primary))
+                            color: AppColors.primary))
                   ])),
           Expanded(
               flex: 5,
               child: ElevatedButton.icon(
-                  onPressed: _openInternalMap,
-                  icon: const Icon(Icons.directions_rounded, size: 20),
-                  label: const Text("Rute Lokasi"),
+                  onPressed: _showReviewInputSheet,
+                  icon: const Icon(Icons.star_rounded, size: 20),
+                  label: Text("Beri Ulasan", style: GoogleFonts.poppins()),
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: CulturalColors.primary,
+                      backgroundColor: AppColors.primary,
                       foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       shape: RoundedRectangleBorder(
@@ -587,198 +644,47 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-                color: CulturalColors.primary.withOpacity(0.1),
+                color: AppColors.primary.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(20),
                 border:
-                    Border.all(color: CulturalColors.primary.withOpacity(0.2))),
+                    Border.all(color: AppColors.primary.withOpacity(0.2))),
             child: Text(widget.cagar.kategori.toUpperCase(),
-                style: const TextStyle(
-                    color: CulturalColors.primary,
+                style: GoogleFonts.poppins(
+                    color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 10,
                     letterSpacing: 1.2))),
         const Spacer(),
-        const Icon(Icons.star, color: CulturalColors.accent, size: 18),
+        const Icon(Icons.star, color: AppColors.rating, size: 18),
         const SizedBox(width: 4),
-        const Text("4.8",
-            style: TextStyle(
+        Text("4.8",
+            style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
-                color: CulturalColors.textDark,
+                color: AppColors.textPrimary,
                 fontSize: 16)),
         Consumer<CommentProvider>(builder: (context, provider, _) {
           return Text(" (${provider.comments.length})",
-              style: const TextStyle(
-                  color: CulturalColors.textGrey, fontSize: 12));
+              style: GoogleFonts.poppins(
+                  color: AppColors.textSecondary, fontSize: 12));
         }),
       ]),
       const SizedBox(height: 16),
       Text(widget.cagar.nama,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               fontSize: 32,
               fontWeight: FontWeight.w800,
               height: 1.1,
-              color: CulturalColors.textDark,
-              fontFamily: 'Serif')),
+              color: AppColors.textPrimary)),
       const SizedBox(height: 12),
       Row(children: [
-        const Icon(Icons.location_on, color: CulturalColors.primary, size: 18),
+        const Icon(Icons.location_on, color: AppColors.primary, size: 18),
         const SizedBox(width: 6),
         Expanded(
             child: Text(widget.cagar.lokasi,
-                style: const TextStyle(
-                    color: CulturalColors.textGrey, fontSize: 14)))
+                style: GoogleFonts.poppins(
+                    color: AppColors.textSecondary, fontSize: 14)))
       ]),
     ]);
-  }
-
-  // --- WIDGET AI STORYTELLER ---
-  Widget _buildAiStorytellerSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text("AI Storyteller",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: CulturalColors.textDark)),
-            if (_isAiStoryPlaying)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.graphic_eq, color: Colors.white, size: 14),
-                    SizedBox(width: 4),
-                    Text("LIVE",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              )
-          ],
-        ),
-        const SizedBox(height: 12),
-        Container(
-          height: 220,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.black,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 15,
-                offset: const Offset(0, 5),
-              ),
-            ],
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // 1. Slideshow Gambar
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
-                  child: _storyImages.isNotEmpty
-                      ? Image.network(
-                          _storyImages[_currentSlideIndex],
-                          key: ValueKey<int>(_currentSlideIndex),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                          errorBuilder: (ctx, err, stack) => Container(
-                            color: Colors.grey[800],
-                            child: const Icon(Icons.broken_image,
-                                color: Colors.white54),
-                          ),
-                        )
-                      : Container(color: Colors.grey[300]),
-                ),
-              ),
-
-              // 2. Overlay Gelap
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color:
-                      Colors.black.withOpacity(_isAiStoryPlaying ? 0.3 : 0.5),
-                ),
-              ),
-
-              // 3. Kontrol Play/Pause Center
-              Center(
-                child: GestureDetector(
-                  onTap: _toggleAiStoryteller,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        )
-                      ],
-                    ),
-                    child: Icon(
-                      _isAiStoryPlaying
-                          ? Icons.pause_rounded
-                          : Icons.play_arrow_rounded,
-                      color: CulturalColors.primary,
-                      size: 36,
-                    ),
-                  ),
-                ),
-              ),
-
-              // 4. Label Deskripsi Bawah
-              Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _isAiStoryPlaying
-                          ? "Narator AI sedang menceritakan sejarah..."
-                          : "Dengarkan Cerita Sejarah (AI)",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        shadows: [Shadow(color: Colors.black, blurRadius: 4)],
-                      ),
-                    ),
-                    if (!_isAiStoryPlaying)
-                      const Text(
-                        "Ketuk tombol play untuk memulai",
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 
   Widget _buildEtikaCard() {
@@ -792,95 +698,36 @@ class _DetailCagarPageState extends State<DetailCagarPage>
               opacity: 0.05,
               fit: BoxFit.cover),
           gradient: LinearGradient(colors: [
-            CulturalColors.primary,
-            CulturalColors.primary.withOpacity(0.8)
+            AppColors.primary,
+            AppColors.primary.withOpacity(0.8)
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: CulturalColors.primary.withOpacity(0.3),
+                color: AppColors.primary.withOpacity(0.3),
                 blurRadius: 15,
                 offset: const Offset(0, 8))
           ]),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(children: [
-            Icon(Icons.tips_and_updates_outlined, color: Colors.white),
-            SizedBox(width: 10),
+            const Icon(Icons.tips_and_updates_outlined, color: Colors.white),
+            const SizedBox(width: 10),
             Text("Etika & Tata Krame",
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 16))
           ]),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Text("• Silaq bekelambi sak sopan (Berpakaian sopan).",
-              style: TextStyle(color: Colors.white, height: 1.5)),
+              style: GoogleFonts.poppins(color: Colors.white, height: 1.5)),
           Text("• Ndak naek ojok bangunan (Dilarang memanjat).",
-              style: TextStyle(color: Colors.white, height: 1.5)),
+              style: GoogleFonts.poppins(color: Colors.white, height: 1.5)),
           Text("• Jage kebersihan tetu niki (Jaga kebersihan).",
-              style: TextStyle(color: Colors.white, height: 1.5)),
+              style: GoogleFonts.poppins(color: Colors.white, height: 1.5)),
         ],
-      ),
-    );
-  }
-
-  Widget _buildMapPreviewCard() {
-    return GestureDetector(
-      onTap: _openInternalMap,
-      child: Container(
-        height: 180,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: Colors.grey.shade300),
-            color: CulturalColors.secondary),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: Image.network(
-                  // Menggunakan koordinat asli dari model cagar
-                  "https://static-maps.yandex.ru/1.x/?lang=en_US&ll=${widget.cagar.longitude},${widget.cagar.latitude}&z=14&l=map&size=600,300",
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) => Container(
-                      color: const Color(0xFFE0E0E0),
-                      child: Center(
-                          child: Icon(Icons.map_rounded,
-                              size: 60, color: Colors.grey.shade400))),
-                ),
-              ),
-              Container(color: Colors.black.withOpacity(0.05)),
-              const Center(
-                  child: Icon(Icons.location_on,
-                      size: 48, color: Colors.redAccent)),
-              Positioned(
-                bottom: 16,
-                right: 16,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: const Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text("Buka Peta",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
-                      SizedBox(width: 4),
-                      Icon(Icons.open_in_new, size: 14)
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -893,7 +740,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                 width: 60,
                 height: 3,
                 decoration: BoxDecoration(
-                    color: CulturalColors.accent.withOpacity(0.5),
+                    color: AppColors.rating.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(1.5)))));
   }
 
@@ -904,11 +751,11 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         children: tags
             .map((tag) => Chip(
                 label: Text(tag,
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                         fontSize: 11,
-                        color: CulturalColors.textDark,
+                        color: AppColors.textPrimary,
                         fontWeight: FontWeight.w500)),
-                backgroundColor: CulturalColors.secondary,
+                backgroundColor: AppColors.background,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                     side: const BorderSide(color: Colors.transparent)),
@@ -922,12 +769,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
       decoration: BoxDecoration(
-          color: CulturalColors.surface,
+          color: AppColors.cardSurface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: CulturalColors.primary.withOpacity(0.1)),
+          border: Border.all(color: AppColors.primary.withOpacity(0.1)),
           boxShadow: [
             BoxShadow(
-                color: CulturalColors.textDark.withOpacity(0.05),
+                color: AppColors.textPrimary.withOpacity(0.05),
                 blurRadius: 15,
                 offset: const Offset(0, 5))
           ]),
@@ -937,12 +784,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         Container(
             width: 1,
             height: 30,
-            color: CulturalColors.primary.withOpacity(0.2)),
+            color: AppColors.primary.withOpacity(0.2)),
         _buildInfoItem(Icons.wb_sunny_outlined, "Waktu Terbaik", "Pagi Hari"),
         Container(
             width: 1,
             height: 30,
-            color: CulturalColors.primary.withOpacity(0.2)),
+            color: AppColors.primary.withOpacity(0.2)),
         _buildInfoItem(Icons.confirmation_number_outlined, "Tiket Masuk",
             widget.cagar.hargaTiket)
       ]),
@@ -952,20 +799,20 @@ class _DetailCagarPageState extends State<DetailCagarPage>
   Widget _buildInfoItem(IconData icon, String label, String value) {
     return Expanded(
         child: Column(children: [
-      Icon(icon, color: CulturalColors.primary, size: 24),
+      Icon(icon, color: AppColors.primary, size: 24),
       const SizedBox(height: 8),
       Text(label,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               fontSize: 10,
-              color: CulturalColors.textGrey,
+              color: AppColors.textSecondary,
               letterSpacing: 0.5)),
       const SizedBox(height: 4),
       Text(value,
           textAlign: TextAlign.center,
-          style: const TextStyle(
+          style: GoogleFonts.poppins(
               fontWeight: FontWeight.bold,
               fontSize: 13,
-              color: CulturalColors.textDark))
+              color: AppColors.textPrimary))
     ]));
   }
 
@@ -980,11 +827,10 @@ class _DetailCagarPageState extends State<DetailCagarPage>
               overflow: _isTextExpanded
                   ? TextOverflow.visible
                   : TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: GoogleFonts.poppins(
                   fontSize: 16,
                   height: 1.8,
-                  color: CulturalColors.textGrey,
-                  fontFamily: 'Serif'),
+                  color: AppColors.textSecondary),
               textAlign: TextAlign.justify)),
       GestureDetector(
           onTap: () => setState(() => _isTextExpanded = !_isTextExpanded),
@@ -993,8 +839,8 @@ class _DetailCagarPageState extends State<DetailCagarPage>
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Text(_isTextExpanded ? "Lipat Kembali" : "Baca Kisah Lengkap",
-                    style: const TextStyle(
-                        color: CulturalColors.primary,
+                    style: GoogleFonts.poppins(
+                        color: AppColors.primary,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 0.5)),
                 const SizedBox(width: 6),
@@ -1003,7 +849,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
                     size: 18,
-                    color: CulturalColors.primary)
+                    color: AppColors.primary)
               ]))),
     ]);
   }
@@ -1012,53 +858,53 @@ class _DetailCagarPageState extends State<DetailCagarPage>
     return Container(
       height: 400,
       decoration: BoxDecoration(
-          color: CulturalColors.secondary,
+          color: AppColors.background,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: CulturalColors.primary.withOpacity(0.1))),
+          border: Border.all(color: AppColors.primary.withOpacity(0.1))),
       child: Column(children: [
         Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-            decoration: const BoxDecoration(
-                color: CulturalColors.surface,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-                border: Border(bottom: BorderSide(color: Color(0xFFEEEAE0)))),
+            decoration: BoxDecoration(
+                color: AppColors.cardSurface,
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                border: const Border(bottom: BorderSide(color: AppColors.divider))),
             child: Row(children: [
               CircleAvatar(
-                  backgroundColor: CulturalColors.primary,
+                  backgroundColor: AppColors.primary,
                   radius: 18,
                   child: const Icon(Icons.history_edu_rounded,
                       size: 20, color: Colors.white)),
               const SizedBox(width: 12),
-              const Expanded(
+              Expanded(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                     Text("Pemandu Budaya",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
                             fontSize: 14,
-                            color: CulturalColors.textDark)),
+                            color: AppColors.textPrimary)),
                     Text("Pilih bahasa percakapan",
-                        style: TextStyle(
-                            color: CulturalColors.textGrey, fontSize: 10))
+                        style: GoogleFonts.poppins(
+                            color: AppColors.textSecondary, fontSize: 10))
                   ])),
               Container(
                   height: 32,
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   decoration: BoxDecoration(
-                      color: CulturalColors.background,
+                      color: AppColors.background,
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                          color: CulturalColors.primary.withOpacity(0.2))),
+                          color: AppColors.primary.withOpacity(0.2))),
                   child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                           value: _chatLanguage,
-                          icon: const Icon(Icons.keyboard_arrow_down,
-                              size: 16, color: CulturalColors.primary),
-                          style: const TextStyle(
+                          icon: Icon(Icons.keyboard_arrow_down,
+                              size: 16, color: AppColors.primary),
+                          style: GoogleFonts.poppins(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,
-                              color: CulturalColors.textDark),
+                              color: AppColors.textPrimary),
                           onChanged: (String? newValue) {
                             if (newValue != null) {
                               setState(() {
@@ -1079,7 +925,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                           ? Icons.volume_up_rounded
                           : Icons.volume_off_rounded,
                       color: _isVoiceEnabled
-                          ? CulturalColors.primary
+                          ? AppColors.primary
                           : Colors.grey,
                       size: 20),
                   tooltip: _isVoiceEnabled ? "Matikan Suara" : "Aktifkan Suara",
@@ -1089,7 +935,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                   }),
               IconButton(
                   icon: const Icon(Icons.refresh_rounded,
-                      color: CulturalColors.textGrey, size: 20),
+                      color: AppColors.textSecondary, size: 20),
                   onPressed: _resetChat)
             ])),
         Expanded(
@@ -1113,8 +959,8 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                                   MediaQuery.of(context).size.width * 0.75),
                           decoration: BoxDecoration(
                               color: isUser
-                                  ? CulturalColors.primary
-                                  : Colors.white,
+                                  ? AppColors.primary
+                                  : AppColors.cardSurface,
                               borderRadius: BorderRadius.only(
                                   topLeft: const Radius.circular(16),
                                   topRight: const Radius.circular(16),
@@ -1123,16 +969,16 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                                       Radius.circular(isUser ? 4 : 16)),
                               boxShadow: [
                                 BoxShadow(
-                                    color: CulturalColors.textDark
+                                    color: AppColors.textPrimary
                                         .withOpacity(0.05),
                                     blurRadius: 4,
                                     offset: const Offset(0, 2))
                               ]),
                           child: Text(msg['message']!,
-                              style: TextStyle(
+                              style: GoogleFonts.poppins(
                                   color: isUser
                                       ? Colors.white
-                                      : CulturalColors.textDark,
+                                      : AppColors.textPrimary,
                                   fontSize: 13,
                                   height: 1.5))));
                 })),
@@ -1150,37 +996,37 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                 ])),
         Container(
             padding: const EdgeInsets.all(12),
-            decoration: const BoxDecoration(
-                color: CulturalColors.surface,
+            decoration: BoxDecoration(
+                color: AppColors.cardSurface,
                 borderRadius:
-                    BorderRadius.vertical(bottom: Radius.circular(20))),
+                    const BorderRadius.vertical(bottom: Radius.circular(20))),
             child: Row(children: [
               Expanded(
                   child: Container(
                       height: 44,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       decoration: BoxDecoration(
-                          color: CulturalColors.background,
+                          color: AppColors.background,
                           borderRadius: BorderRadius.circular(24),
                           border: Border.all(
-                              color: CulturalColors.primary.withOpacity(0.1))),
+                              color: AppColors.primary.withOpacity(0.1))),
                       child: Row(children: [
                         Expanded(
                             child: TextField(
                                 controller: _chatController,
-                                style: const TextStyle(
+                                style: GoogleFonts.poppins(
                                     fontSize: 14,
-                                    color: CulturalColors.textDark),
+                                    color: AppColors.textPrimary),
                                 decoration: InputDecoration(
                                     hintText: _chatLanguage == 'sasak'
                                         ? "Kirim pitakon..."
                                         : (_isListening
                                             ? "Mendengarkan..."
                                             : "Tanya tentang budaya..."),
-                                    hintStyle: TextStyle(
+                                    hintStyle: GoogleFonts.poppins(
                                         fontSize: 14,
                                         color: _isListening
-                                            ? CulturalColors.primary
+                                            ? AppColors.primary
                                             : Colors.grey),
                                     border: InputBorder.none,
                                     contentPadding:
@@ -1208,7 +1054,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                       ]))),
               const SizedBox(width: 8),
               CircleAvatar(
-                  backgroundColor: CulturalColors.primary,
+                  backgroundColor: AppColors.primary,
                   radius: 22,
                   child: IconButton(
                       icon: const Icon(Icons.send_rounded,
@@ -1226,14 +1072,14 @@ class _DetailCagarPageState extends State<DetailCagarPage>
             margin: const EdgeInsets.only(right: 8),
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             decoration: BoxDecoration(
-                color: CulturalColors.surface,
+                color: AppColors.cardSurface,
                 borderRadius: BorderRadius.circular(20),
                 border:
-                    Border.all(color: CulturalColors.accent.withOpacity(0.5))),
+                    Border.all(color: AppColors.rating.withOpacity(0.5))),
             child: Text(text,
-                style: const TextStyle(
+                style: GoogleFonts.poppins(
                     fontSize: 12,
-                    color: CulturalColors.textDark,
+                    color: AppColors.textPrimary,
                     fontWeight: FontWeight.w600))));
   }
 
@@ -1244,7 +1090,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
             margin: const EdgeInsets.only(bottom: 12),
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.cardSurface,
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16),
@@ -1252,7 +1098,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                     bottomLeft: Radius.circular(4)),
                 boxShadow: [
                   BoxShadow(
-                      color: CulturalColors.textDark.withOpacity(0.05),
+                      color: AppColors.textPrimary.withOpacity(0.05),
                       blurRadius: 4,
                       offset: const Offset(0, 2))
                 ]),
@@ -1265,32 +1111,17 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                         height: 6,
                         margin: EdgeInsets.only(right: index < 2 ? 4 : 0),
                         decoration: const BoxDecoration(
-                            color: CulturalColors.textGrey,
+                            color: AppColors.textSecondary,
                             shape: BoxShape.circle))))));
   }
 
-  Widget _buildGallery() {
-    if (widget.cagar.images.isEmpty) return const SizedBox();
-    return SizedBox(
-        height: 120,
-        child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.cagar.images.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 12),
-            itemBuilder: (context, index) {
-              return ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: _buildImageProvider(widget.cagar.images[index],
-                      width: 160));
-            }));
-  }
+  // ✅ GALERI VISUAL, AI STORYTELLER, DAN LOKASI SITUS TELAH DIHAPUS
 
   Widget _buildReviewSection() {
     return Consumer<CommentProvider>(builder: (context, provider, child) {
       final comments = provider.comments;
       final totalApresiasi = comments.length;
 
-      // 🔥 Hitung rata-rata rating
       double rataRata = 0.0;
       if (totalApresiasi > 0) {
         final totalBintang =
@@ -1298,7 +1129,6 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         rataRata = totalBintang / totalApresiasi;
       }
 
-      // 🔥 Hitung distribusi bintang (1–5)
       Map<int, int> starCount = {5: 0, 4: 0, 3: 0, 2: 0, 1: 0};
 
       for (var c in comments) {
@@ -1306,7 +1136,6 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         starCount[rating] = (starCount[rating] ?? 0) + 1;
       }
 
-      // 🔥 Fungsi untuk hitung persentase bar
       double getPercent(int star) {
         if (totalApresiasi == 0) return 0;
         return (starCount[star]! / totalApresiasi);
@@ -1318,22 +1147,19 @@ class _DetailCagarPageState extends State<DetailCagarPage>
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text("Ulasan & Rating / Reviews",
-                  style: TextStyle(
+              Text("Ulasan & Rating / Reviews",
+                  style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: CulturalColors.textDark,
-                      fontFamily: 'Serif')),
+                      color: AppColors.textPrimary)),
               if (totalApresiasi > 0)
                 GestureDetector(
                     onTap: _openComments,
                     child: const Icon(Icons.arrow_forward,
-                        color: CulturalColors.primary))
+                        color: AppColors.primary))
             ],
           ),
-
           const SizedBox(height: 24),
-
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -1350,17 +1176,17 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                           totalApresiasi == 0
                               ? "0.0"
                               : rataRata.toStringAsFixed(1),
-                          style: const TextStyle(
+                          style: GoogleFonts.poppins(
                               fontSize: 48,
                               fontWeight: FontWeight.bold,
                               height: 1,
-                              color: CulturalColors.textDark),
+                              color: AppColors.textPrimary),
                         ),
-                        const Text("/5.0",
-                            style: TextStyle(
+                        Text("/5.0",
+                            style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w500,
-                                color: CulturalColors.textGrey)),
+                                color: AppColors.textSecondary)),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -1370,43 +1196,39 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                           index < rataRata.floor()
                               ? Icons.star_rounded
                               : Icons.star_outline_rounded,
-                          color: CulturalColors.accent,
+                          color: AppColors.rating,
                           size: 18,
                         );
                       }),
                     ),
                     const SizedBox(height: 4),
                     Text("$totalApresiasi ulasan / reviews",
-                        style: TextStyle(
+                        style: GoogleFonts.poppins(
                             fontSize: 12,
-                            color: CulturalColors.textGrey.withOpacity(0.8))),
+                            color: AppColors.textSecondary.withOpacity(0.8))),
                   ],
                 ),
               ),
-              Expanded(
-                flex: 5,
-                child: Column(
-                  children: [
-                    _buildBar(5, getPercent(5)),
-                    _buildBar(4, getPercent(4)),
-                    _buildBar(3, getPercent(3)),
-                    _buildBar(2, getPercent(2)),
-                    _buildBar(1, getPercent(1)),
-                  ],
-                ),
-              )
+              if (totalApresiasi > 0)
+                Expanded(
+                  flex: 5,
+                  child: Column(
+                    children: [
+                      _buildBar(5, getPercent(5)),
+                      _buildBar(4, getPercent(4)),
+                      _buildBar(3, getPercent(3)),
+                      _buildBar(2, getPercent(2)),
+                      _buildBar(1, getPercent(1)),
+                    ],
+                  ),
+                )
             ],
           ),
-
           const SizedBox(height: 30),
-
-          // 🔥 CTA diperbaiki
-          const Text("Ceritakan pengalaman di sini / Share your experience",
-              style: TextStyle(
-                  color: CulturalColors.textDark, fontWeight: FontWeight.w500)),
-
+          Text("Ceritakan pengalaman di sini / Share your experience",
+              style: GoogleFonts.poppins(
+                  color: AppColors.textPrimary, fontWeight: FontWeight.w500)),
           const SizedBox(height: 16),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(5, (index) {
@@ -1418,29 +1240,26 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                       : Icons.star_outline_rounded,
                   size: 40,
                   color: index < _userRating
-                      ? CulturalColors.accent
+                      ? AppColors.rating
                       : Colors.grey.shade300,
                 ),
               );
             }),
           ),
-
           const SizedBox(height: 30),
-
-          // 🔥 Empty State
           if (comments.isEmpty)
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                  color: CulturalColors.secondary,
+                  color: AppColors.background,
                   borderRadius: BorderRadius.circular(16)),
-              child: const Center(
+              child: Center(
                 child: Text(
                     "Belum ada ulasan. Jadilah yang pertama!\n(No reviews yet. Be the first!)",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: CulturalColors.textGrey,
+                    style: GoogleFonts.poppins(
+                        color: AppColors.textSecondary,
                         fontStyle: FontStyle.italic)),
               ),
             )
@@ -1451,14 +1270,13 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                   .map((comment) => _buildReviewItem(comment))
                   .toList(),
             ),
-
           if (totalApresiasi > 0)
             Center(
               child: TextButton(
                 onPressed: _openComments,
                 style: TextButton.styleFrom(
-                    foregroundColor: CulturalColors.primary),
-                child: const Text("Lihat semua ulasan / See all reviews"),
+                    foregroundColor: AppColors.primary),
+                child: Text("Lihat semua ulasan / See all reviews", style: GoogleFonts.poppins()),
               ),
             )
         ],
@@ -1473,10 +1291,10 @@ class _DetailCagarPageState extends State<DetailCagarPage>
           SizedBox(
               width: 12,
               child: Text("$star",
-                  style: const TextStyle(
+                  style: GoogleFonts.poppins(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: CulturalColors.textGrey))),
+                      color: AppColors.textSecondary))),
           const SizedBox(width: 8),
           Expanded(
               child: ClipRRect(
@@ -1484,13 +1302,12 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                   child: LinearProgressIndicator(
                       value: val,
                       backgroundColor: Colors.grey.shade200,
-                      color: CulturalColors
-                          .accent, // Disamakan dengan warna bintang
+                      color: AppColors.rating,
                       minHeight: 6)))
         ]));
   }
 
-  Widget _buildReviewItem(var comment) {
+  Widget _buildReviewItem(CommentModel comment) {
     return Container(
         margin: const EdgeInsets.only(bottom: 24),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -1502,16 +1319,16 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                     comment.userName.isNotEmpty
                         ? comment.userName[0].toUpperCase()
                         : 'A',
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold))),
             const SizedBox(width: 12),
             Text(comment.userName,
-                style: const TextStyle(
+                style: GoogleFonts.poppins(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
-                    color: CulturalColors.textDark)),
+                    color: AppColors.textPrimary)),
             const Spacer(),
             const Icon(Icons.more_vert, size: 18, color: Colors.grey)
           ]),
@@ -1519,18 +1336,34 @@ class _DetailCagarPageState extends State<DetailCagarPage>
           Row(children: [
             Row(
                 children: List.generate(
-                    5,
+                    comment.rating ?? 5,
                     (i) => const Icon(Icons.star_rounded,
-                        size: 14, color: CulturalColors.accent))),
+                        size: 14, color: AppColors.rating),
+                ),
+            ),
             const SizedBox(width: 8),
-            const Text("14 Jan 2024",
-                style: TextStyle(fontSize: 12, color: CulturalColors.textGrey))
+            Text(
+                _formatDate(comment.createdAt),
+                style: GoogleFonts.poppins(fontSize: 12, color: AppColors.textSecondary),
+            ),
           ]),
           const SizedBox(height: 8),
           Text(comment.content,
-              style: const TextStyle(
-                  color: CulturalColors.textDark, height: 1.5, fontSize: 14))
+              style: GoogleFonts.poppins(
+                  color: AppColors.textPrimary, height: 1.5, fontSize: 14))
         ]));
+  }
+
+  String _formatDate(DateTime date) {
+    return "${date.day} ${_getMonthName(date.month)} ${date.year}";
+  }
+
+  String _getMonthName(int month) {
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "Mei", "Jun",
+      "Jul", "Agu", "Sep", "Okt", "Nov", "Des"
+    ];
+    return months[month - 1];
   }
 
   Widget _buildCircleBtn(IconData icon, VoidCallback onTap,
@@ -1542,21 +1375,21 @@ class _DetailCagarPageState extends State<DetailCagarPage>
             height: 40,
             decoration: BoxDecoration(
                 color: forceDark
-                    ? CulturalColors.surface
+                    ? AppColors.cardSurface
                     : Colors.black.withOpacity(0.3),
                 shape: BoxShape.circle,
                 border:
-                    forceDark ? Border.all(color: Colors.grey.shade200) : null),
+                    forceDark ? Border.all(color: AppColors.divider) : null),
             child: Icon(icon,
                 color: color ??
-                    (forceDark ? CulturalColors.textDark : Colors.white),
+                    (forceDark ? AppColors.textPrimary : Colors.white),
                 size: 20)));
   }
 
   Color _getColorFromname(String name) {
-    if (name.isEmpty) return CulturalColors.primary;
+    if (name.isEmpty) return AppColors.primary;
     final colors = [
-      CulturalColors.primary,
+      AppColors.primary,
       const Color(0xFFA1887F),
       const Color(0xFF8D6E63),
       const Color(0xFF5D4037),
@@ -1575,7 +1408,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
         itemBuilder: (context, index) => Transform.rotate(
           angle: math.pi / 4,
           child: Icon(index % 2 == 0 ? Icons.spa : Icons.local_florist,
-              size: 24, color: CulturalColors.textDark),
+              size: 24, color: AppColors.textPrimary),
         ),
       ),
     );
@@ -1589,7 +1422,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
             _isScrolled ? Brightness.dark : Brightness.light));
 
     return Scaffold(
-      backgroundColor: CulturalColors.background,
+      backgroundColor: AppColors.background,
       bottomNavigationBar: _buildBottomBar(),
       body: Stack(
         children: [
@@ -1601,11 +1434,11 @@ class _DetailCagarPageState extends State<DetailCagarPage>
               SliverToBoxAdapter(
                 child: Container(
                   transform: Matrix4.translationValues(0, -24, 0),
-                  decoration: const BoxDecoration(
-                    color: CulturalColors.background,
+                  decoration: BoxDecoration(
+                    color: AppColors.background,
                     borderRadius:
-                        BorderRadius.vertical(top: Radius.circular(32)),
-                    boxShadow: [
+                        const BorderRadius.vertical(top: Radius.circular(32)),
+                    boxShadow: const [
                       BoxShadow(
                           color: Colors.black12,
                           blurRadius: 20,
@@ -1624,7 +1457,7 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                                 margin:
                                     const EdgeInsets.only(top: 12, bottom: 20),
                                 decoration: BoxDecoration(
-                                    color: Colors.grey.shade300,
+                                    color: AppColors.divider,
                                     borderRadius: BorderRadius.circular(2)))),
                         _buildHeaderTitle(),
                         const SizedBox(height: 20),
@@ -1633,48 +1466,27 @@ class _DetailCagarPageState extends State<DetailCagarPage>
                         _buildInfoRow(),
                         const SizedBox(height: 32),
                         _buildSectionDivider(),
-                        const Text("Kisah Sejarah",
-                            style: TextStyle(
+                        Text("Kisah Sejarah",
+                            style: GoogleFonts.poppins(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: CulturalColors.textDark,
-                                fontFamily: 'Serif')),
+                                color: AppColors.textPrimary)),
                         const SizedBox(height: 16),
                         _buildDescription(),
-                        // ============================================
-                        // 🔥 AI STORYTELLER SECTION 🔥
                         const SizedBox(height: 32),
-                        _buildAiStorytellerSection(),
-                        // ============================================
-                        const SizedBox(height: 32),
+                        // ✅ AI STORYTELLER TELAH DIHAPUS
                         _buildEtikaCard(),
                         const SizedBox(height: 32),
                         _buildSectionDivider(),
-                        const Text("Pemandu Budaya (AI)",
-                            style: TextStyle(
+                        Text("Pemandu Budaya (AI)",
+                            style: GoogleFonts.poppins(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: CulturalColors.textDark,
-                                fontFamily: 'Serif')),
+                                color: AppColors.textPrimary)),
                         const SizedBox(height: 16),
                         _buildChatSection(),
                         const SizedBox(height: 32),
-                        const Text("Galeri Visual",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: CulturalColors.textDark)),
-                        const SizedBox(height: 16),
-                        _buildGallery(),
-                        const SizedBox(height: 32),
-                        const Text("Lokasi Situs",
-                            style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: CulturalColors.textDark)),
-                        const SizedBox(height: 16),
-                        _buildMapPreviewCard(),
-                        const SizedBox(height: 40),
+                        // ✅ GALERI VISUAL & LOKASI SITUS TELAH DIHAPUS
                         _buildSectionDivider(),
                         _buildReviewSection(),
                         const SizedBox(height: 40),
@@ -1687,156 +1499,6 @@ class _DetailCagarPageState extends State<DetailCagarPage>
           ),
         ],
       ),
-    );
-  }
-
-  // --- WIDGET AI STORYTELLER ---
-  Widget _buildAiStorytellerSectio() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text("VIDEO SEJARAH",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: CulturalColors.textDark)),
-            if (_isAiStoryPlaying)
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.graphic_eq, color: Colors.white, size: 14),
-                    SizedBox(width: 4),
-                    Text("LIVE",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold)),
-                  ],
-                ),
-              )
-          ],
-        ),
-        const SizedBox(height: 12),
-        Container(
-          height: 220,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.black,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 15,
-                offset: const Offset(0, 5),
-              ),
-            ],
-          ),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              // 1. Slideshow Gambar
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 800),
-                  child: _storyImages.isNotEmpty
-                      ? Image.network(
-                          _storyImages[_currentSlideIndex],
-                          key: ValueKey<int>(_currentSlideIndex),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                          errorBuilder: (ctx, err, stack) => Container(
-                            color: Colors.grey[800],
-                            child: const Icon(Icons.broken_image,
-                                color: Colors.white54),
-                          ),
-                        )
-                      : Container(color: Colors.grey[300]),
-                ),
-              ),
-
-              // 2. Overlay Gelap
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color:
-                      Colors.black.withOpacity(_isAiStoryPlaying ? 0.3 : 0.5),
-                ),
-              ),
-
-              // 3. Kontrol Play/Pause Center
-              Center(
-                child: GestureDetector(
-                  onTap: _toggleAiStoryteller,
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.9),
-                      shape: BoxShape.circle,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.3),
-                          blurRadius: 10,
-                          spreadRadius: 2,
-                        )
-                      ],
-                    ),
-                    child: Icon(
-                      _isAiStoryPlaying
-                          ? Icons.pause_rounded
-                          : Icons.play_arrow_rounded,
-                      color: CulturalColors.primary,
-                      size: 36,
-                    ),
-                  ),
-                ),
-              ),
-
-              // 4. Label Deskripsi Bawah
-              Positioned(
-                bottom: 16,
-                left: 16,
-                right: 16,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      _isAiStoryPlaying
-                          ? "Silahkan dengar cerita sejarah..."
-                          : "Silahkan Tekan Tombol Play",
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        shadows: [Shadow(color: Colors.black, blurRadius: 4)],
-                      ),
-                    ),
-                    if (!_isAiStoryPlaying)
-                      const Text(
-                        "Ketuk tombol play untuk memulai",
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 12,
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
     );
   }
 }
