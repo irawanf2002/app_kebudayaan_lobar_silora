@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Langkah baru: Memperbesar batas memori sistem Linux di server GitHub
+      - name: Fix System Watcher Limit
+        run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -25,11 +29,8 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
 
-      - name: Optimize Gradle Memory
-        run: echo "org.gradle.jvmargs=-Xmx4G -XX:MaxMetaspaceSize=1G" >> android/gradle.properties
-
-      - name: Build APK (Bypass Error)
-        continue-on-error: true
+      # Membuang trik 'continue-on-error' agar kita tahu kalau benar-benar sukses
+      - name: Build APK
         run: flutter build apk --release
 
       - name: Upload APK file
