@@ -36,4 +36,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SIBUD-LOBAR-Release-APK
-          path: build/app/outputs/**/*.apk
+          path: "**/*.apk"
