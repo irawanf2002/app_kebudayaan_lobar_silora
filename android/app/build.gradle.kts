@@ -9,11 +9,20 @@ android {
     namespace = "com.example.app_kebudyaan_lobar"
 
     compileSdk = 36
-    ndkVersion = "28.2.13676358"
+    
+    // 1. Kunci versi NDK yang diminta oleh plugin jni & speech_to_text
+    ndkVersion = "28.2.13676358" 
+    
+    // 2. TRIK KHUSUS: Mengarahkan Gradle ke folder tujuan agar dia mendownload 
+    // secara otomatis jika versinya belum ada di laptopmu.
+    ndkPath = "${android.sdkDirectory.absolutePath}/ndk/28.2.13676358"
 
     defaultConfig {
         applicationId = "com.example.app_kebudyaan_lobar"
-        minSdk = flutter.minSdkVersion // 🔥 FIX: jangan pakai flutter.minSdkVersion
+        
+        // FIX: Langsung set ke angka 23 agar aman dan mendukung Firebase terbaru
+        minSdk = flutter.minSdkVersion 
+        
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -32,7 +41,7 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("debug") // sementara
+            signingConfig = signingConfigs.getByName("debug")
             isMinifyEnabled = false
             isShrinkResources = false
         }
