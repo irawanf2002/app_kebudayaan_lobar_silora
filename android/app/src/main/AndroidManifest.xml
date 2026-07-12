@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- Izin Aplikasi -->
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -33,7 +34,6 @@
         </intent>
     </queries>
 
-    <!-- Ganti label aplikasi di sini agar sinkron dengan SIBUD LOBAR -->
     <application
         android:label="SILORA"
         android:name="${applicationName}"
@@ -41,12 +41,13 @@
         android:allowBackup="true"
         android:supportsRtl="true"
         android:theme="@style/LaunchTheme"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        android:requestLegacyExternalStorage="true">
 
-        <!-- 🔥 PERBAIKAN: Meta-data ML Kit diletakkan di dalam <application> -->
-        <meta-data
+        <!-- ✅ DIMATIKAN SEMENTARA (AGAR TIDAK MEMBUTUHKAN NDK) -->
+        <!-- <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"
-            android:value="langid" />
+            android:value="langid" /> -->
 
         <activity
             android:name=".MainActivity"
