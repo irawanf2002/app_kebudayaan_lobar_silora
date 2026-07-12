@@ -1,0 +1,19 @@
+workflows:
+  default-workflow:
+    name: Build Release APK
+    max_build_duration: 30
+    environment:
+      flutter: stable
+      xcode: latest
+      vars:
+        JAVA_OPTS: "-Xmx2048m -Xms512m -XX:+UseParallelGC"
+    scripts:
+      - name: Clean previous builds and get packages
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Build Android Release APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/app-release.apk
