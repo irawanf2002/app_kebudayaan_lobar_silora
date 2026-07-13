@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:google_fonts/google_fonts.dart'; // ✅ Font Poppins
-import 'dart:ui' as ui; // ✅ Efek Glassmorphism
+import 'package:google_fonts/google_fonts.dart';
+import 'dart:ui' as ui;
 
 import '../styles/colors.dart';
 
@@ -67,13 +67,17 @@ class _CoePageState extends State<CoePage> {
     "JULI": 7, "AGUSTUS": 8, "SEPTEMBER": 9, "OKTOBER": 10, "NOVEMBER": 11, "DESEMBER": 12
   };
 
-  // ➕ Variabel ikon filter premium
+  // Variabel ikon filter premium
   final Map<String, IconData> _filterIcons = {
     "Semua": Icons.grid_view_rounded,
     "BUDAYA": Icons.museum_rounded,
     "OLAHRAGA": Icons.directions_run_rounded,
     "PARIWISATA": Icons.flight_takeoff_rounded,
   };
+
+  // VARIABEL UNTUK FILTER TANGGAL KALENDER
+  bool _showDayFilter = false;
+  List<Map<String, dynamic>> _filteredDayEvents = [];
 
   @override
   void initState() {
@@ -128,6 +132,15 @@ class _CoePageState extends State<CoePage> {
     if (parts.isNotEmpty && int.tryParse(parts[0]) != null) return parts[0];
     return "🗓️";
   }
+
+  String _formatDateOnly(DateTime date) {
+    return "${date.day} ${_monthNames[date.month]} ${date.year}";
+  }
+
+  final List<String> _monthNames = [
+    "", "JANUARI", "FEBRUARI", "MARET", "APRIL", "MEI", "JUNI",
+    "JULI", "AGUSTUS", "SEPTEMBER", "OKTOBER", "NOVEMBER", "DESEMBER"
+  ];
 
   String _extractYearOnly(String fullDate) {
     DateTime? dt = _parseEventDate(fullDate);
@@ -184,7 +197,7 @@ class _CoePageState extends State<CoePage> {
     }).toList();
   }
 
-  // ➕ GLASSMORPHISM CARD WRAPPER (Sama seperti di MapsPage)
+  // GLASSMORPHISM CARD WRAPPER
   Widget _buildGlassCard({required Widget child, Color? color, double opacity = 0.85}) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -203,11 +216,19 @@ class _CoePageState extends State<CoePage> {
     );
   }
 
+  // FUNGSI UNTUK MERESET FILTER TANGGAL
+  void _resetDayFilter() {
+    setState(() {
+      _selectedDay = null;
+      _showDayFilter = false;
+      _filteredDayEvents.clear();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F6F9),
-      // ➕ Ganti AppBar standar dengan AppBar transparan/premium
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -244,11 +265,12 @@ class _CoePageState extends State<CoePage> {
               opacity: 0.9,
               child: InkWell(
                 customBorder: const CircleBorder(),
-                // ✅ PERBAIKAN ERROR DI SINI: Ganti 'onPressed' menjadi 'onTap'
                 onTap: () { 
                   setState(() {
                     _focusedDay = DateTime(2026, 1, 1);
                     _selectedDay = _focusedDay;
+                    _showDayFilter = false;
+                    _filteredDayEvents.clear();
                   });
                 },
                 child: const Padding(padding: EdgeInsets.all(8.0), child: Icon(Icons.today_rounded, color: AppColors.primary, size: 20)),
@@ -264,6 +286,11 @@ class _CoePageState extends State<CoePage> {
             if (snapshot.hasData) { firebaseDocs = snapshot.data!.docs; }
 
             final displayedEvents = _getCombinedAndFilteredEvents(firebaseDocs);
+            
+            // LOGIKA FILTER KALENDER (Jika user memilih hari)
+            final eventsToShow = _showDayFilter && _selectedDay != null
+                ? _filteredDayEvents
+                : displayedEvents;
 
             return Column(
               children: [
@@ -284,7 +311,14 @@ class _CoePageState extends State<CoePage> {
                     onFormatChanged: (format) => setState(() => _calendarFormat = format),
                     selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
                     onDaySelected: (selectedDay, focusedDay) {
-                      setState(() { _selectedDay = selectedDay; _focusedDay = focusedDay; });
+                      final eventsOnDay = _getEventsForDay(selectedDay, displayedEvents);
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                        // Simpan hasil filter ke _filteredDayEvents
+                        _filteredDayEvents = eventsOnDay.cast<Map<String, dynamic>>();
+                        _showDayFilter = true;
+                      });
                     },
                     eventLoader: (day) => _getEventsForDay(day, displayedEvents),
                     headerStyle: const HeaderStyle(
@@ -318,7 +352,16 @@ class _CoePageState extends State<CoePage> {
                               Expanded(
                                 child: TextField(
                                   controller: _searchController,
-                                  onChanged: (value) => setState(() => _searchQuery = value),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _searchQuery = value;
+                                      // Reset filter tanggal saat mencari
+                                      if (_showDayFilter) {
+                                        _showDayFilter = false;
+                                        _filteredDayEvents.clear();
+                                      }
+                                    });
+                                  },
                                   style: GoogleFonts.poppins(fontSize: 15),
                                   decoration: InputDecoration(
                                     hintText: "Cari nama event atau lokasi...",
@@ -328,7 +371,19 @@ class _CoePageState extends State<CoePage> {
                                 ),
                               ),
                               if (_searchQuery.isNotEmpty) 
-                                IconButton(icon: const Icon(Icons.close, color: Colors.grey), onPressed: () { _searchController.clear(); setState(() => _searchQuery = ""); })
+                                IconButton(
+                                  icon: const Icon(Icons.close, color: Colors.grey), 
+                                  onPressed: () { 
+                                    _searchController.clear(); 
+                                    setState(() {
+                                      _searchQuery = "";
+                                      if (_showDayFilter) {
+                                        _showDayFilter = false;
+                                        _filteredDayEvents.clear();
+                                      }
+                                    });
+                                  }
+                                )
                             ],
                           ),
                         ),
@@ -345,7 +400,16 @@ class _CoePageState extends State<CoePage> {
                                 avatar: isSelected ? null : Icon(_filterIcons[label], size: 16, color: Colors.grey.shade600),
                                 label: Text(label, style: GoogleFonts.poppins(fontSize: 12, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal)),
                                 selected: isSelected,
-                                onSelected: (_) => setState(() => _selectedCategoryFilter = label),
+                                onSelected: (_) {
+                                  setState(() {
+                                    _selectedCategoryFilter = label;
+                                    // Reset filter tanggal saat mengganti kategori
+                                    if (_showDayFilter) {
+                                      _showDayFilter = false;
+                                      _filteredDayEvents.clear();
+                                    }
+                                  });
+                                },
                                 selectedColor: AppColors.primary.withOpacity(0.15),
                                 backgroundColor: Colors.white.withOpacity(0.6),
                                 labelStyle: GoogleFonts.poppins(color: isSelected ? AppColors.primary : Colors.black87, fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal),
@@ -359,32 +423,112 @@ class _CoePageState extends State<CoePage> {
                   ),
                 ),
 
-                // 3. HEADER TOTAL
+                // 3. HEADER TOTAL & FILTER ACTIVE
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Agenda Mendatang", style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)),
-                      Text("${displayedEvents.length} Event", style: GoogleFonts.poppins(color: Colors.grey, fontSize: 12)),
+                      Text(
+                        _showDayFilter && _selectedDay != null
+                            ? "Event pada ${_formatDateOnly(_selectedDay!)}"
+                            : _searchQuery.isNotEmpty 
+                                ? "Hasil Pencarian" 
+                                : "Agenda Mendatang",
+                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 16)
+                      ),
+                      Row(
+                        children: [
+                          Text("${eventsToShow.length} Event", style: GoogleFonts.poppins(color: Colors.grey, fontSize: 12)),
+                          if (_showDayFilter && _selectedDay != null) ...[
+                            const SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: _resetDayFilter,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primary.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8)
+                                ),
+                                child: Row(
+                                  children: [
+                                    Text("Reset", style: GoogleFonts.poppins(fontSize: 11, fontWeight: FontWeight.w600, color: AppColors.primary)),
+                                    const SizedBox(width: 4),
+                                    const Icon(Icons.close_rounded, size: 14, color: AppColors.primary)
+                                  ],
+                                )
+                              ),
+                            )
+                          ]
+                        ],
+                      )
                     ],
                   ),
                 ),
 
-                // 4. LIST EVENT
+                // 4. LIST EVENT (DENGAN FILTER TANGGAL)
                 Expanded(
-                  child: displayedEvents.isEmpty
-                      ? Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.search_off_rounded, size: 50, color: Colors.grey.shade400), const SizedBox(height: 10), Text("Tidak ada event yang cocok", style: GoogleFonts.poppins(color: Colors.grey.shade500))]))
+                  child: eventsToShow.isEmpty
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                _selectedDay != null 
+                                  ? Icons.event_busy_rounded 
+                                  : _searchQuery.isNotEmpty
+                                      ? Icons.search_off_rounded
+                                      : Icons.event_note_rounded,
+                                size: 50, 
+                                color: Colors.grey.shade400
+                              ),
+                              const SizedBox(height: 10),
+                              Text(
+                                _selectedDay != null 
+                                  ? "Tidak ada event pada tanggal ini" 
+                                  : _searchQuery.isNotEmpty
+                                      ? "Tidak ada event yang sesuai dengan pencarian"
+                                      : "Belum ada event",
+                                style: GoogleFonts.poppins(color: Colors.grey.shade500)
+                              ),
+                              if (_selectedDay != null) ...[
+                                const SizedBox(height: 8),
+                                TextButton(
+                                  onPressed: _resetDayFilter,
+                                  child: Text(
+                                    "Lihat semua event",
+                                    style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)
+                                  ),
+                                ),
+                              ],
+                              if (_searchQuery.isNotEmpty) ...[
+                                const SizedBox(height: 8),
+                                TextButton(
+                                  onPressed: () {
+                                    _searchController.clear();
+                                    setState(() {
+                                      _searchQuery = "";
+                                    });
+                                  },
+                                  child: Text(
+                                    "Hapus pencarian",
+                                    style: TextStyle(color: AppColors.primary, fontWeight: FontWeight.w600)
+                                  ),
+                                ),
+                              ],
+                            ],
+                          ),
+                        )
                       : ListView.builder(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 5),
-                          itemCount: displayedEvents.length,
+                          itemCount: eventsToShow.length,
                           itemBuilder: (context, index) {
-                            final event = displayedEvents[index];
+                            final event = eventsToShow[index];
                             bool showHeader = false;
                             if (index == 0) {
                               showHeader = true;
                             } else {
-                              final prevEvent = displayedEvents[index - 1];
+                              final prevEvent = eventsToShow[index - 1];
                               if (_extractMonthName(event['tanggal']) != _extractMonthName(prevEvent['tanggal'])) showHeader = true;
                             }
 
@@ -419,7 +563,6 @@ class _CoePageState extends State<CoePage> {
     );
   }
 
-  // ➕ DESAIN KARTU EVENT YANG LEBIH ELEGAN
   Widget _buildModernEventCard(Map<String, dynamic> event) {
     Color badgeColor = Colors.blue;
     String klasifikasi = (event['klasifikasi'] ?? '').toString().toUpperCase();
@@ -441,7 +584,6 @@ class _CoePageState extends State<CoePage> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // ➕ Desain Tanggal lebih modern (tidak perlu kotak jumbo)
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [

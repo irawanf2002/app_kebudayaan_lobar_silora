@@ -1,1 +1,0 @@
-web: gunicorn scripts.app_api:app

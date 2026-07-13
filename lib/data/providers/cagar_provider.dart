@@ -15,7 +15,9 @@ class CagarProvider extends ChangeNotifier {
   final String _collectionOdcb = "odcb_data_2025";
 
   List<CagarModel> _listCagarUI = [];
+  List<CagarModel> _backupListCagar = []; // Backup untuk fitur pencarian
   bool _isLoading = false;
+  bool _isFirstLoad = true; // Optimasi agar tidak fetch ulang jika sudah ada
 
   List<CagarModel> get listCagar => _listCagarUI;
   bool get isLoading => _isLoading;
@@ -23,7 +25,12 @@ class CagarProvider extends ChangeNotifier {
   // =========================================================================
   // 1. FUNGSI FETCH DATA (GABUNGAN ADMIN + ODCB 2025)
   // =========================================================================
-  Future<void> fetchCagar() async {
+  Future<void> fetchCagar({bool forceRefresh = false}) async {
+    // Optimasi: Jika data sudah ada dan bukan panggilan paksa, jangan fetch ulang
+    if (!forceRefresh && _listCagarUI.isNotEmpty) {
+      return;
+    }
+
     _isLoading = true;
     notifyListeners();
 
@@ -42,6 +49,7 @@ class CagarProvider extends ChangeNotifier {
 
       // 1c. Gabungkan kedua list menjadi satu
       _listCagarUI = [...adminData, ...odcbData];
+      _backupListCagar = List.from(_listCagarUI); // Simpan salinan untuk pencarian
 
       debugPrint("✅ Data Berhasil Dimuat! Total: ${_listCagarUI.length} (Admin: ${adminData.length}, ODCB: ${odcbData.length})");
     } catch (e) {
@@ -49,38 +57,87 @@ class CagarProvider extends ChangeNotifier {
     }
 
     _isLoading = false;
+    _isFirstLoad = false;
     notifyListeners();
   }
 
   // =========================================================================
-  // 2. REFRESH DATA (SETELAH PREDIKSI XGBOOST)
+  // 2. FUNGSI UNTUK MENGHITUNG JUMLAH DATA PER KATEGORI (UNTUK UI)
   // =========================================================================
-  Future<void> refreshData() async {
-    _isLoading = true;
-    notifyListeners();
+  int getCountByCategory(String filterKey) {
+    if (_listCagarUI.isEmpty) return 0;
 
-    try {
-      final snapshotAdmin = await _firestore.collection(_collectionAdmin).get();
-      List<CagarModel> adminData = snapshotAdmin.docs
-          .map((doc) => CagarModel.fromFirestore(doc))
-          .toList();
+    return _listCagarUI.where((item) {
+      final dataKat = item.kategori.toLowerCase().trim();
+      final key = filterKey.toLowerCase().trim();
 
-      final snapshotOdcb = await _firestore.collection(_collectionOdcb).get();
-      List<CagarModel> odcbData = snapshotOdcb.docs
-          .map((doc) => _mapOdcbToCagarModel(doc))
-          .toList();
+      // Logika filter yang sama persis dengan CategoryResultPage
+      if (key == 'bangunan') {
+        return dataKat.contains('bangunan') ||
+               dataKat.contains('struktur') ||
+               dataKat.contains('situs') ||
+               dataKat.contains('cagar budaya');
+      } else if (key == 'benda') {
+        return dataKat.contains('benda') || 
+               dataKat.contains('warisan budaya');
+      } else if (key == 'manuskrip') {
+        return dataKat.contains('manuskrip') || 
+               dataKat.contains('lontar');
+      } else if (key == 'ritus') {
+        return dataKat.contains('ritus') || 
+               dataKat.contains('upacara adat') || 
+               dataKat.contains('adat istiadat');
+      } else if (key == 'tradisi lisan') {
+        return dataKat.contains('tradisi lisan');
+      } else if (key == 'kesenian') {
+        return dataKat.contains('seni') || 
+               dataKat.contains('kesenian');
+      } else if (key == 'kuliner') {
+        return dataKat.contains('kuliner') || 
+               dataKat.contains('makanan') ||
+               dataKat.contains('pengetahuan tradisional');
+      } else if (key == 'teknologi') {
+        return dataKat.contains('teknologi tradisional') || 
+               dataKat.contains('kerajinan');
+      } else if (key == 'bahasa') {
+        return dataKat.contains('bahasa daerah');
+      } else if (key == 'permainan') {
+        return dataKat.contains('permainan rakyat');
+      }
+      return dataKat.contains(key);
+    }).length;
+  }
 
-      _listCagarUI = [...adminData, ...odcbData];
-    } catch (e) {
-      debugPrint("❌ Error saat refresh data: $e");
+  // =========================================================================
+  // 3. FUNGSI PENCARIAN (UNTUK SEARCH BAR)
+  // =========================================================================
+  void searchCagar(String query) {
+    if (query.trim().isEmpty) {
+      // Kembalikan ke data awal
+      _listCagarUI = List.from(_backupListCagar);
+      notifyListeners();
+      return;
     }
 
-    _isLoading = false;
+    final lowerQuery = query.toLowerCase().trim();
+    _listCagarUI = _backupListCagar.where((item) {
+      return item.nama.toLowerCase().contains(lowerQuery) ||
+             item.kategori.toLowerCase().contains(lowerQuery) ||
+             item.lokasi.toLowerCase().contains(lowerQuery);
+    }).toList();
+    
     notifyListeners();
   }
 
   // =========================================================================
-  // 3. STREAM DATA (REALTIME UPDATE - GABUNGAN)
+  // 4. REFRESH DATA (SETELAH PREDIKSI XGBOOST / TAMBAH DATA)
+  // =========================================================================
+  Future<void> refreshData() async {
+    await fetchCagar(forceRefresh: true);
+  }
+
+  // =========================================================================
+  // 5. STREAM DATA (REALTIME UPDATE - GABUNGAN)
   // =========================================================================
   Stream<List<CagarModel>> get cagarStream {
     return _firestore.collection(_collectionAdmin).snapshots().asyncMap((_) async {
@@ -103,7 +160,7 @@ class CagarProvider extends ChangeNotifier {
   }
 
   // =========================================================================
-  // 4. HELPER: MAPPING DATA ODCB KE CAGAR MODEL
+  // 6. HELPER: MAPPING DATA ODCB KE CAGAR MODEL
   // =========================================================================
   CagarModel _mapOdcbToCagarModel(QueryDocumentSnapshot doc) {
     final data = doc.data() as Map<String, dynamic>;
@@ -115,10 +172,12 @@ class CagarProvider extends ChangeNotifier {
     final double lng = (data['longitude'] ?? 0.0).toDouble();
 
     // Tentukan status kode (0, 1, 2) berdasarkan teks kondisi
+    // 0: Rusak/Tidak Terawat, 1: Kurang Terawat, 2: Terawat/Berkembang
     int statusCode;
-    if (kondisi.contains("Terawat") || kondisi.contains("Berkembang")) {
+    final kondisiLower = kondisi.toLowerCase();
+    if (kondisiLower.contains("terawat") || kondisiLower.contains("berkembang")) {
       statusCode = 2;
-    } else if (kondisi.contains("Kurang")) {
+    } else if (kondisiLower.contains("kurang")) {
       statusCode = 1;
     } else {
       statusCode = 0;
@@ -127,9 +186,9 @@ class CagarProvider extends ChangeNotifier {
     return CagarModel(
       id: doc.id,
       nama: nama,
-      kategori: kategori,
+      kategori: kategori, // Dipastikan tersimpan agar filter UI berfungsi
       lokasi: "Lombok Barat",
-      status: statusCode, // Hanya kirim angka status.
+      status: statusCode,
       latitude: lat,
       longitude: lng,
       gambarUrl: "https://images.unsplash.com/photo-1590075865003-e48277afd558?w=500",
@@ -141,7 +200,7 @@ class CagarProvider extends ChangeNotifier {
   }
 
   // =========================================================================
-  // 5. FUNGSI ADD / UPDATE DATA (KHUSUS UNTUK ADMIN)
+  // 7. FUNGSI ADD / UPDATE DATA (KHUSUS UNTUK ADMIN)
   // =========================================================================
   Future<void> addCagar(CagarModel cagar, File? imageFile) async {
     _isLoading = true;
@@ -163,7 +222,7 @@ class CagarProvider extends ChangeNotifier {
       Map<String, dynamic> data = cagar.toFirestore();
       data["gambar_url"] = finalImageUrl;
 
-      if (cagar.id == null) {
+      if (cagar.id == null || cagar.id!.isEmpty) {
         data["createdAt"] = FieldValue.serverTimestamp();
         await _firestore.collection(_collectionAdmin).add(data);
       } else {
@@ -171,7 +230,7 @@ class CagarProvider extends ChangeNotifier {
         await _firestore.collection(_collectionAdmin).doc(cagar.id).update(data);
       }
 
-      await fetchCagar();
+      await refreshData(); // Refresh data setelah add/update
     } catch (e) {
       debugPrint("❌ Error saat menyimpan data cagar: $e");
     }

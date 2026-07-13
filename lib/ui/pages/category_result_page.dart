@@ -15,15 +15,55 @@ class CategoryResultPage extends StatelessWidget {
     final provider = context.watch<CagarProvider>();
     final allData = provider.listCagar;
 
+    // ✅ LOGIKA FILTER YANG DIPERBARUI UNTUK 10 KATEGORI
     final filteredList = allData.where((item) {
-      final dataKat = item.kategori.toLowerCase();
-      final filterKey = kategori.toLowerCase();
+      final dataKat = item.kategori.toLowerCase().trim();
+      final filterKey = kategori.toLowerCase().trim();
 
+      // Mapping kategori dari menu ke data di database
       if (filterKey == 'bangunan') {
         return dataKat.contains('bangunan') ||
             dataKat.contains('struktur') ||
-            dataKat.contains('situs');
+            dataKat.contains('situs') ||
+            dataKat.contains('cagar budaya'); // Catch-all agar aman
+      } 
+      else if (filterKey == 'benda') {
+        return dataKat.contains('benda') || 
+               dataKat.contains('warisan budaya');
       }
+      else if (filterKey == 'manuskrip') {
+        return dataKat.contains('manuskrip') || 
+               dataKat.contains('lontar');
+      }
+      else if (filterKey == 'ritus') {
+        return dataKat.contains('ritus') || 
+               dataKat.contains('upacara adat') || 
+               dataKat.contains('adat istiadat');
+      }
+      else if (filterKey == 'tradisi lisan') {
+        return dataKat.contains('tradisi lisan');
+      }
+      else if (filterKey == 'kesenian') {
+        return dataKat.contains('seni') || 
+               dataKat.contains('kesenian');
+      }
+      else if (filterKey == 'kuliner') {
+        return dataKat.contains('kuliner') || 
+               dataKat.contains('makanan') ||
+               dataKat.contains('pengetahuan tradisional'); // Karena kuliner ada di sub-bagian ini
+      }
+      else if (filterKey == 'teknologi') {
+        return dataKat.contains('teknologi tradisional') || 
+               dataKat.contains('kerajinan');
+      }
+      else if (filterKey == 'bahasa') {
+        return dataKat.contains('bahasa daerah');
+      }
+      else if (filterKey == 'permainan') {
+        return dataKat.contains('permainan rakyat');
+      }
+
+      // Fallback default jika tidak ada yang cocok
       return dataKat.contains(filterKey);
     }).toList();
 
@@ -65,16 +105,29 @@ class CategoryResultPage extends StatelessWidget {
     );
   }
 
+  // ✅ JUDUL HEADER YANG DIPERBARUI
   String _getDisplayTitle(String key) {
     switch (key.toLowerCase()) {
       case 'bangunan':
         return 'Cagar Budaya';
       case 'benda':
-        return 'Warisan Budaya Tak Benda';
+        return 'Warisan Budaya';
+      case 'manuskrip':
+        return 'Manuskrip Kuno';
+      case 'ritus':
+        return 'Ritus & Adat';
+      case 'tradisi lisan':
+        return 'Tradisi Lisan';
       case 'kesenian':
-        return 'Tarian & Kesenian';
+        return 'Kesenian Lokal';
       case 'kuliner':
         return 'Kuliner Khas';
+      case 'teknologi':
+        return 'Teknologi & Kerajinan';
+      case 'bahasa':
+        return 'Bahasa Daerah';
+      case 'permainan':
+        return 'Permainan Rakyat';
       default:
         return key;
     }
@@ -111,7 +164,6 @@ class CategoryResultPage extends StatelessWidget {
                 child: SizedBox(
                   width: 110,
                   height: 110,
-                  // LOGIKA LANGSUNG (TANPA FUNGSI TAMBAHAN)
                   child: item.gambarUrl.startsWith('http')
                       ? Image.network(
                           item.gambarUrl,

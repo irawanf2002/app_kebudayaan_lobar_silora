@@ -1,5 +1,5 @@
 import 'package:app_kebudyaan_lobar/data/models/kategori_model.dart';
-import 'package:app_kebudyaan_lobar/ui/pages/all_categories_page.dart'; // ✅ Tambahkan import halaman baru
+import 'package:app_kebudyaan_lobar/ui/pages/all_categories_page.dart'; // ✅ Import halaman baru
 import 'package:app_kebudyaan_lobar/ui/pages/dikbud_info_page.dart';
 import 'package:app_kebudyaan_lobar/ui/pages/lang_helper.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ import '../../../data/providers/settings_provider.dart';
 
 // WIDGET PECAHAN
 import 'widgets/kategori_menu.dart';
-import 'widgets/situs_terbaru_list.dart';
+import 'widgets/situs_terbaru_list.dart'; // Jika file ini masih dibutuhkan di tempat lain, biarkan. Tapi tidak dipanggil di kode ini.
 
 // HALAMAN LAIN
 import '../ceo_page.dart';
@@ -407,7 +407,6 @@ class _HomeContentPageState extends State<HomeContentPage> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    final provider = context.watch<CagarProvider>();
     final String lang = context.watch<SettingsProvider>().currentLocale.languageCode;
 
     return Stack(
@@ -416,112 +415,98 @@ class _HomeContentPageState extends State<HomeContentPage> with SingleTickerProv
           onRefresh: () async {},
           color: AppColors.primary,
           backgroundColor: Colors.white,
-          child: CustomScrollView(
+          child: SingleChildScrollView(
             controller: _scrollController,
             physics: const BouncingScrollPhysics(),
-            slivers: [
-              // HEADER PREMIUM
-              SliverAppBar(
-                expandedHeight: 180,
-                pinned: true,
-                backgroundColor: Colors.white,
-                elevation: 0,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(40)),
-                ),
-                flexibleSpace: FlexibleSpaceBar(
-                  titlePadding: const EdgeInsets.only(left: 24, right: 24, bottom: 16),
-                  background: Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [AppColors.primary, AppColors.primaryDark],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
+            child: Column(
+              children: [
+                // --- HEADER ---
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [AppColors.primary, AppColors.primaryDark],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
                     ),
-                    child: SafeArea(
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 30, left: 24, right: 24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Jelajah Budaya Lobar",
-                              style: GoogleFonts.poppins(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                letterSpacing: 1.2,
-                                shadows: [Shadow(color: Colors.black.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 4))],
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              "Tunas napi leq jero tamiu",
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.w300,
-                                color: Colors.white70,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    borderRadius: const BorderRadius.vertical(bottom: Radius.circular(40)),
                   ),
-                  title: SafeArea(
-                    child: Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 4))],
-                      ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/logo_budaya.png', height: 35, errorBuilder: (c, e, s) => const Icon(Icons.language, color: AppColors.primary)),
-                          const SizedBox(width: 10),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.only(top: kIsWeb ? 20 : 0, left: 24, right: 24, bottom: 20),
+                  child: SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Jelajah Budaya Lobar",
+                          style: GoogleFonts.poppins(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            letterSpacing: 1.2,
+                            shadows: [Shadow(color: Colors.black.withOpacity(0.2), blurRadius: 6, offset: const Offset(0, 4))],
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          "Tunas napi leq jero tamiu",
+                          style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        // Logo di Header
+                        Container(
+                          height: 50,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 8, offset: const Offset(0, 4))],
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
                             children: [
-                              Text(
-                                "SILORA",
-                                style: GoogleFonts.poppins(
-                                  color: AppColors.primary,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w900,
-                                  letterSpacing: 1,
-                                  height: 1,
-                                ),
-                              ),
-                              const SizedBox(height: 2),
-                              Text(
-                                "Lombok Barat",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.grey.shade500,
-                                  fontSize: 10, 
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: 0.5,
-                                  height: 1, 
-                                ),
+                              Image.asset('assets/images/logo_budaya.png', height: 35, errorBuilder: (c, e, s) => const Icon(Icons.language, color: AppColors.primary)),
+                              const SizedBox(width: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "SILORA",
+                                    style: GoogleFonts.poppins(
+                                      color: AppColors.primary,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900,
+                                      letterSpacing: 1,
+                                      height: 1,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    "Lombok Barat",
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.grey.shade500,
+                                      fontSize: 10, 
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.5,
+                                      height: 1, 
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                actions: [const SizedBox()],
-              ),
 
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: const EdgeInsets.only(bottom: 100),
+                // --- BODY CONTENT ---
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 100), // Memberi ruang untuk BottomNav
                   child: Column(
                     children: [
                       // 1. SEARCH BAR GLASSMORPHISM
@@ -568,20 +553,17 @@ class _HomeContentPageState extends State<HomeContentPage> with SingleTickerProv
                       // ✅ 3. KATEGORI UTAMA DENGAN STAGGERED & PULSE (Berfungsi)
                       _buildStaggeredCategorySection(),
 
-                      const SizedBox(height: 20),
-
-                      // ✅ 4. DAFTAR SITUS
-                      FadeInUp(
-                        delay: 150,
-                        child: provider.isLoading ? _buildShimmerList() : const SitusSection(),
-                      ),
+                      // ❌ BAGIAN INI DIHAPUS (List Situs & Shimmer Loading) 
+                      // Sesuai permintaan: "hanya tampilan kategorinya saja ke bawah"
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
+        
+        // Back To Top Button
         AnimatedPositioned(
           duration: const Duration(milliseconds: 300),
           bottom: _showBackToTopButton ? 20 : -100,
@@ -596,62 +578,6 @@ class _HomeContentPageState extends State<HomeContentPage> with SingleTickerProv
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildShimmerList() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        children: List.generate(3, (index) {
-          return Container(
-            margin: const EdgeInsets.only(bottom: 16),
-            height: 120, 
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20), 
-              boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 4))],
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [AppColors.primary, AppColors.primaryDark],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    borderRadius: const BorderRadius.horizontal(left: Radius.circular(20)),
-                  ),
-                  child: const Center(child: Icon(Icons.image_outlined, color: Colors.white, size: 32)),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(width: 100, height: 14, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
-                      const SizedBox(height: 10),
-                      Container(width: 180, height: 20, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Container(width: 12, height: 12, decoration: BoxDecoration(color: Colors.grey.shade200, shape: BoxShape.circle)),
-                          const SizedBox(width: 6),
-                          Container(width: 80, height: 12, decoration: BoxDecoration(color: Colors.grey.shade200, borderRadius: BorderRadius.circular(4))),
-                        ],
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          );
-        }),
-      ),
     );
   }
 }
