@@ -29,13 +29,18 @@ class _CagarFormPageState extends State<CagarFormPage> {
 
   String _selectedKategori = "Benda Cagar Budaya";
   final List<String> _kategoriList = [
-    "Benda Cagar Budaya",
-    "Bangunan Cagar Budaya",
-    "Struktur Cagar Budaya",
-    "Situs Cagar Budaya",
-    "Kawasan Cagar Budaya",
-    "Warisan Budaya Tak Benda",
-    "Kuliner",
+    "Cagar Budaya",
+    "Warisan Budaya Takbenda",
+    "Manuskrip",
+    "Tradisi Lisan",
+    "Ritus",
+    "Adat Istiadat",
+    "Teknologi Tradisional",
+    "Pengetahuan Tradisional",
+    "Seni",
+    "Bahasa",
+    "Permainan Rakyat & Olahraga Tradisional",
+
   ];
 
   final Color _primaryNavy = const Color(0xFF1E3A8A);

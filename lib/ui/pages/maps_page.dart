@@ -26,7 +26,7 @@ class MapsPage extends StatefulWidget {
   State<MapsPage> createState() => _MapsPageState();
 }
 
-class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin {
+class _MapsPageState extends State<MapsPage> with TickerProviderStateMixin {
   final MapController _mapController = MapController();
   final FlutterTts _flutterTts = FlutterTts();
   final TextEditingController _searchController = TextEditingController();
@@ -119,14 +119,41 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
     }
   }
 
-  Future<void> _initTts() async {
-    await _flutterTts.setLanguage("id-ID");
-    await _flutterTts.setSpeechRate(0.5);
-    await _flutterTts.setVolume(1.0);
+    Future<void> _initTts() async {
+    try {
+      // 🔥 Tambahkan Handler (Listener) untuk mengetahui status TTS
+      _flutterTts.setStartHandler(() {
+        print("✅ TTS: Mulai bersuara...");
+      });
+
+      _flutterTts.setCompletionHandler(() {
+        print("✅ TTS: Selesai bersuara.");
+      });
+
+      _flutterTts.setErrorHandler((msg) {
+        print("❌ ERROR TTS: $msg");
+        // Jika muncul pesan error "not installed" atau "engine not ready",
+        // berarti HP Anda belum menginstall Google Text-to-Speech.
+      });
+
+      // Inisialisasi bahasa dan parameter
+      await _flutterTts.setLanguage("id-ID");
+      await _flutterTts.setSpeechRate(0.5);
+      await _flutterTts.setVolume(1.0);
+      
+      print("🎙️ TTS Berhasil diinisialisasi!");
+    } catch (e) {
+      print("❌ Gagal menginisialisasi TTS: $e");
+    }
   }
 
   Future<void> _speak(String text) async {
-    await _flutterTts.speak(text);
+    try {
+      print("🎙️ Memanggil suara: $text"); // <-- Ini penting untuk debugging!
+      await _flutterTts.speak(text);
+    } catch (e) {
+      print("❌ Error saat mencoba bersuara: $e");
+    }
   }
 
   Future<void> _determinePosition() async {
@@ -176,7 +203,7 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
   }
 
   // ---------- XGBOOST (Mengambil data dari CagarProvider) ----------
-  Future<void> _runXGBoostPrediction() async {
+   Future<void> _runXGBoostPrediction() async {
     if (_isXGBoostRunning) return;
     setState(() {
       _isXGBoostRunning = true;
@@ -187,30 +214,32 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
       _showXGBoostDashboard = true;
     });
 
-    // ✅ AMBIL DATA LANGSUNG DARI PROVIDER (GABUNGAN ADMIN + ODCB)
     final provider = context.read<CagarProvider>();
     final allData = provider.listCagar;
 
-    if (allData.isEmpty) {
+    // 🔥 KRUSIAL: FILTER HANYA DATA "CAGAR BUDAYA" SAJA
+    final cagarData = allData.where((item) => item.kategori == "Cagar Budaya").toList();
+
+    if (cagarData.isEmpty) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Tidak ada data cagar budaya yang ditemukan.")));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Tidak ada data Cagar Budaya yang ditemukan.")));
         setState(() => _isXGBoostRunning = false);
       }
       return;
     }
 
-    // ✅ GANTI URL KE API LOKAL LAPTOP ANDA (Jika di Emulator Android gunakan 10.0.2.2. Jika HP Fisik, ganti dengan IP 192.168.1.2)
-    const String apiUrlBatch = "https://silora-backend-api.up.railway.app/predict_batch";
-    const String apiUrlSingle = "https://silora-backend-api.up.railway.app/predict";
+    const String apiUrlBatch = "https://web-production-adfc6.up.railway.app/predict_batch";
+ const String apiUrlSingle = "https://web-production-adfc6.up.railway.app/predict";
 
     try {
-      final batchData = allData.map((item) {
+      // 🔥 PERBAIKAN PAYLOAD: Kirim Latitude, Longitude, dan Jumlah Objek
+      final batchData = cagarData.map((item) {
         return {
           "id": item.id,
           "nama": item.nama,
-          "kategori": item.kategori,
-          "etnis": "Sasak", // 🔥 WAJIB dikirim
-          "lokasi": item.lokasi,
+          "latitude": item.latitude,
+          "longitude": item.longitude,
+          "jumlah_objek": 1,
         };
       }).toList();
 
@@ -224,11 +253,14 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
         final result = jsonDecode(response.body);
         final predictions = result['predictions'] as List;
 
-        for (int i = 0; i < predictions.length && i < allData.length; i++) {
+        for (int i = 0; i < predictions.length && i < cagarData.length; i++) {
           final pred = predictions[i];
-          final item = allData[i];
+          final item = cagarData[i];
+          
+          // Backend mengembalikan 'prediction' (int) dan 'label' (String)
           final int status = int.tryParse(pred['prediction']?.toString() ?? '2') ?? 2;
-          final double confidence = (pred['confidence'] ?? 0.0).toDouble();
+          // ⚠️ PERINGATAN: Backend tidak mengembalikan 'confidence', jadi kita set 0.0
+          final double confidence = 0.0; 
 
           setState(() {
             _xgboostProgress = (i + 1) / predictions.length;
@@ -240,7 +272,7 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
             status: status,
             confidence: confidence,
             timestamp: DateTime.now(),
-            features: pred['features'] ?? {},
+            features: {}, // ⚠️ Backend tidak mengembalikan 'features', jadi kosongkan saja
           ));
 
           setState(() {
@@ -258,7 +290,6 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
           _isXGBoostRunning = false;
         });
 
-        _speak("Prediksi XGBoost selesai. Akurasi ${_xgboostAccuracy.toStringAsFixed(1)} persen.");
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -283,31 +314,33 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
     }
   }
 
-  Future<void> _predictSingleItem(CagarModel item) async {
+    Future<void> _predictSingleItem(CagarModel item) async {
     if (_isXGBoostRunning) return;
     setState(() => _isXGBoostRunning = true);
 
+    // 🔥 PERBAIKI PAYLOAD: Hanya Kirim Koordinat dan Jumlah Objek
     final payload = {
-      "kategori": item.kategori,
-      "etnis": "Sasak", // 🔥 WAJIB dikirim
-      "nama": item.nama,
-      "lokasi": item.lokasi,
+      "latitude": item.latitude,
+      "longitude": item.longitude,
+      "jumlah_objek": 1
     };
 
     try {
-      // ✅ GANTI URL KE API LOKAL LAPTOP ANDA (Jika di Emulator Android gunakan 10.0.2.2. Jika HP Fisik, ganti dengan IP 192.168.1.2)
+      // ✅ GANTI DARI 10.0.2.2 KE IP WIFI ANDA (192.168.1.6)
       final response = await http.post(
-        Uri.parse("http://10.0.2.2:5000/predict"),
+        Uri.parse("https://web-production-adfc6.up.railway.app/predict"),
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(payload),
       ).timeout(const Duration(seconds: 8));
 
       if (response.statusCode == 200) {
         final result = jsonDecode(response.body);
-        final int status = int.tryParse(result['prediction']?.toString() ?? '2') ?? 2;
-        final double confidence = (result['confidence'] ?? 0.0).toDouble();
+        
+        // 🔥 PERHATIKAN: Backend tunggal mengembalikan 'prediction_code' dan 'label_kategori'
+        final int status = int.tryParse(result['prediction_code']?.toString() ?? '2') ?? 2;
+        final double confidence = 0.0; // Backend tidak mengirim confidence
 
-        // 🔥 PERBAIKAN KRUSIAL: BUNGKUS DENGAN TRY-CATCH UNTUK MENCEGAH ERROR MERAH DI LAYAR SAAT SIDANG!
+        // Update ke Firebase (Jika diperlukan)
         try {
           await FirebaseFirestore.instance.collection('cagar_budaya').doc(item.id).update({
             'status': status,
@@ -316,12 +349,10 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
             'predicted_at': FieldValue.serverTimestamp(),
           });
         } catch (e) {
-          // Error ini sengaja diabaikan agar UI tetap berjalan mulus.
           debugPrint("ℹ️ Data ODCB tidak diupdate ke database (error not-found dilewati).");
         }
 
         _calculateStats();
-        // 🔥 Refresh provider agar data terbaru muncul di UI tanpa restart aplikasi
         context.read<CagarProvider>().refreshData();
 
         if (mounted) {
@@ -334,11 +365,10 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
           });
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text("✅ Prediksi: ${_getStatusLabel(status)} (${(confidence * 100).toStringAsFixed(1)}% confidence)"),
+              content: Text("✅ Prediksi: ${_getStatusLabel(status)}"),
               backgroundColor: Colors.green,
             )
           );
-          _speak("Prediksi selesai. Status: ${_getStatusLabel(status)} dengan kepercayaan ${(confidence * 100).toStringAsFixed(1)} persen.");
         }
       }
     } catch (e) {
@@ -352,23 +382,24 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
     }
   }
 
-  String _getStatusLabel(int status) {
+     String _getStatusLabel(int status) {
     switch (status) {
-      case 0: return "Rusak Berat";
-      case 1: return "Rusak Ringan";
-      case 2: return "Terawat";
+      case 0: return "Benda";
+      case 1: return "Struktur";
+      case 2: return "Bangunan";
       default: return "Tidak Diketahui";
     }
   }
 
-  Color _getStatusColor(int status) {
+   Color _getStatusColor(int status) {
     switch (status) {
-      case 0: return AppColors.error;
-      case 1: return AppColors.warning;
-      case 2: return AppColors.success;
+      case 0: return Colors.orange; // Benda
+      case 1: return Colors.purple; // Struktur
+      case 2: return Colors.blue;   // Bangunan
       default: return Colors.grey;
     }
   }
+  
 
   // ---------- ROUTE ----------
   Future<void> _getRouteToDestination(LatLng destination) async {
@@ -590,17 +621,18 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
     );
   }
 
-  static Widget _bottomTitles(double value, TitleMeta meta) {
+ static Widget _bottomTitles(double value, TitleMeta meta) {
     const style = TextStyle(fontSize: 10, fontWeight: FontWeight.w500);
     String text;
     switch (value.toInt()) {
-      case 0: text = 'Terawat'; break;
-      case 1: text = 'Ringan'; break;
-      case 2: text = 'Berat'; break;
+      case 0: text = 'Benda'; break;
+      case 1: text = 'Struktur'; break;
+      case 2: text = 'Bangunan'; break;
       default: text = '';
     }
     return SideTitleWidget(axisSide: meta.axisSide, child: Text(text, style: style));
   }
+
 
   Widget _buildStatCard(String title, String value, IconData icon, Color color) {
     return Expanded(
@@ -667,147 +699,149 @@ class _MapsPageState extends State<MapsPage> with SingleTickerProviderStateMixin
             ),
 
           // MAP
-          FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              initialCenter: const LatLng(-8.6500, 116.1500),
-              initialZoom: _isNavigating ? 16.0 : 13.0,
-              maxZoom: 18,
-              minZoom: 7,
-              interactionOptions: const InteractionOptions(flags: InteractiveFlag.all),
-              onMapReady: () {
-                setState(() => _isMapReady = true);
-              },
-              onPositionChanged: (position, hasGesture) {
-                if (hasGesture) setState(() => _currentZoom = position.zoom ?? _currentZoom);
-              },
-              onTap: (_, __) {
-                if (!_isNavigating) {
-                  setState(() {
-                    _selectedItem = null;
-                    _routePoints.clear();
-                    _routeInfo = "";
-                  });
-                }
-              },
-            ),
-            children: [
-              TileLayer(
-                urlTemplate: _isSatelliteMode ? 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                userAgentPackageName: 'com.lobar.kebudayaan_lobar',
-                tileProvider: NetworkTileProvider(),
+          RepaintBoundary( // 🔥 TAMBAHKAN INI AGAR PETA TIDAK LEMOT
+            child: FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                initialCenter: const LatLng(-8.6500, 116.1500),
+                initialZoom: _isNavigating ? 16.0 : 13.0,
                 maxZoom: 18,
                 minZoom: 7,
+                interactionOptions: const InteractionOptions(flags: InteractiveFlag.all),
+                onMapReady: () {
+                  setState(() => _isMapReady = true);
+                },
+                onPositionChanged: (position, hasGesture) {
+                  if (hasGesture) setState(() => _currentZoom = position.zoom ?? _currentZoom);
+                },
+                onTap: (_, __) {
+                  if (!_isNavigating) {
+                    setState(() {
+                      _selectedItem = null;
+                      _routePoints.clear();
+                      _routeInfo = "";
+                    });
+                  }
+                },
               ),
-              if (_routePoints.isNotEmpty)
-                PolylineLayer(
-                  polylines: [
-                    Polyline(
-                      points: _routePoints,
-                      strokeWidth: _isNavigating ? 6 : 5,
-                      color: _isNavigating ? Colors.blue.shade800 : Colors.blueAccent,
-                      strokeCap: StrokeCap.round,
-                    )
-                  ],
+              children: [
+                TileLayer(
+                  urlTemplate: _isSatelliteMode ? 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}' : 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.lobar.kebudayaan_lobar',
+                  tileProvider: NetworkTileProvider(),
+                  maxZoom: 18,
+                  minZoom: 7,
                 ),
-              if (_routePoints.isNotEmpty)
-                MarkerLayer(
-                  markers: [
-                    Marker(
-                      point: _routePoints.last,
-                      width: 40,
-                      height: 40,
-                      child: const Icon(Icons.flag_circle, color: Colors.red, size: 40),
-                    ),
-                  ],
-                ),
-              MarkerClusterLayerWidget(
-                options: MarkerClusterLayerOptions(
-                  maxClusterRadius: 60,
-                  size: const Size(44, 44),
-                  disableClusteringAtZoom: 15,
-                  markers: filteredData.map((item) {
-                    final color = item.statusColor;
-                    final isSelected = _selectedItem?.id == item.id;
-                    return Marker(
-                      point: LatLng(item.latitude, item.longitude),
-                      width: 48,
-                      height: 48,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (_isNavigating) return;
-                          HapticFeedback.lightImpact();
-                          _speak("${item.nama}. Kondisi: ${item.statusLabel}");
-                          setState(() => _selectedItem = item);
-                          _mapController.move(LatLng(item.latitude, item.longitude), 16.0);
-                        },
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              width: isSelected ? 56 : 48,
-                              height: isSelected ? 56 : 48,
-                              decoration: BoxDecoration(
-                                color: isSelected ? AppColors.primary.withValues(alpha: 0.2) : color.withValues(alpha: 0.2),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            AnimatedScale(
-                              scale: isSelected ? 1.15 : 1.0,
-                              duration: const Duration(milliseconds: 200),
-                              curve: Curves.easeOutBack,
-                              child: Icon(
-                                Icons.location_on,
-                                color: isSelected ? AppColors.primary : color,
-                                size: isSelected ? 48 : 40,
-                                shadows: const [Shadow(color: Colors.black45, blurRadius: 6, offset: Offset(0, 3))],
-                              ),
-                            ),
-                            Positioned(
-                              top: isSelected ? 10 : 8,
-                              child: Container(
-                                width: isSelected ? 14 : 10,
-                                height: isSelected ? 14 : 10,
-                                decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
-                              ),
-                            )
-                          ],
-                        ),
+                if (_routePoints.isNotEmpty)
+                  PolylineLayer(
+                    polylines: [
+                      Polyline(
+                        points: _routePoints,
+                        strokeWidth: _isNavigating ? 6 : 5,
+                        color: _isNavigating ? Colors.blue.shade800 : Colors.blueAccent,
+                        strokeCap: StrokeCap.round,
+                      )
+                    ],
+                  ),
+                if (_routePoints.isNotEmpty)
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: _routePoints.last,
+                        width: 40,
+                        height: 40,
+                        child: const Icon(Icons.flag_circle, color: Colors.red, size: 40),
                       ),
-                    );
-                  }).toList(),
-                  builder: (_, markers) => Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.primary,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 3),
-                      boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.5), blurRadius: 10, spreadRadius: 2)],
-                    ),
-                    child: Center(
-                      child: Text(markers.length.toString(), style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                    ],
+                  ),
+                MarkerClusterLayerWidget(
+                  options: MarkerClusterLayerOptions(
+                    maxClusterRadius: 60,
+                    size: const Size(44, 44),
+                    disableClusteringAtZoom: 15,
+                    markers: filteredData.map((item) {
+                      final color = item.statusColor;
+                      final isSelected = _selectedItem?.id == item.id;
+                      return Marker(
+                        point: LatLng(item.latitude, item.longitude),
+                        width: 48,
+                        height: 48,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (_isNavigating) return;
+                            HapticFeedback.lightImpact();
+                            _speak("${item.nama}. Kondisi: ${item.statusLabel}");
+                            setState(() => _selectedItem = item);
+                            _mapController.move(LatLng(item.latitude, item.longitude), 16.0);
+                          },
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                width: isSelected ? 56 : 48,
+                                height: isSelected ? 56 : 48,
+                                decoration: BoxDecoration(
+                                  color: isSelected ? AppColors.primary.withValues(alpha: 0.2) : color.withValues(alpha: 0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              AnimatedScale(
+                                scale: isSelected ? 1.15 : 1.0,
+                                duration: const Duration(milliseconds: 200),
+                                curve: Curves.easeOutBack,
+                                child: Icon(
+                                  Icons.location_on,
+                                  color: isSelected ? AppColors.primary : color,
+                                  size: isSelected ? 48 : 40,
+                                  shadows: const [Shadow(color: Colors.black45, blurRadius: 6, offset: Offset(0, 3))],
+                                ),
+                              ),
+                              Positioned(
+                                top: isSelected ? 10 : 8,
+                                child: Container(
+                                  width: isSelected ? 14 : 10,
+                                  height: isSelected ? 14 : 10,
+                                  decoration: const BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    builder: (_, markers) => Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.white, width: 3),
+                        boxShadow: [BoxShadow(color: AppColors.primary.withValues(alpha: 0.5), blurRadius: 10, spreadRadius: 2)],
+                      ),
+                      child: Center(
+                        child: Text(markers.length.toString(), style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              if (_userLocation != null)
-                MarkerLayer(
-                  markers: [
-                    Marker(
-                      point: _userLocation!,
-                      width: 44,
-                      height: 44,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(width: _isNavigating ? 30 : 22, height: _isNavigating ? 30 : 22, decoration: BoxDecoration(color: Colors.blue.withOpacity(_isNavigating ? 0.2 : 0.3), shape: BoxShape.circle)),
-                          Container(width: _isNavigating ? 18 : 14, height: _isNavigating ? 18 : 14, decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2))),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-            ],
+                if (_userLocation != null)
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: _userLocation!,
+                        width: 44,
+                        height: 44,
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(width: _isNavigating ? 30 : 22, height: _isNavigating ? 30 : 22, decoration: BoxDecoration(color: Colors.blue.withOpacity(_isNavigating ? 0.2 : 0.3), shape: BoxShape.circle)),
+                            Container(width: _isNavigating ? 18 : 14, height: _isNavigating ? 18 : 14, decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle, border: Border.all(color: Colors.white, width: 2))),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+              ],
+            ),
           ),
 
           // TOP: Search & Filter

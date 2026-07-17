@@ -1,82 +1,14 @@
-# ==========================
-# Flutter / Dart
-# ==========================
-.dart_tool/
-.flutter-plugins
-.flutter-plugins-dependencies
-.packages
-.pub/
-.pub-cache/
-build/
-coverage/
-
-# ==========================
-# Android
-# ==========================
-android/.gradle/
-android/build/
-android/app/build/
-android/local.properties
-android/key.properties
-android/captures/
-
-# Gradle
-.gradle/
-gradlew
-gradlew.bat
 gradle-wrapper.jar
-
-# Native build
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
 .cxx/
 
-# ==========================
-# iOS
-# ==========================
-ios/Pods/
-ios/Flutter/.last_build_id
-
-# ==========================
-# IDE
-# ==========================
-.idea/
-.vscode/
-*.iml
-
-# ==========================
-# Python
-# ==========================
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-*.log
-venv/
-.env
-
-# ==========================
-# Firebase / Google Cloud
-# ==========================
-credentials.json
-google-services.json
-firebase-adminsdk*.json
-
-# ==========================
-# Keystore
-# ==========================
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/to/reference-keystore
 key.properties
 **/*.keystore
 **/*.jks
-
-# ==========================
-# OS Files
-# ==========================
-.DS_Store
-Thumbs.db
-
-# ==========================
-# Misc
-# ==========================
-*.class
-*.swp
-*.symbols
-*.map.json
